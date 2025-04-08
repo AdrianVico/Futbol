@@ -8,6 +8,7 @@
             Console.WriteLine("Hola soy Izan");
             Console.WriteLine("Hola soy Alejandro");
             Console.WriteLine("Hola soy Sergio");
+            Console.WriteLine("Hola soy Marcos");
         }
     }
 }
