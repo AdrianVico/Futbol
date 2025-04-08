@@ -24,5 +24,10 @@ namespace Futbol
         public string Posicion { get => posicion; set => posicion = value; }
         public int Dorsal { get => dorsal; set => dorsal = value; }
         public int Coste { get => coste; set => coste = value; }
+
+        public override string ToString()
+        {
+            return $"Nombre: {nombre}, Posición: {posicion}, Dorsal: {dorsal}, Coste: {coste}";
+        }
     }
 }
