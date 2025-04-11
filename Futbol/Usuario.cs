@@ -10,20 +10,27 @@ namespace Futbol
     {
         string nombre;
         string password;
-        Plantilla plantilla;
-        public Usuario(string nombre, string password)
+        Equipo equipo;
+        long dinero;
+        int puntos;
+        public Usuario(string nombre, string password, long dinero, int puntos)
         {
             this.nombre = nombre;
             this.password = password;
-            plantilla = new Plantilla(nombre);
+            equipo = new Equipo(nombre);
+            this.dinero = dinero;
+            this.puntos = puntos;
         }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Password { get => password; set => password = value; }
-        public Plantilla Plantilla { get => plantilla; set => plantilla = value; }
+        public Equipo Equipo { get => equipo; set => equipo = value; }
+        public long Dinero { get => dinero; set => dinero = value; }
+        public int Puntos { get => puntos; set => puntos = value; }
 
         public override string ToString()
         {
-            return $"Nombre: {nombre}, Password: {password}, Plantilla: {plantilla.Nombre}";
+            return $"Nombre: {nombre}, Password: {password}, Equipo: {equipo.Nombre}, Dinero: {dinero}" +
+                $", Puntos: {puntos}.";
         }
 
     }
