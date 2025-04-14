@@ -1,0 +1,72 @@
+﻿Pelé Santos;Delantero;Santos;160.000.000
+Diego Maradona;Mediocampista;Boca Juniors;180.000.000
+Zinedine Zidane;Mediocampista;Real Madrid;56.000.000
+Franz Beckenbauer;Defensa;Bayern Múnich;49.000.000
+Johan Cruyff;Mediocampista;Feyenoord;70.000.000
+Ronaldo Nazário;Delantero;Barcelona;77.000.000
+Ronaldinho Gaúcho;Mediocampista;Barcelona;63.000.000
+Michel Platini;Mediocampista;Juventus;45.000.000
+Lev Yashin;Portero;Dynamo Moscú;28.000.000
+Paolo Maldini;Defensa;Milan;38.000.000
+George Best;Delantero;Bournemouth;47.000.000
+Roberto Baggio;Delantero;Brescia;23.000.000
+Alfredo Di Stéfano;Delantero;Español;43.000.000
+Garrincha Santos;Delantero;Olaria;23.000.000
+Ferenc Puskás;Delantero;Real Madrid;70.000.000
+Karl Heinz Rummenigge;Delantero;Bayern Múnich;17.000.000
+Lothar Matthäus;Mediocampista;NY MetroStars;47.000.000
+Romário Souza;Delantero;América;65.000.000
+Hugo Sánchez;Delantero;Atlante;53.000.000
+Ruud Gullit;Mediocampista;Chelsea;62.000.000
+Marco Van Basten;Delantero;Milan;67.000.000
+Andrés Iniesta;Mediocampista;Barcelona;64.000.000
+Xavi Hernández;Mediocampista;Al Sadd;61.000.000
+Thierry Henry;Delantero;Arsenal;33.000.000
+Dennis Bergkamp;Delantero;Arsenal;26.000.000
+Gianluigi Buffon;Portero;Parma;44.000.000
+Iker Casillas;Portero;Porto;42.000.000
+Roberto Carlos;Defensa;Anzhi Makhachkala;58.000.000
+Cafu Silva;Defensa;Milan;38.000.000
+Clarence Seedorf;Mediocampista;Botafogo;50.000.000
+Didier Drogba;Delantero;Phoenix Rising;45.000.000
+David Beckham;Mediocampista;PSG;59.000.000
+Ryan Giggs;Mediocampista;Manchester United;45.000.000
+Eric Cantona;Delantero;Manchester United;52.000.000
+Patrick Vieira;Mediocampista;Manchester City;49.000.000
+Fabio Cannavaro;Defensa;Al-Ahli;43.000.000
+Fernando Hierro;Defensa;Bolton Wanderers;11.000.000
+Carlos Valderrama;Mediocampista;Colorado Rapids;39.000.000
+Emilio Butragueño;Delantero;Celaya;36.000.000
+Raúl González;Delantero;New York Cosmos;13.000.000
+Zlatan Ibrahimović;Delantero;AC Milan;80.000.000
+Luis Figo;Mediocampista;Inter de Milán;58.000.000
+Pavel Nedvěd;Mediocampista;Juventus;48.000.000
+Miroslav Klose;Delantero;Lazio;42.000.000
+Roberto Donato;Defensa;Real Betis;39.000.000
+Philipp Lahm;Defensa;Bayern Múnich;52.000.000
+Arjen Robben;Delantero;Groningen;56.000.000
+Frank Lampard;Mediocampista;New York City;60.000.000
+Steven Gerrard;Mediocampista;LA Galaxy;35.000.000
+Michael Ballack;Mediocampista;Bayer Leverkusen;27.000.000
+Samuel Eto;Delantero;Antalyaspor;44.000.000
+Rivaldo Vítor;Mediocampista;Kabuscorp;55.000.000
+Lionel Messi;Delantero;Barcelona;120.000.000
+Cristiano Ronaldo;Delantero;Al Nassr;100.000.000
+Kylian Mbappé;Delantero;PSG;40.000.000
+Erling Haaland;Delantero;Manchester City;30.000.000
+Neymar Jr;Delantero;Al Hilal;90.000.000
+Kevin De Bruyne;Mediocampista;Manchester City;34.000.000
+Luka Modrić;Mediocampista;Real Madrid;26.000.000
+Toni Kroos;Mediocampista;Real Madrid;23.000.000
+Karim Benzema;Delantero;Al Ittihad;50.000.000
+Robert Lewandowski;Delantero;Barcelona;47.000.000
+Mohamed Salah;Delantero;Liverpool;22.000.000
+Sadio Mané;Delantero;Al Nassr;13.000.000
+Harry Kane;Delantero;Bayern Múnich;29.000.000
+Virgil van Dijk;Defensa;Liverpool;20.000.000
+Trent Alexander Arnold;Defensa;Liverpool;7.000.000
+Thibaut Courtois;Portero;Real Madrid;35.000.000
+Manuel Neuer;Portero;Bayern Múnich;31.000.000
+Joshua Kimmich;Mediocampista;Bayern Múnich;18.000.000
+Vinícius Júnior;Delantero;Real Madrid;28.000.000
+Jude Bellingham;Mediocampista;Real Madrid;12.000.000
