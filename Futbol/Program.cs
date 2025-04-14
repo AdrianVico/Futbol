@@ -1,4 +1,6 @@
-﻿namespace Futbol
+﻿using System.Runtime.InteropServices;
+
+namespace Futbol
 {
     internal class Program
     {

@@ -37,7 +37,7 @@ namespace Futbol
                     }
                     else
                     {
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ResetColor();
                         Console.WriteLine(jugadoresMercado[i].ToString());
                     }
                 }

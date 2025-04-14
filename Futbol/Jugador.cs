@@ -15,13 +15,13 @@ namespace Futbol
         string equipoOrigen;
         bool esCapitan;
 
-        public Jugador(string nombre, string posicion, int precio, string equipoOrigen, bool esCapitan)
+        public Jugador(string nombre, string posicion, int precio, string equipoOrigen)
         {
             this.nombre = nombre;
             this.posicion = posicion;
             this.precio = precio;
             this.equipoOrigen = equipoOrigen;
-            this.esCapitan = esCapitan;
+            esCapitan = false;
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
