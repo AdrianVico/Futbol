@@ -27,7 +27,11 @@ namespace Futbol
         public static void MostrarAlineacion()
         {
             Console.WriteLine("Alineación del equipo:");
-            // Aquí se puede mostrar la alineación del equipo.
+            foreach (Jugador jugador in jugadores)
+            {
+                Console.WriteLine(jugador.ToString());
+            }
+            Console.ReadLine();
         }
     }
 }

@@ -14,12 +14,7 @@ namespace Futbol
 
         public Mercado(Equipo equipoUsu)
         {
-            jugadoresMercado = new List<Jugador>();
             this.equipoUsu = equipoUsu;
-        }
-        public void AddJugador(Jugador jugador)
-        {
-            jugadoresMercado.Add(jugador);
         }
         public void SeleccionarJugador()
         {
@@ -32,13 +27,13 @@ namespace Futbol
                 {
                     if (i == indice)
                     {
+                        Console.BackgroundColor = ConsoleColor.Magenta;
                         Console.WriteLine($"> {jugadoresMercado[i].ToString()}");
-                        Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.ResetColor();
                     }
                     else
                     {
-                        Console.ResetColor();
-                        Console.WriteLine(jugadoresMercado[i].ToString());
+                        Console.WriteLine($"  {jugadoresMercado[i].ToString()}");
                     }
                 }
                 keyInfo = Console.ReadKey(true);
@@ -57,9 +52,10 @@ namespace Futbol
         }
         public void ComprarJugador(Jugador jugador)
         {
-            Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}.");
+            Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
             equipoUsu.AddJugador(jugador);
             jugadoresMercado.Remove(jugador);
+            Console.ReadLine();
         }
     }
 }
