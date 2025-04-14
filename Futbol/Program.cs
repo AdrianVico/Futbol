@@ -19,11 +19,6 @@ namespace Futbol
             Console.WriteLine("Hola soy Marcos");
             Console.WriteLine("Hola soy Marcos");
             Console.WriteLine("Hola soy Marcos");
-
-            if (!Directory.Exists("usuarios_registrados"))
-            {
-                Directory.CreateDirectory("usuarios_registrados");
-            }
         }
     }
 }
