@@ -9,9 +9,11 @@ namespace Futbol
     internal class Jornada
     {
         List<Partido> partidos;
+        int numeroJornada;
         public Jornada()
         {
             partidos = new List<Partido>();
+            numeroJornada = 1;
         }
 
         public void AddPartido(Partido partido)
@@ -20,11 +22,14 @@ namespace Futbol
         }
         public void MostrarPartidos()
         {
-            Console.WriteLine("Partidos de la jornada:");
+            Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+            Console.WriteLine($"Partidos de la J{numeroJornada}");
+            Console.WriteLine();
             foreach (Partido partido in partidos)
             {
                 Console.WriteLine(partido.ToString());
             }
+            numeroJornada++;
         }
     }
 }
