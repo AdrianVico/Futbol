@@ -24,7 +24,7 @@ namespace Futbol
         {
             jugadores.Remove(jugador);
         }
-        public static void MostrarAlineacion()
+        public void MostrarAlineacion()
         {
             Console.WriteLine("Alineación del equipo:");
             foreach (Jugador jugador in jugadores)
