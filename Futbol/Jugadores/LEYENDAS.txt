@@ -52,7 +52,6 @@ Samuel Eto;Delantero;Antalyaspor;44000000
 Rivaldo Vítor;Mediocampista;Kabuscorp;55000000
 Lionel Messi;Delantero;Barcelona;120000000
 Cristiano Ronaldo;Delantero;Al Nassr;100000000
-Kylian Mbappé;Delantero;PSG;40000000
 Erling Haaland;Delantero;Manchester City;30000000
 Neymar Jr;Delantero;Al Hilal;90000000
 Kevin De Bruyne;Mediocampista;Manchester City;34000000
@@ -70,3 +69,4 @@ Manuel Neuer;Portero;Bayern Múnich;31000000
 Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
 Vinícius Júnior;Delantero;Real Madrid;28000000
 Jude Bellingham;Mediocampista;Real Madrid;12000000
+Kylian Mbappé;Delantero;PSG;40000000

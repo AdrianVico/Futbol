@@ -1,0 +1,11 @@
+Guglielmo Vicario;Portero;Tottenham Hotspur;2.500.000
+Pedro Porro;Defensa;Tottenham Hotspur;3.000.000
+Cristian Romero;Defensa;Tottenham Hotspur;4.000.000
+Micky van de Ven;Defensa;Tottenham Hotspur;2.500.000
+Destiny Udogie;Defensa;Tottenham Hotspur;2.000.000
+Yves Bissouma;Centrocampista;Tottenham Hotspur;3.000.000
+Archie Gray;Centrocampista;Tottenham Hotspur;1.000.000
+James Maddison;Centrocampista;Tottenham Hotspur;4.500.000
+Brennan Johnson;Delantero;Tottenham Hotspur;2.500.000
+Heung-min Son;Delantero;Tottenham Hotspur;8.000.000
+Richarlison;Delantero;Tottenham Hotspur;5.000.000​
