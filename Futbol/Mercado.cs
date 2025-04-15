@@ -105,7 +105,7 @@ namespace Futbol
         {
             string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Equipo.Nombre}.txt";
 
-            File.AppendAllText(ruta, $"{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}\n");
+            File.AppendAllText(ruta, $"\n{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}");
         }
     }
 }

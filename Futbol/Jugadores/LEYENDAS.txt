@@ -1,4 +1,4 @@
-﻿Pelé Santos;Delantero;Santos;160000000
+Pelé Santos;Delantero;Santos;160000000
 Diego Maradona;Mediocampista;Boca Juniors;180000000
 Zinedine Zidane;Mediocampista;Real Madrid;56000000
 Franz Beckenbauer;Defensa;Bayern Múnich;49000000
@@ -7,6 +7,8 @@ Ronaldo Nazário;Delantero;Barcelona;77000000
 Ronaldinho Gaúcho;Mediocampista;Barcelona;63000000
 Michel Platini;Mediocampista;Juventus;45000000
 Lev Yashin;Portero;Dynamo Moscú;28000000
+Kylian Mbappé;Delantero;PSG;40000000
+Andrés Iniesta;Mediocampista;Barcelona;64000000
 Paolo Maldini;Defensa;Milan;38000000
 George Best;Delantero;Bournemouth;47000000
 Roberto Baggio;Delantero;Brescia;23000000
@@ -16,10 +18,10 @@ Ferenc Puskás;Delantero;Real Madrid;70000000
 Karl Heinz Rummenigge;Delantero;Bayern Múnich;17000000
 Lothar Matthäus;Mediocampista;NY MetroStars;47000000
 Romário Souza;Delantero;América;65000000
+Thibaut Courtois;Portero;Real Madrid;35000000
 Hugo Sánchez;Delantero;Atlante;53000000
 Ruud Gullit;Mediocampista;Chelsea;62000000
 Marco Van Basten;Delantero;Milan;67000000
-Andrés Iniesta;Mediocampista;Barcelona;64000000
 Xavi Hernández;Mediocampista;Al Sadd;61000000
 Thierry Henry;Delantero;Arsenal;33000000
 Dennis Bergkamp;Delantero;Arsenal;26000000
@@ -37,6 +39,7 @@ Fabio Cannavaro;Defensa;Al-Ahli;43000000
 Fernando Hierro;Defensa;Bolton Wanderers;11000000
 Carlos Valderrama;Mediocampista;Colorado Rapids;39000000
 Emilio Butragueño;Delantero;Celaya;36000000
+Lionel Messi;Delantero;Barcelona;120000000
 Raúl González;Delantero;New York Cosmos;13000000
 Zlatan Ibrahimović;Delantero;AC Milan;80000000
 Luis Figo;Mediocampista;Inter de Milán;58000000
@@ -50,7 +53,6 @@ Steven Gerrard;Mediocampista;LA Galaxy;35000000
 Michael Ballack;Mediocampista;Bayer Leverkusen;27000000
 Samuel Eto;Delantero;Antalyaspor;44000000
 Rivaldo Vítor;Mediocampista;Kabuscorp;55000000
-Lionel Messi;Delantero;Barcelona;120000000
 Cristiano Ronaldo;Delantero;Al Nassr;100000000
 Erling Haaland;Delantero;Manchester City;30000000
 Neymar Jr;Delantero;Al Hilal;90000000
@@ -64,9 +66,7 @@ Sadio Mané;Delantero;Al Nassr;13000000
 Harry Kane;Delantero;Bayern Múnich;29000000
 Virgil van Dijk;Defensa;Liverpool;20000000
 Trent Alexander Arnold;Defensa;Liverpool;7000000
-Thibaut Courtois;Portero;Real Madrid;35000000
 Manuel Neuer;Portero;Bayern Múnich;31000000
 Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
 Vinícius Júnior;Delantero;Real Madrid;28000000
 Jude Bellingham;Mediocampista;Real Madrid;12000000
-Kylian Mbappé;Delantero;PSG;40000000
