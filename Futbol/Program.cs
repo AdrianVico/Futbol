@@ -16,35 +16,36 @@ namespace Futbol
             Console.Write("¿Tienes una cuenta creada?");
             string[] opciones = { "Si", "No" };
             Console.SetCursorPosition(Console.WindowWidth / 2, 0);
-            Console.BackgroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("> "+opciones[0]);
-            Console.ResetColor();
             Console.SetCursorPosition(Console.WindowWidth / 2, 1);
-            Console.WriteLine(opciones[1]);
-            ConsoleKeyInfo keyInfo;
+            ConsoleKeyInfo key = new ConsoleKeyInfo();
             int indice = 0;
-            
             do
             {
-                    Console.SetCursorPosition(Console.WindowWidth / 2, indice);
-                    Console.BackgroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine(opciones[indice]);
-                    Console.ResetColor();
-                    keyInfo = Console.ReadKey(true);
-                    switch (keyInfo.Key)
-                    {
-                        case ConsoleKey.UpArrow:
-                            indice = (indice != 0) ? indice-- : 1;
-                            break;
-                        case ConsoleKey.DownArrow:
-                            indice = (indice != 1) ? indice++ : 0;
-                            break;
-                    }
-                    Console.SetCursorPosition(Console.WindowWidth / 2, indice);
-                    Console.BackgroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("> " + opciones[indice]);
-                    Console.ResetColor();
-            } while (keyInfo.Key != ConsoleKey.Enter);
+                Console.Clear();
+                Console.SetCursorPosition(5, 2);
+                Console.Write("¿Tienes una cuenta creada?");
+                for (int i = 0; i < opciones.Length; i++)
+                {
+                    int x = Console.WindowWidth/2;
+                    int y = 2 + i;
+                    Console.SetCursorPosition(x, y);
+                    if (i == indice)
+                        Console.Write($"> {opciones[i]}");
+                    else
+                        Console.Write($"  {opciones[i]}");
+                }
+                key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.UpArrow)
+                {
+                    indice = (indice - 1 + opciones.Length) % opciones.Length;
+                }
+                else if (key.Key == ConsoleKey.DownArrow)
+                {
+                    indice = (indice + 1) % opciones.Length;
+                }
+
+            } while (key.Key != ConsoleKey.Enter);
+
             return indice != 1 ? true : false;
         }
         static void Main(string[] args)
