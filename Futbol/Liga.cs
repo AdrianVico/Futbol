@@ -8,25 +8,35 @@ namespace Futbol
 {
     internal class Liga
     {
-        string nombre;
+        string nombreLiga;
         List<Equipo> equipos;
-
-        public Liga(string nombre)
+        public Liga(string nombreLiga)
         {
-            this.nombre = nombre;
+            this.nombreLiga = nombreLiga;
             equipos = new List<Equipo>();
         }
-        public string Nombre { get => nombre; set => nombre = value; }
+        public string Nombre { get => nombreLiga; set => nombreLiga = value; }
         public void AddEquipo(Equipo equipo)
         {
             equipos.Add(equipo);
         }
         public void MostrarEquipos()
         {
-            Console.WriteLine($"Equipos de la liga {nombre}:");
+            Console.WriteLine($"Equipos de la liga {nombreLiga}:");
             foreach (Equipo equipo in equipos)
             {
                 Console.WriteLine(equipo.Nombre);
+            }
+        }
+
+        public void MostrarClasificacion()
+        {
+            Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+            Console.WriteLine(nombreLiga);
+            Console.WriteLine();
+            foreach (Equipo equipo in equipos)
+            {
+                Console.WriteLine($"{equipo}");
             }
         }
 
@@ -34,7 +44,7 @@ namespace Futbol
         {
             string equiposString = string.Join(", ", equipos.Select(e => e.Nombre));
             
-            return $"Nombre: {nombre}, Equipos: {equiposString}";
+            return $"Nombre: {nombreLiga}, Equipos: {equiposString}";
         }
     }
 }
