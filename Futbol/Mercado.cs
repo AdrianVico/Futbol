@@ -81,7 +81,22 @@ namespace Futbol
             Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
             equipoUsu.AddJugador(jugador);
             jugadoresMercado.Remove(jugador);
+            BorrarJugadorDelFichero(jugador);
             Console.ReadLine();
+        }
+        public void BorrarJugadorDelFichero(Jugador jugador)
+        {
+            string[] jugadores = File.ReadAllLines("../../../Jugadores/LEYENDAS.txt");
+            List<string> jugadoresActualizados = new List<string>(jugadores);
+            for (int i = 0; i < jugadores.Length; i++)
+            {
+                if (jugadores[i].Contains(jugador.Nombre))
+                {
+                    jugadoresActualizados.RemoveAt(i);
+                    break;
+                }
+            }
+            File.WriteAllLines("../../../Jugadores/LEYENDAS.txt", jugadoresActualizados);
         }
     }
 }
