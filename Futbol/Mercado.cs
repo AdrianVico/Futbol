@@ -88,15 +88,21 @@ namespace Futbol
         {
             string[] jugadores = File.ReadAllLines("../../../Jugadores/LEYENDAS.txt");
             List<string> jugadoresActualizados = new List<string>(jugadores);
-            for (int i = 0; i < jugadores.Length; i++)
+
+            bool encontrado = false;
+            for (int i = 0; i < jugadores.Length && !encontrado; i++)
             {
                 if (jugadores[i].Contains(jugador.Nombre))
                 {
                     jugadoresActualizados.RemoveAt(i);
-                    break;
+                    encontrado = true;
                 }
             }
             File.WriteAllLines("../../../Jugadores/LEYENDAS.txt", jugadoresActualizados);
+        }
+        public void AgregarJugadorAlFicheroDelEquipo(Jugador jugador)
+        {
+
         }
     }
 }
