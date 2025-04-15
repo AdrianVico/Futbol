@@ -15,15 +15,16 @@ namespace Futbol
         public Mercado(Equipo equipoUsu)
         {
             this.equipoUsu = equipoUsu;
+            jugadoresMercado = new List<Jugador>();
         }
         public List<Jugador> LeerFicheroJugadores()
         {
             List<Jugador> jugadoresTotales = new List<Jugador>();
-            string[] jugadores = File.ReadAllLines("LEYENDAS.txt");
+            string[] jugadores = File.ReadAllLines("../../../Jugadores/LEYENDAS.txt");
             foreach (string linea in jugadores)
             {
                 string[] datos = linea.Split(';');
-                Jugador jugador = new Jugador(datos[0], datos[1], Convert.ToInt32(datos[2]), datos[3]);
+                Jugador jugador = new Jugador(datos[0], datos[1], datos[2], Convert.ToInt32(datos[3]));
                 jugadoresTotales.Add(jugador);
             }
             return jugadoresTotales;

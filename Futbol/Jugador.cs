@@ -15,7 +15,7 @@ namespace Futbol
         string equipoOrigen;
         bool esCapitan;
 
-        public Jugador(string nombre, string posicion, int precio, string equipoOrigen)
+        public Jugador(string nombre, string posicion,string equipoOrigen, int precio)
         {
             this.nombre = nombre;
             this.posicion = posicion;
@@ -34,8 +34,7 @@ namespace Futbol
         {
             string capitan = esCapitan ? "Es Capitan" : "No es Capitan";
 
-            return $"Nombre: {nombre}, Posición: {posicion}, Precio: {precio}, Equipo de Origen: {equipoOrigen}" +
-                $", {capitan}.";
+            return $"Nombre: {nombre} - Posición: {posicion} - Precio: {precio}";
         }
     }
 }
