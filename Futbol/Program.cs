@@ -11,7 +11,50 @@ namespace Futbol
             Console.Write("");
         }
 
-        public static bool InicioDeSesion()
+        public static void RegistroUsuario()
+        {
+            string nombreFichero = "../../../usuarios.txt";
+            string nombreDirectorio = "../../../Usuarios";
+            bool encontrado;
+            int indice = 0;
+            do
+            {
+                encontrado = false;
+                Console.WriteLine("Dime el nombre del nuevo usuario: ");
+                string nombre = Console.ReadLine();
+
+                if (File.Exists(nombreFichero))
+                {
+                    List<string> lineas = null;
+                   
+                    try
+                    {
+                        lineas = new List<string>(File.ReadAllLines(nombreFichero));
+                        do
+                        {
+                            if (lineas[indice] == nombre)
+                            {
+                                encontrado = true;
+                            }
+                            indice++;
+                        } while (!encontrado || indice < lineas.Count);
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine("Error en el fichero " + ex.Message);
+                    }
+
+                }
+
+            } while (encontrado);
+
+            if (Directory.Exists(nombreDirectorio))
+            {
+                //if ()
+            }
+        }
+
+        public static bool TipoDeInicio()
         {
             Console.Write("¿Tienes una cuenta creada?");
             string[] opciones = { "Si", "No" };
@@ -46,11 +89,18 @@ namespace Futbol
 
             } while (key.Key != ConsoleKey.Enter);
 
-            return indice != 1 ? true : false;
+            return indice == 0 ? true : false;
         }
         static void Main(string[] args)
         {
-            Console.WriteLine(InicioDeSesion());
+            if (TipoDeInicio())
+            {
+                InicioSesion();
+            }
+            else
+            {
+                RegistroUsuario();
+            }
         }
     }
 }
