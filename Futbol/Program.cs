@@ -11,7 +11,7 @@ namespace Futbol
             Console.Write("");
         }
 
-        public static int Seleccion()
+        public static bool InicioDeSesion()
         {
             Console.Write("¿Tienes una cuenta creada?");
             string[] opciones = { "Si", "No" };
@@ -23,25 +23,33 @@ namespace Futbol
             Console.WriteLine(opciones[1]);
             ConsoleKeyInfo keyInfo;
             int indice = 0;
-            if (Console.KeyAvailable)
+            
+            do
             {
-                keyInfo = Console.ReadKey();
-                switch (keyInfo.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        //indice == -1 ? 0 : indice -1; 
-                        
-                        break;
-                }
-            }
-
-
-
-            return 0;
+                    Console.SetCursorPosition(Console.WindowWidth / 2, indice);
+                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine(opciones[indice]);
+                    Console.ResetColor();
+                    keyInfo = Console.ReadKey(true);
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            indice = (indice != 0) ? indice-- : 1;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            indice = (indice != 1) ? indice++ : 0;
+                            break;
+                    }
+                    Console.SetCursorPosition(Console.WindowWidth / 2, indice);
+                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("> " + opciones[indice]);
+                    Console.ResetColor();
+            } while (keyInfo.Key != ConsoleKey.Enter);
+            return indice != 1 ? true : false;
         }
         static void Main(string[] args)
         {
-            
+            Console.WriteLine(InicioDeSesion());
         }
     }
 }
