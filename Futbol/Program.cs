@@ -1,5 +1,6 @@
 ﻿using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace Futbol
 {
@@ -13,15 +14,16 @@ namespace Futbol
 
         public static void RegistroUsuario()
         {
-            string nombreFichero = "../../../usuarios.txt";
+            string nombreFichero = "../../../Usuarios/usuarios.txt";
             string nombreDirectorio = "../../../Usuarios";
             bool encontrado;
             int indice = 0;
+            string nombre;
             do
             {
                 encontrado = false;
                 Console.WriteLine("Dime el nombre del nuevo usuario: ");
-                string nombre = Console.ReadLine();
+                nombre = Console.ReadLine();
 
                 if (File.Exists(nombreFichero))
                 {
@@ -30,14 +32,20 @@ namespace Futbol
                     try
                     {
                         lineas = new List<string>(File.ReadAllLines(nombreFichero));
-                        do
+                        string[] partes = null;
+                        if (lineas.Count >= 1)
                         {
-                            if (lineas[indice] == nombre)
+                            while (!encontrado && indice < lineas.Count) 
                             {
-                                encontrado = true;
-                            }
-                            indice++;
-                        } while (!encontrado || indice < lineas.Count);
+                                partes = lineas[indice].Split(";");
+                                if (partes[0] == nombre)
+                                {
+                                    encontrado = true;
+                                    Console.WriteLine("Ya hay un usuario con ese nombre.");
+                                }
+                                indice++;
+                            } 
+                        }
                     }
                     catch (IOException ex)
                     {
@@ -48,9 +56,25 @@ namespace Futbol
 
             } while (encontrado);
 
+            Console.WriteLine("Dime la contraseña: ");
+            string password = Console.ReadLine();
+            StreamWriter streamWriter = null;
             if (Directory.Exists(nombreDirectorio))
             {
-                //if ()
+                try
+                {
+                    streamWriter = new StreamWriter(nombreFichero, true);
+                    streamWriter.WriteLine(nombre+";"+password);
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
+                if (streamWriter != null)
+                {
+                    streamWriter.Close();
+                }
             }
         }
 
@@ -99,6 +123,7 @@ namespace Futbol
             }
             else
             {
+                Console.Clear();
                 RegistroUsuario();
             }
         }
