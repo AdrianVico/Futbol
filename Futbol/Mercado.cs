@@ -10,11 +10,11 @@ namespace Futbol
     internal class Mercado
     {
         List<Jugador> jugadoresMercado;
-        Equipo equipoUsu;
+        Usuario usuario;
 
-        public Mercado(Equipo equipoUsu)
+        public Mercado(Usuario usuario)
         {
-            this.equipoUsu = equipoUsu;
+            this.usuario = usuario;
             jugadoresMercado = new List<Jugador>();
         }
         public List<Jugador> LeerFicheroJugadores()
@@ -32,7 +32,7 @@ namespace Futbol
         public void AgregarJugadorMercado()
         {
             jugadoresMercado.Clear();
-            List <Jugador> jugadoresTotales = LeerFicheroJugadores();
+            List<Jugador> jugadoresTotales = LeerFicheroJugadores();
             Random random = new Random();
             for (int i = 0; i < 7; i++)
             {
@@ -79,7 +79,8 @@ namespace Futbol
         public void ComprarJugador(Jugador jugador)
         {
             Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
-            equipoUsu.AddJugador(jugador);
+            usuario.Equipo.AddJugador(jugador);
+            AgregarJugadoresAlFicheroDelUsuario(jugador);
             jugadoresMercado.Remove(jugador);
             BorrarJugadorDelFichero(jugador);
             Console.ReadLine();
@@ -100,9 +101,11 @@ namespace Futbol
             }
             File.WriteAllLines("../../../Jugadores/LEYENDAS.txt", jugadoresActualizados);
         }
-        public void AgregarJugadorAlFicheroDelEquipo(Jugador jugador)
+        public void AgregarJugadoresAlFicheroDelUsuario(Jugador jugador)
         {
+            string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Equipo.Nombre}.txt";
 
+            File.AppendAllText(ruta, $"{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}\n");
         }
     }
 }
