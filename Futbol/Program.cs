@@ -6,56 +6,107 @@ namespace Futbol
 {
     internal class Program
     {
-
+        const string NOMBRE_FICHERO = "../../../Usuarios/usuarios.txt";
+        const string NOMBRE_Directorio = "../../../Usuarios";
         public static void InicioSesion()
         {
-            Console.Write("");
+            string nombreFichero = NOMBRE_FICHERO;
+            string nombreDirectorio = NOMBRE_Directorio;
+            bool encontrado;
+            string nombre = null;
+            List<string> lineas = null;
+            int posicion = 0;
+            if (File.Exists(nombreFichero))
+            {
+
+                try
+                {
+                    lineas = new List<string>(File.ReadAllLines(nombreFichero));
+
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine("Error en el fichero " + ex.Message);
+                }
+
+
+                do
+                {
+                    encontrado = false;
+                    Console.WriteLine("Dime el nombre del usuario: ");
+                    nombre = Console.ReadLine();
+                    encontrado = EncontrarNombre(lineas, nombre, ref posicion);
+                    if (!encontrado)
+                    {
+                        Console.WriteLine("No existe el usuario.");
+                    }
+
+                } while (!encontrado);
+
+                string[] partes = lineas[posicion].Split(";");
+                int intentos = 3;
+                bool registrado = false;
+                string password;
+                do
+                {
+                    Console.WriteLine("Dime la contraseña del usuario:");
+                    password = Console.ReadLine();
+                    if (password != partes[1])
+                    {
+                        intentos--;
+                        Console.WriteLine("Contraseña incorrecta.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inicio de sesión de satisfactorio.");
+                        registrado = true;
+                    }
+
+
+                } while (intentos > 0 && !registrado);
+
+                if (intentos == 0)
+                {
+                    Console.WriteLine("Te has quedado sin intentos");
+                }
+            }
         }
 
         public static void RegistroUsuario()
         {
-            string nombreFichero = "../../../Usuarios/usuarios.txt";
-            string nombreDirectorio = "../../../Usuarios";
+            string nombreFichero = NOMBRE_FICHERO;
+            string nombreDirectorio = NOMBRE_Directorio;
             bool encontrado;
+            string nombre = null;
             int indice = 0;
-            string nombre;
-            do
+            List<string> lineas = null;
+            if (File.Exists(nombreFichero))
             {
-                encontrado = false;
-                Console.WriteLine("Dime el nombre del nuevo usuario: ");
-                nombre = Console.ReadLine();
 
-                if (File.Exists(nombreFichero))
+                try
                 {
-                    List<string> lineas = null;
-                   
-                    try
-                    {
-                        lineas = new List<string>(File.ReadAllLines(nombreFichero));
-                        string[] partes = null;
-                        if (lineas.Count >= 1)
-                        {
-                            while (!encontrado && indice < lineas.Count) 
-                            {
-                                partes = lineas[indice].Split(";");
-                                if (partes[0] == nombre)
-                                {
-                                    encontrado = true;
-                                    Console.WriteLine("Ya hay un usuario con ese nombre.");
-                                }
-                                indice++;
-                            } 
-                        }
-                    }
-                    catch (IOException ex)
-                    {
-                        Console.WriteLine("Error en el fichero " + ex.Message);
-                    }
+                    lineas = new List<string>(File.ReadAllLines(nombreFichero));
 
                 }
+                catch (IOException ex)
+                {
+                    Console.WriteLine("Error en el fichero " + ex.Message);
+                }
 
-            } while (encontrado);
 
+                do
+                {
+                    encontrado = false;
+                    Console.WriteLine("Dime el nombre del nuevo usuario: ");
+                    nombre = Console.ReadLine();
+                    encontrado = EncontrarNombre(lineas, nombre, ref indice);
+                    if (encontrado)
+                    {
+                        Console.WriteLine("Ya hay un usuario con ese nombre.");
+                    }
+
+                } while (encontrado);
+            }
             Console.WriteLine("Dime la contraseña: ");
             string password = Console.ReadLine();
             StreamWriter streamWriter = null;
@@ -64,18 +115,43 @@ namespace Futbol
                 try
                 {
                     streamWriter = new StreamWriter(nombreFichero, true);
-                    streamWriter.WriteLine(nombre+";"+password);
+                    streamWriter.WriteLine(nombre + ";" + password);
                 }
                 catch (IOException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                
+
                 if (streamWriter != null)
                 {
                     streamWriter.Close();
                 }
             }
+        }
+
+
+        public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)
+        {
+            int indice = 0;
+            bool encontrado = false;
+            string[] partes = null;
+            if (lineas.Count >= 1)
+            {
+                while (!encontrado && indice < lineas.Count)
+                {
+                    partes = lineas[indice].Split(";");
+                    if (partes[0] == nombre)
+                    {
+                        encontrado = true;
+                    }
+                    else
+                    {
+                        indice++;
+                    }
+                }
+            }
+            posicion = indice;
+            return encontrado;
         }
 
         public static bool TipoDeInicio()
@@ -93,7 +169,7 @@ namespace Futbol
                 Console.Write("¿Tienes una cuenta creada?");
                 for (int i = 0; i < opciones.Length; i++)
                 {
-                    int x = Console.WindowWidth/2;
+                    int x = Console.WindowWidth / 2;
                     int y = 2 + i;
                     Console.SetCursorPosition(x, y);
                     if (i == indice)
@@ -119,6 +195,7 @@ namespace Futbol
         {
             if (TipoDeInicio())
             {
+                Console.Clear();
                 InicioSesion();
             }
             else
