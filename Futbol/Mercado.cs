@@ -136,7 +136,7 @@ namespace Futbol
         }
         public void BorrarJugadoresDelFicheroDelUsuario(Jugador jugador)
         {
-            string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Equipo.Nombre}.txt";
+            string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Nombre}_jugadores_equipo.txt";
             string[] jugadores = File.ReadAllLines(ruta);
             List<string> jugadoresActualizados = new List<string>(jugadores);
             bool encontrado = false;
@@ -152,7 +152,7 @@ namespace Futbol
         }
         public void AgregarJugadoresAlFicheroDelUsuario(Jugador jugador)
         {
-            string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Equipo.Nombre}.txt";
+            string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Nombre}_jugadores_equipo.txt";
 
             File.AppendAllText(ruta, $"\n{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}");
         }

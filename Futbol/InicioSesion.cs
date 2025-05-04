@@ -129,7 +129,10 @@ namespace Futbol
                     streamWriter.Close();
                 }
                 Directory.CreateDirectory(NOMBRE_DIRECTORIO+"\\"+nombre);
-                File.Create(NOMBRE_DIRECTORIO + "\\" + nombre + "\\"+nombre+".txt").Close();
+                File.Create(NOMBRE_DIRECTORIO + "\\" + nombre + "\\"+nombre+"_datos"+".txt");
+                File.Create(NOMBRE_DIRECTORIO + "\\" + nombre + "\\" + nombre + "_jugadores_equipo" + ".txt");
+                //TODO saber donde hacer la instancia del usuario
+                //porque cuando la creas aqui en las clases no aparecera
             }
         }
         public static string ElegirEquipoInicial()
@@ -155,6 +158,7 @@ namespace Futbol
                     else
                         Console.Write($"  {opciones[i]}");
                 }
+                
                 key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.UpArrow)
                 {
@@ -168,7 +172,6 @@ namespace Futbol
             } while (key.Key != ConsoleKey.Enter);
             return opciones[indice];
         }
-
 
         public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)
         {
@@ -242,6 +245,7 @@ namespace Futbol
             {
                 Console.Clear();
                 RegistroUsuario();
+                ElegirEquipoInicial();
             }
         }
     }
