@@ -69,4 +69,3 @@ Trent Alexander Arnold;Defensa;Liverpool;7000000
 Manuel Neuer;Portero;Bayern Múnich;31000000
 Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
 Vinícius Júnior;Delantero;Real Madrid;28000000
-Jude Bellingham;Mediocampista;Real Madrid;12000000

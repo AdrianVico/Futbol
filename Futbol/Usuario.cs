@@ -13,13 +13,13 @@ namespace Futbol
         Equipo equipo;
         long dinero;
         int puntos;
-        public Usuario(string nombre, string password, long dinero, int puntos)
+        public Usuario(string nombre, string password)
         {
             this.nombre = nombre;
             this.password = password;
             equipo = new Equipo(nombre);
-            this.dinero = dinero;
-            this.puntos = puntos;
+            dinero = 100000000;
+            puntos = 0;
         }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Password { get => password; set => password = value; }

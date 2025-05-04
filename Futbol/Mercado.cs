@@ -44,6 +44,8 @@ namespace Futbol
 
         public void SeleccionarJugador()
         {
+            LeerFicheroJugadores();
+            AgregarJugadorMercado();
             ConsoleKeyInfo keyInfo;
             int indice = 0;
             do
