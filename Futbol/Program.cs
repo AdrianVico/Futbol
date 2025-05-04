@@ -8,9 +8,7 @@ namespace Futbol
     {
         static void Main(string[] args)
         {
-            //InicioSesion.Inicio();
-            Mercado mercado = new Mercado(new Usuario("S", "S"));
-            mercado.VenderJugador();
+            InicioSesion.Inicio();
         }
     }
 }

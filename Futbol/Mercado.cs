@@ -96,6 +96,7 @@ namespace Futbol
             }
             
         }
+
         public void VenderJugador(Jugador jugador)
         {
             if (usuario.Equipo.Jugadores.Contains(jugador))
