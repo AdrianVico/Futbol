@@ -78,12 +78,37 @@ namespace Futbol
         }
         public void ComprarJugador(Jugador jugador)
         {
-            Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
-            usuario.Equipo.AddJugador(jugador);
-            AgregarJugadoresAlFicheroDelUsuario(jugador);
-            jugadoresMercado.Remove(jugador);
-            BorrarJugadorDelFichero(jugador);
-            Console.ReadLine();
+            if(usuario.Dinero >= jugador.Precio)
+            {
+                usuario.Dinero -= jugador.Precio;
+                Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
+                usuario.Equipo.AddJugador(jugador);
+                AgregarJugadoresAlFicheroDelUsuario(jugador);
+                jugadoresMercado.Remove(jugador);
+                BorrarJugadorDelFichero(jugador);       
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("No tienes suficiente dinero disponible para comprar el jugador.");
+            }
+            
+        }
+        public void VenderJugador(Jugador jugador)
+        {
+            if (usuario.Equipo.Jugadores.Contains(jugador))
+            {
+                usuario.Dinero += jugador.Precio;
+                Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
+                usuario.Equipo.VenderJugador(jugador);
+                AgregarJugadorAlFichero(jugador);
+                BorrarJugadoresDelFicheroDelUsuario(jugador);
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("No tienes el jugador en tu equipo.");
+            }
         }
         public void BorrarJugadorDelFichero(Jugador jugador)
         {
@@ -100,6 +125,27 @@ namespace Futbol
                 }
             }
             File.WriteAllLines("../../../Jugadores/LEYENDAS.txt", jugadoresActualizados);
+        }
+        public void AgregarJugadorAlFichero(Jugador jugador)
+        {
+            string ruta = "../../../Jugadores/LEYENDAS.txt";
+            File.AppendAllText(ruta, $"\n{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}");
+        }
+        public void BorrarJugadoresDelFicheroDelUsuario(Jugador jugador)
+        {
+            string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Equipo.Nombre}.txt";
+            string[] jugadores = File.ReadAllLines(ruta);
+            List<string> jugadoresActualizados = new List<string>(jugadores);
+            bool encontrado = false;
+            for (int i = 0; i < jugadores.Length && !encontrado; i++)
+            {
+                if (jugadores[i].Contains(jugador.Nombre))
+                {
+                    jugadoresActualizados.RemoveAt(i);
+                    encontrado = true;
+                }
+            }
+            File.WriteAllLines(ruta, jugadoresActualizados);
         }
         public void AgregarJugadoresAlFicheroDelUsuario(Jugador jugador)
         {

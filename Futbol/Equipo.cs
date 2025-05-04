@@ -16,6 +16,8 @@ namespace Futbol
             jugadores = new List<Jugador>();
         }
         public string Nombre { get => nombre; set => nombre = value; }
+        internal List<Jugador> Jugadores { get => jugadores; set => jugadores = value; }
+
         public void AddJugador(Jugador jugador)
         {
             jugadores.Add(jugador);
