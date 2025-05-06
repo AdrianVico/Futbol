@@ -1,5 +1,0 @@
-adrian;adrian
-juan;pepe
-Sergio;Hola
-hola;hola
-S;S
