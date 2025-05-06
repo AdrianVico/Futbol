@@ -10,14 +10,16 @@ namespace Futbol
     {
         const string NOMBRE_FICHERO = "../../../Usuarios/usuarios.txt";
         const string NOMBRE_DIRECTORIO = "../../../Usuarios";
-        public static void IniciarSesion()
+        public static Usuario IniciarSesion()
         {
             string nombreFichero = NOMBRE_FICHERO;
             string nombreDirectorio = NOMBRE_DIRECTORIO;
             bool encontrado;
             string nombre = null;
+            string password = "";
             List<string> lineas = null;
             int posicion = 0;
+
             if (File.Exists(nombreFichero))
             {
 
@@ -48,7 +50,6 @@ namespace Futbol
                 string[] partes = lineas[posicion].Split(";");
                 int intentos = 3;
                 bool registrado = false;
-                string password;
                 do
                 {
                     Console.WriteLine("Dime la contraseña del usuario:");
@@ -72,9 +73,11 @@ namespace Futbol
                     Console.WriteLine("Te has quedado sin intentos");
                 }
             }
+            return new Usuario(nombre, password);
         }
 
-        public static string RegistroUsuario()
+
+        public static Usuario RegistroUsuario()
         {
             string nombreFichero = NOMBRE_FICHERO;
             string nombreDirectorio = NOMBRE_DIRECTORIO;
@@ -137,7 +140,24 @@ namespace Futbol
                 //TODO saber donde hacer la instancia del usuario
                 //porque cuando la creas aqui en las clases no aparecera
             }
-            return nombre;
+            Usuario usu = new Usuario(nombre, password);
+            StreamWriter st = null;
+            try
+            {
+                st = new StreamWriter(nombreDirectorio+$"/{nombre}/{nombre}.txt");
+                st.WriteLine(usu.Dinero+";"+usu.Puntos);
+            }
+            catch(IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                st.Close();
+            }
+
+
+            return usu;
         }
         public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)
         {
@@ -246,8 +266,6 @@ namespace Futbol
 
                 string[] lineas = File.ReadAllLines(archivo);
                 File.WriteAllLines(archivoDestino, lineas);
-
-                Console.WriteLine("Equipo copiado correctamente.");
             }
             catch (IOException ex)
             {
@@ -258,20 +276,35 @@ namespace Futbol
                 Console.WriteLine("Ocurrió un error inesperado: " + ex.Message);
             }
         }
-        public static void Inicio()
+
+        public static void RellenarUsuario(Usuario usuario)
         {
+            string lineas = File.ReadAllText(NOMBRE_DIRECTORIO+$"/{usuario.Nombre}/{usuario.Nombre}_datos.txt");
+            string lineasJugadores;
+            string[] partes = lineas.Split(";");
+            usuario.Dinero = Convert.ToInt64(partes[0]);
+            usuario.Puntos = Convert.ToInt32(partes[1]);
+
+        }
+        public static Usuario Inicio()
+        {
+            Usuario usu = null;
             if (TipoDeInicio())
             {
                 Console.Clear();
-                IniciarSesion();
+                usu = IniciarSesion();
+                RellenarUsuario(usu);
             }
             else
             {
                 Console.Clear();
-                string nombreUsuario = RegistroUsuario();
+                usu = RegistroUsuario();
+                string nombreUsuario = usu.Nombre;
                 string equipoInicial = ElegirEquipoInicial();
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
             }
+            Console.WriteLine(usu);
+            return usu;
         }
     }
 }

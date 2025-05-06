@@ -25,6 +25,9 @@ namespace Futbol
 
         public Usuario(string nombre, string password, Equipo equipo):this(nombre, password, equipo, 100000000, 0)
         {  }
+
+        public Usuario(string nombre, string password):this(nombre, password, null) { }
+
         public string Nombre { get => nombre; set => nombre = value; }
         public string Password { get => password; set => password = value; }
         public Equipo Equipo { get => equipo; set => equipo = value; }
