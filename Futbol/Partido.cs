@@ -51,10 +51,29 @@ namespace Futbol
         }
         public void AnyadirPartidos()
         {
-            for (int i = 0; i < equipos.Count - 1; i += 2)
+            List<Equipo> clubes = equipos;
+
+            do
             {
-                Equipo local = equipos[i];
-                Equipo visitante = equipos[i + 1];
+                Random rand = new Random();
+
+                int equipo1 = rand.Next(0, clubes.Count - 1);
+                Equipo local = clubes[equipo1];
+                clubes.RemoveAt(equipo1);
+
+                int equipo2 = rand.Next(0, clubes.Count - 1);
+                Equipo visitante = clubes[equipo2];
+                clubes.RemoveAt(equipo2);
+
+                partidos.Add(local, visitante);
+
+            } while (clubes.Count > 0);
+
+
+            for (int i = 0; i < clubes.Count - 1; i += 2)
+            {
+                Equipo local = clubes[i];
+                Equipo visitante = clubes[i + 1];
 
                 partidos.Add(local, visitante);
             }
@@ -86,7 +105,7 @@ namespace Futbol
         public void MostrarGuardarPartidos()
         {
             string archivo = "jornadas.txt";
-            StreamWriter stw = new StreamWriter(archivo, true);
+            StreamWriter stw = new StreamWriter(archivo);
 
             MostrarNumeroJornada();
             Console.WriteLine();
@@ -100,8 +119,8 @@ namespace Futbol
                 Console.SetCursorPosition((Console.WindowWidth - lineaConsola.Length) / 2, Console.CursorTop);
                 Console.WriteLine(lineaConsola);
 
-                stw.WriteLine(e.Key + " " + resultadoPartido);
-                stw.WriteLine(e.Value + " " + invertido);
+                stw.WriteLine(e.Key + ";" + resultadoPartido);
+                stw.WriteLine(e.Value + ";" + invertido);
             }
 
             Console.WriteLine();
