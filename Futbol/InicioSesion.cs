@@ -10,7 +10,7 @@ namespace Futbol
     {
         const string NOMBRE_FICHERO = "../../../Usuarios/usuarios.txt";
         const string NOMBRE_DIRECTORIO = "../../../Usuarios";
-        public static void InicioSesion2()
+        public static void IniciarSesion()
         {
             string nombreFichero = NOMBRE_FICHERO;
             string nombreDirectorio = NOMBRE_DIRECTORIO;
@@ -239,7 +239,7 @@ namespace Futbol
             if (TipoDeInicio())
             {
                 Console.Clear();
-                InicioSesion2();
+                IniciarSesion();
             }
             else
             {
