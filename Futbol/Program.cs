@@ -9,10 +9,7 @@ namespace Futbol
         static void Main(string[] args)
         {
             Usuario usuario = InicioSesion.Inicio();
-            Mercado m = new Mercado(usuario);
-            m.LeerFicheroJugadores();
-            m.AgregarJugadorMercado();
-            m.SeleccionarJugador();
+            Menu menu = new Menu(usuario);
         }
     }
 }

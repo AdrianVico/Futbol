@@ -156,5 +156,11 @@ namespace Futbol
 
             File.AppendAllText(ruta, $"\n{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}");
         }
+        public void IniciarMercado()
+        {
+            LeerFicheroJugadores();
+            AgregarJugadorMercado();
+            SeleccionarJugador();
+        }
     }
 }
