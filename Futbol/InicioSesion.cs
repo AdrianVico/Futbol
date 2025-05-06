@@ -145,7 +145,7 @@ namespace Futbol
             StreamWriter st = null;
             try
             {
-                st = new StreamWriter(nombreDirectorio+$"/{nombre}/{nombre}.txt");
+                st = new StreamWriter(nombreDirectorio+$"/{nombre}/{nombre}_datos.txt");
                 st.WriteLine(usu.Dinero+";"+usu.Puntos);
             }
             catch(IOException e)
@@ -307,7 +307,7 @@ namespace Futbol
             }
             
             usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
-            Console.WriteLine(usu);
+           // Console.WriteLine(usu);
             return usu;
         }
     }

@@ -8,7 +8,11 @@ namespace Futbol
     {
         static void Main(string[] args)
         {
-            InicioSesion.Inicio();
+            Usuario usuario = InicioSesion.Inicio();
+            Mercado m = new Mercado(usuario);
+            m.LeerFicheroJugadores();
+            m.AgregarJugadorMercado();
+            m.SeleccionarJugador();
         }
     }
 }
