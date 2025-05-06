@@ -71,7 +71,7 @@ namespace Futbol
         public static List<Jugador> RellenarEquipo(string nombre)
         {
             List<Jugador> jugadores = new List<Jugador>();
-            string ruta = $"../../../Usuarios/{nombre}/{nombre}_jugadores.txt";
+            string ruta = $"../../../Usuarios/{nombre}/{nombre}_jugadores_equipo.txt";
             string[] jugadoresFichero = File.ReadAllLines(ruta);
             string[] partes = null;
             foreach (string l in  jugadoresFichero)

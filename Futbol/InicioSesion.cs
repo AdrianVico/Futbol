@@ -305,8 +305,9 @@ namespace Futbol
                 string equipoInicial = ElegirEquipoInicial();
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
             }
-            Console.WriteLine(usu);
+            
             usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
+            Console.WriteLine(usu);
             return usu;
         }
     }
