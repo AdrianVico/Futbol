@@ -73,9 +73,10 @@ namespace Futbol
                     Console.WriteLine("Te has quedado sin intentos");
                 }
             }
-            return new Usuario(nombre, password);
+            Usuario usuario = new Usuario(nombre, password);
+            RellenarUsuario(usuario);
+            return usuario;
         }
-
 
         public static Usuario RegistroUsuario()
         {
@@ -275,6 +276,8 @@ namespace Futbol
             {
                 Console.WriteLine("Ocurrió un error inesperado: " + ex.Message);
             }
+
+
         }
 
         public static void RellenarUsuario(Usuario usuario)
@@ -293,7 +296,6 @@ namespace Futbol
             {
                 Console.Clear();
                 usu = IniciarSesion();
-                RellenarUsuario(usu);
             }
             else
             {
@@ -304,6 +306,7 @@ namespace Futbol
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
             }
             Console.WriteLine(usu);
+            usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
             return usu;
         }
     }

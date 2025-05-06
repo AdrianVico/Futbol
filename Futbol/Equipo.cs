@@ -11,7 +11,7 @@ namespace Futbol
         string nombre;
         List<Jugador> jugadores;
         List<Jugador> banquillo;
-        int[] alineacion;
+        int[] alineacion = null;
 
         public Equipo(string nombre)
         {
@@ -27,6 +27,14 @@ namespace Futbol
             this.jugadores = jugadores;
             this.banquillo = banquillo;
             this.alineacion = alineacion;
+        }
+
+        public Equipo(string nombre, List<Jugador> jugadores)
+        {
+            this.nombre = nombre;
+            this.jugadores = jugadores;
+            banquillo = new List<Jugador>();
+            alineacion = new int[] {1, 4, 4, 2};
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
@@ -58,6 +66,21 @@ namespace Futbol
         {
 
             return nombre;
+        }
+
+        public static List<Jugador> RellenarEquipo(string nombre)
+        {
+            List<Jugador> jugadores = new List<Jugador>();
+            string ruta = $"../../../Usuarios/{nombre}/{nombre}_jugadores.txt";
+            string[] jugadoresFichero = File.ReadAllLines(ruta);
+            string[] partes = null;
+            foreach (string l in  jugadoresFichero)
+            {
+                partes = l.Split(';');
+                jugadores.Add(new Jugador(partes[0], partes[1], partes[2],
+                    Convert.ToInt32(partes[3])));
+            }
+            return jugadores;
         }
 
         public string[] MostrarCamisetas()
