@@ -44,17 +44,9 @@ namespace Futbol
 
         public void AddJugador(Jugador jugador)
         {
-            if (jugadores.Count < 11)
-            {
-                jugadores.Add(jugador);
-            }
-            else
-            {
-                banquillo.Add(jugador);
-                Console.WriteLine("al banquillo");
-            }
+            jugadores.Add(jugador); 
         }
-        public void VenderJugador(Jugador jugador)
+        public void RemoveJugador(Jugador jugador)
         {
             jugadores.Remove(jugador);
         }
@@ -64,7 +56,6 @@ namespace Futbol
         }
         public string GetNombreCamiseta()
         {
-
             return nombre;
         }
 

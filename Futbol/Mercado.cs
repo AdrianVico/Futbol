@@ -9,7 +9,9 @@ namespace Futbol
 {
     internal class Mercado
     {
+        string rutaLeyendas = "../../../Jugadores/LEYENDAS.txt";
         List<Jugador> jugadoresMercado;
+        List<Jugador> jugadoresUsuario;
         Usuario usuario;
 
         public Mercado(Usuario usuario)
@@ -17,10 +19,10 @@ namespace Futbol
             this.usuario = usuario;
             jugadoresMercado = new List<Jugador>();
         }
-        public List<Jugador> LeerFicheroJugadores()
+        public List<Jugador> LeerFicheroJugadores(string ruta)
         {
             List<Jugador> jugadoresTotales = new List<Jugador>();
-            string[] jugadores = File.ReadAllLines("../../../Jugadores/LEYENDAS.txt");
+            string[] jugadores = File.ReadAllLines(ruta);
             foreach (string linea in jugadores)
             {
                 string[] datos = linea.Split(';');
@@ -32,7 +34,7 @@ namespace Futbol
         public void AgregarJugadorMercado()
         {
             jugadoresMercado.Clear();
-            List<Jugador> jugadoresTotales = LeerFicheroJugadores();
+            List<Jugador> jugadoresTotales = LeerFicheroJugadores(rutaLeyendas);
             Random random = new Random();
             for (int i = 0; i < 7; i++)
             {
@@ -42,9 +44,9 @@ namespace Futbol
             }
         }
 
-        public void SeleccionarJugador()
+        public void SeleccionarJugadorMercado()
         {
-            LeerFicheroJugadores();
+            LeerFicheroJugadores(rutaLeyendas);
             AgregarJugadorMercado();
             ConsoleKeyInfo keyInfo;
             int indice = 0;
@@ -74,9 +76,51 @@ namespace Futbol
                     indice = (indice == jugadoresMercado.Count - 1) ? 0 : indice + 1;
                 }
                 Console.Clear();
-            } while (keyInfo.Key != ConsoleKey.Enter);
+            } while (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Escape);
 
-            ComprarJugador(jugadoresMercado[indice]);
+            if (keyInfo.Key != ConsoleKey.Escape)
+            {
+                ComprarJugador(jugadoresMercado[indice]);
+            }
+        }
+        public void SeleccionarJugadorUsuario()
+        {
+            jugadoresUsuario = usuario.Equipo.Jugadores;
+            ConsoleKeyInfo keyInfo;
+            int indice = 0;
+            do
+            {
+                Console.WriteLine("Jugadores en el mercado:");
+                for (int i = 0; i < jugadoresUsuario.Count; i++)
+                {
+                    if (i == indice)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine($"> {jugadoresUsuario[i].ToString()}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"  {jugadoresUsuario[i].ToString()}");
+                    }
+                }
+                keyInfo = Console.ReadKey(true);
+                if (keyInfo.Key == ConsoleKey.UpArrow)
+                {
+                    indice = (indice == 0) ? jugadoresUsuario.Count - 1 : indice - 1;
+                }
+                else if (keyInfo.Key == ConsoleKey.DownArrow)
+                {
+                    indice = (indice == jugadoresUsuario.Count - 1) ? 0 : indice + 1;
+                }
+                Console.Clear();
+            } while (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Escape);
+           
+            if(keyInfo.Key != ConsoleKey.Escape)
+            {
+                VenderJugador(jugadoresUsuario[indice]);
+            }
+            
         }
         public void ComprarJugador(Jugador jugador)
         {
@@ -103,7 +147,7 @@ namespace Futbol
             {
                 usuario.Dinero += jugador.Precio;
                 Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
-                usuario.Equipo.VenderJugador(jugador);
+                usuario.Equipo.RemoveJugador(jugador);
                 AgregarJugadorAlFichero(jugador);
                 BorrarJugadoresDelFicheroDelUsuario(jugador);
                 Console.ReadLine();
@@ -132,7 +176,7 @@ namespace Futbol
         public void AgregarJugadorAlFichero(Jugador jugador)
         {
             string ruta = "../../../Jugadores/LEYENDAS.txt";
-            File.AppendAllText(ruta, $"\n{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}");
+            File.AppendAllText(ruta, $"{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}\n");
         }
         public void BorrarJugadoresDelFicheroDelUsuario(Jugador jugador)
         {
@@ -154,13 +198,17 @@ namespace Futbol
         {
             string ruta = $"../../../Usuarios/{usuario.Nombre}/{usuario.Nombre}_jugadores_equipo.txt";
 
-            File.AppendAllText(ruta, $"\n{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}");
+            File.AppendAllText(ruta, $"{jugador.Nombre};{jugador.Posicion};{jugador.EquipoOrigen};{jugador.Precio}\n");
         }
         public void IniciarMercado()
         {
-            LeerFicheroJugadores();
+            LeerFicheroJugadores(rutaLeyendas);
             AgregarJugadorMercado();
-            SeleccionarJugador();
+            SeleccionarJugadorMercado();
+        }
+        public void Vender()
+        {
+            SeleccionarJugadorUsuario();
         }
     }
 }
