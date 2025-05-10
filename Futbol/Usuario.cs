@@ -34,6 +34,17 @@ namespace Futbol
         public long Dinero { get => dinero; set => dinero = value; }
         public int Puntos { get => puntos; set => puntos = value; }
 
+
+        public void ActualizarFicheroDatos()
+        {
+            string ruta = $"../../../Usuarios/{nombre}/{nombre}_datos.txt";
+
+            using (StreamWriter sw = new StreamWriter(ruta))
+            {
+                sw.WriteLine(dinero+";"+puntos);
+            }
+        }
+
         public override string ToString()
         {
             return $"Nombre: {nombre}, Password: {password}, Equipo: {equipo.Nombre}, Dinero: {dinero}" +

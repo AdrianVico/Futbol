@@ -138,26 +138,9 @@ namespace Futbol
 
                 using (FileStream fs = File.Create(rutaDatos)) { }
                 using (FileStream fs = File.Create(rutaEquipo)) { }
-                //TODO saber donde hacer la instancia del usuario
-                //porque cuando la creas aqui en las clases no aparecera
             }
             Usuario usu = new Usuario(nombre, password);
-            StreamWriter st = null;
-            try
-            {
-                st = new StreamWriter(nombreDirectorio+$"/{nombre}/{nombre}_datos.txt");
-                st.WriteLine(usu.Dinero+";"+usu.Puntos);
-            }
-            catch(IOException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                st.Close();
-            }
-
-
+            usu.ActualizarFicheroDatos();
             return usu;
         }
         public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)

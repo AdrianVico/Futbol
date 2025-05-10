@@ -63,9 +63,8 @@ Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
 Vinícius Júnior;Delantero;Real Madrid;28000000
 Toni Kroos;Mediocampista;Real Madrid;23000000
 Paolo Maldini;Defensa;Milan;38000000
-Dennis Bergkamp;Delantero;Arsenal;26000000
 Ferenc Puskás;Delantero;Real Madrid;70000000
 Michel Platini;Mediocampista;Juventus;45000000
 Xavi Hernández;Mediocampista;Al Sadd;61000000
-Zlatan Ibrahimović;Delantero;AC Milan;80000000
 Fernando Hierro;Defensa;Bolton Wanderers;11000000
+Zlatan Ibrahimović;Delantero;AC Milan;80000000

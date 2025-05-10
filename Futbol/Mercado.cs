@@ -90,6 +90,7 @@ namespace Futbol
             int indice = 0;
             do
             {
+                Console.WriteLine("Elige un jugador para vender: ");
                 Console.WriteLine("Jugadores en el mercado:");
                 for (int i = 0; i < jugadoresUsuario.Count; i++)
                 {
@@ -127,6 +128,7 @@ namespace Futbol
             if(usuario.Dinero >= jugador.Precio)
             {
                 usuario.Dinero -= jugador.Precio;
+                usuario.ActualizarFicheroDatos();
                 Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
                 usuario.Equipo.AddJugador(jugador);
                 AgregarJugadoresAlFicheroDelUsuario(jugador);
@@ -146,6 +148,7 @@ namespace Futbol
             if (usuario.Equipo.Jugadores.Contains(jugador))
             {
                 usuario.Dinero += jugador.Precio;
+                usuario.ActualizarFicheroDatos();
                 Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
                 usuario.Equipo.RemoveJugador(jugador);
                 AgregarJugadorAlFichero(jugador);
