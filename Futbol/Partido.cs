@@ -8,7 +8,7 @@ namespace Futbol
 {
     internal class Partido
     {
-
+        private Random rand = new Random();
         string resultado;
         int numeroJornada;
         List<Equipo> equipos;
@@ -40,6 +40,11 @@ namespace Futbol
             return equipos;
         }
         public string Resultado { get => resultado; set => resultado = value; }
+        public string Resultado1 { get => resultado; set => resultado = value; }
+        public int NumeroJornada { get => numeroJornada; set => numeroJornada = value; }
+        internal List<Equipo> Equipos { get => equipos; set => equipos = value; }
+        internal Dictionary<Equipo, Equipo> Partidos { get => partidos; set => partidos = value; }
+        internal Dictionary<Equipo, string> ResultadosPorEquipo { get => resultadosPorEquipo; set => resultadosPorEquipo = value; }
 
         public string SimularResultado()
         {
@@ -52,29 +57,17 @@ namespace Futbol
         }
         public void AnyadirPartidos()
         {
-            List<Equipo> clubes = equipos;
+            List<Equipo> clubes = new List<Equipo>(equipos);
 
-            do
+            while (clubes.Count >= 2)
             {
-                Random rand = new Random();
-
-                int equipo1 = rand.Next(0, clubes.Count - 1);
+                int equipo1 = rand.Next(clubes.Count);
                 Equipo local = clubes[equipo1];
                 clubes.RemoveAt(equipo1);
 
-                int equipo2 = rand.Next(0, clubes.Count - 1);
+                int equipo2 = rand.Next(clubes.Count);
                 Equipo visitante = clubes[equipo2];
                 clubes.RemoveAt(equipo2);
-
-                partidos.Add(local, visitante);
-
-            } while (clubes.Count > 0);
-
-
-            for (int i = 0; i < clubes.Count - 1; i += 2)
-            {
-                Equipo local = clubes[i];
-                Equipo visitante = clubes[i + 1];
 
                 partidos.Add(local, visitante);
             }
@@ -106,7 +99,7 @@ namespace Futbol
         public void MostrarGuardarPartidos()
         {
             string archivo = "jornadas.txt";
-            StreamWriter stw = new StreamWriter(archivo, true);
+            StreamWriter stw = new StreamWriter(archivo);
 
             MostrarNumeroJornada();
             Console.WriteLine();
