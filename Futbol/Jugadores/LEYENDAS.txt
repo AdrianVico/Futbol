@@ -9,7 +9,6 @@ Lev Yashin;Portero;Dynamo Moscú;28000000
 Kylian Mbappé;Delantero;PSG;40000000
 Andrés Iniesta;Mediocampista;Barcelona;64000000
 George Best;Delantero;Bournemouth;47000000
-Roberto Baggio;Delantero;Brescia;23000000
 Alfredo Di Stéfano;Delantero;Español;43000000
 Garrincha Santos;Delantero;Olaria;23000000
 Karl Heinz Rummenigge;Delantero;Bayern Múnich;17000000
@@ -50,7 +49,6 @@ Cristiano Ronaldo;Delantero;Al Nassr;100000000
 Erling Haaland;Delantero;Manchester City;30000000
 Neymar Jr;Delantero;Al Hilal;90000000
 Kevin De Bruyne;Mediocampista;Manchester City;34000000
-Luka Modrić;Mediocampista;Real Madrid;26000000
 Karim Benzema;Delantero;Al Ittihad;50000000
 Robert Lewandowski;Delantero;Barcelona;47000000
 Mohamed Salah;Delantero;Liverpool;22000000
@@ -68,3 +66,5 @@ Michel Platini;Mediocampista;Juventus;45000000
 Xavi Hernández;Mediocampista;Al Sadd;61000000
 Fernando Hierro;Defensa;Bolton Wanderers;11000000
 Zlatan Ibrahimović;Delantero;AC Milan;80000000
+Luka Modrić;Mediocampista;Real Madrid;26000000
+Roberto Baggio;Delantero;Brescia;23000000
