@@ -10,6 +10,9 @@ namespace Futbol
     {
         Usuario usuario;
         Mercado mercado;
+        Liga liga;
+        Jornada jornada;
+        Partido partido;
 
         public Menu(Usuario usuario)
         {
@@ -18,6 +21,9 @@ namespace Futbol
             string[] opcionesMenu = { "Mercado", "Equipo", "Liga", "Jornada", "Salir" };
             int indiceSeleccionado = 0;
             bool salir = false;
+            liga = new Liga();
+            jornada = new Jornada();
+            partido = new Partido();    
 
             while (!salir)
             {
@@ -57,11 +63,16 @@ namespace Futbol
                                 MostrarMenuEquipo();
                                 break;
                             case 2:
-                                Console.WriteLine("\n(Mostrar liga no implementado)");
+                                liga.MostrarClasificacion();
                                 Console.ReadKey();
                                 break;
                             case 3:
-                                Console.WriteLine("\n(Mostrar jornada no implementado)");
+                                partido.AnyadirPartidos();
+                                partido.AnyadirEquiposAPartidos();
+                                partido.MostrarGuardarPartidos();
+                                jornada.MostrarPartidos();
+                                partido.Partidos.Clear();
+                                partido.ResultadosPorEquipo.Clear();
                                 Console.ReadKey();
                                 break;
                             case 4:
