@@ -8,8 +8,10 @@ namespace Futbol
     {
         static void Main(string[] args)
         {
-            Usuario usuario = InicioSesion.Inicio();
-            Menu menu = new Menu(usuario);
+            //Usuario usuario = InicioSesion.Inicio();
+            //Menu menu = new Menu(usuario);
+            Console.ReadLine();
+            Menu.Iniciar();
         }
     }
 }
