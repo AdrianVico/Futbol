@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +11,6 @@ namespace Futbol
     {
         Usuario usuario;
         Mercado mercado;
-        Liga liga;
-        Jornada jornada;
-        Partido partido;
 
         public Menu(Usuario usuario)
         {
@@ -21,9 +19,6 @@ namespace Futbol
             string[] opcionesMenu = { "Mercado", "Equipo", "Liga", "Jornada", "Salir" };
             int indiceSeleccionado = 0;
             bool salir = false;
-            liga = new Liga();
-            jornada = new Jornada();
-            partido = new Partido();    
 
             while (!salir)
             {
@@ -63,16 +58,11 @@ namespace Futbol
                                 MostrarMenuEquipo();
                                 break;
                             case 2:
-                                liga.MostrarClasificacion();
+                                Console.WriteLine("\n(Mostrar liga no implementado)");
                                 Console.ReadKey();
                                 break;
                             case 3:
-                                partido.AnyadirPartidos();
-                                partido.AnyadirEquiposAPartidos();
-                                partido.MostrarGuardarPartidos();
-                                jornada.MostrarPartidos();
-                                partido.Partidos.Clear();
-                                partido.ResultadosPorEquipo.Clear();
+                                Console.WriteLine("\n(Mostrar jornada no implementado)");
                                 Console.ReadKey();
                                 break;
                             case 4:
@@ -83,7 +73,157 @@ namespace Futbol
                 }
             }
         }
+        public static int DibujarCuadro(List<string> lineas)
+        {
+            const int ANCHO_CONSOLA = 209;
+            const int ALTO_CONSOLA = 51;
 
+            int anchoCuadro = 70;
+            int altoCuadro = 51;
+
+            int padLeft = (ANCHO_CONSOLA - anchoCuadro) / 2; // 69
+            int padTop = 0;
+
+            // Agregar líneas de transición
+            for (int y = 0; y < altoCuadro; y++)
+            {
+                for (int x = 0; x < anchoCuadro; x++)
+                {
+                    Console.SetCursorPosition(padLeft + x, padTop + y);
+                    Console.Write("█");
+                }
+            }
+            // Dibuja cuadro completo
+            for (int y = 0; y < altoCuadro; y++)
+            {
+                for (int x = 0; x < anchoCuadro; x++)
+                {
+                    Console.SetCursorPosition(padLeft + x, padTop + y);
+                    if (y == 0 || y == altoCuadro - 1 || x == 0 || x == anchoCuadro - 1)
+                        Console.Write("█");
+                    else
+                        Console.Write(" ");
+                }
+            }
+
+            // Imprimir líneas centradas dentro del cuadro
+            int altoTexto = altoCuadro - 2; // espacio entre los bordes
+            int padTopTexto = padTop + 1 + (altoTexto - lineas.Count) / 2;
+
+            for (int i = 0; i < lineas.Count && i < altoTexto; i++)
+            {
+                string linea = lineas[i];
+                if (linea.Length > anchoCuadro - 2)
+                    linea = linea.Substring(0, anchoCuadro - 2); // cortar si es muy larga
+
+                int anchoTexto = anchoCuadro - 2; // sin los bordes
+                int padLeftTexto = (anchoTexto - linea.Length) / 2;
+
+                int xTexto = padLeft + 1 + padLeftTexto;
+                int yTexto = padTopTexto + i;
+
+                Console.SetCursorPosition(xTexto, yTexto);
+                Console.Write(linea);
+            }
+            return padTopTexto;
+        }
+        public static int MakeMenuOf(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
+        {
+            const int ANCHO_CONSOLA = 209;
+            const int ALTO_CONSOLA = 51;
+
+            // Crear las líneas para el menú completo
+            List<string> lineasMenu = new List<string>();
+
+            // Agregar las preguntas al menú
+            lineasMenu.AddRange(preguntasTexto);
+
+            // Agregar una línea en blanco entre las preguntas y las opciones
+            lineasMenu.Add("");
+
+            // Agregar las opciones al menú
+            lineasMenu.AddRange(opciones);
+
+            // Agregar una línea en blanco y el texto adicional
+            lineasMenu.Add("");
+            lineasMenu.Add(textoAdicional);
+
+            // Dibujar el cuadro inicial con todo el contenido
+            int padTopTexto = DibujarCuadro(lineasMenu);
+
+            // Calcular posiciones para las opciones
+            int maxLargo = opciones.Max(o => o.Length);
+            int POSICION_X_OPCIONES = (ANCHO_CONSOLA / 2) - (maxLargo / 2) - 2; // Centrado aproximado
+            int POSICION_Y_PRIMERA_OPCION = padTopTexto + preguntasTexto.Count + 1; // Después de las líneas de preguntas
+
+            int opcionSeleccionada = 0;
+            int opcionAnterior = -1;
+            ConsoleKey tecla;
+
+            // Calcular la posición Y de cada opción en la pantalla
+            int[] posicionesY = new int[opciones.Count];
+            for (int i = 0; i < opciones.Count; i++)
+            {
+                posicionesY[i] = POSICION_Y_PRIMERA_OPCION + i;
+            }
+
+            // Marcar inicialmente la primera opción (seleccionada por defecto)
+            Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[0]);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(">" + opciones[0]);
+            Console.ResetColor();
+
+            do
+            {
+                // Si la opción cambió, actualizamos solo las líneas necesarias
+                if (opcionAnterior != opcionSeleccionada)
+                {
+                    // Actualizar opción anterior (quitar el cursor y restaurar color)
+                    if (opcionAnterior >= 0)
+                    {
+                        Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[opcionAnterior]);
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.Write(" " + opciones[opcionAnterior]);
+                        Console.ResetColor();
+                    }
+
+                    // Actualizar opción actual (poner el cursor y colorear de verde)
+                    Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[opcionSeleccionada]);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(">" + opciones[opcionSeleccionada]);
+                    Console.ResetColor();
+
+                    opcionAnterior = opcionSeleccionada;
+                }
+
+                // Leer la tecla presionada
+                tecla = Console.ReadKey(true).Key;
+
+                // Actualizar la opción seleccionada según la tecla
+                switch (tecla)
+                {
+                    case ConsoleKey.UpArrow:
+                        opcionSeleccionada = (opcionSeleccionada > 0) ? opcionSeleccionada - 1 : opciones.Count - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
+                        break;
+                }
+            } while (tecla != ConsoleKey.Enter);
+
+            return opcionSeleccionada;
+        }
+
+        public static void Iniciar()
+        {
+            MenuIniciarSesion();
+        }
+        private static bool MenuIniciarSesion()
+        {
+            List<string> pregunta = new List<string> { "Tienes una cuenta creada?" };
+            List<string> opciones = new List<string> { "Si ", "No " };//si es par se le mete un espacio pq se necesita impar
+            return MakeMenuOf(pregunta, opciones, "") == 0 ? true : false;
+        }
         private void MostrarMenuMercado()
         {
             string[] opcionesMercado = { "Comprar", "Vender", "Volver" };
