@@ -169,9 +169,9 @@ namespace Futbol
 
         public static bool TipoDeInicio()
         {
-            Console.Write("¿Tienes una cuenta creada?");
-            string[] opciones = { "Si", "No" };
-            Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+            string titulo = "¿Tienes una cuenta creada?";
+            List<string> opciones = new List<string>{ "Si", "No" };
+            /*Console.SetCursorPosition(Console.WindowWidth / 2, 0);
             Console.SetCursorPosition(Console.WindowWidth / 2, 1);
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             int indice = 0;
@@ -201,8 +201,8 @@ namespace Futbol
                 }
 
             } while (key.Key != ConsoleKey.Enter);
-
-            return indice == 0 ? true : false;
+            */
+            return MenuSelector.SeleccionarOpcion(opciones,titulo) == 0 ? true : false;
         }
         public static string ElegirEquipoInicial()
         {

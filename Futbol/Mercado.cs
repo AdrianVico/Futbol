@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -49,8 +50,10 @@ namespace Futbol
             LeerFicheroJugadores(rutaLeyendas);
             AgregarJugadorMercado();
             ConsoleKeyInfo keyInfo;
-            int indice = 0;
-            do
+            List<string> lista = new List<string>();
+            jugadoresMercado.ForEach(j => lista.Add(j.ToString()));
+            int indice = MenuSelector.SeleccionarOpcion(lista, "Jugadores en el mercado:");
+            /*do
             {
                 Console.WriteLine("Jugadores en el mercado:");
                 for (int i = 0; i < jugadoresMercado.Count; i++)
@@ -77,11 +80,18 @@ namespace Futbol
                 }
                 Console.Clear();
             } while (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Escape);
+            */
 
-            if (keyInfo.Key != ConsoleKey.Escape)
+            if (indice != -1)
             {
                 ComprarJugador(jugadoresMercado[indice]);
             }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Has salido del mercado.");
+            }
+
         }
         public void SeleccionarJugadorUsuario()
         {
@@ -122,6 +132,7 @@ namespace Futbol
                 VenderJugador(jugadoresUsuario[indice]);
             }
             
+
         }
         public void ComprarJugador(Jugador jugador)
         {

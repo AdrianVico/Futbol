@@ -1,0 +1,11 @@
+Lucas Perri;Portero;Olympique Lyonnais;1500000
+Clinton Mata;Defensa;Olympique Lyonnais;2000000
+Jake O'Brien;Defensa;Olympique Lyonnais;1200000
+Duje Ćaleta-Car;Defensa;Olympique Lyonnais;2500000
+Nicolás Tagliafico;Defensa;Olympique Lyonnais;2800000
+Nemanja Matić;Centrocampista;Olympique Lyonnais;3000000
+Maxence Caqueret;Centrocampista;Olympique Lyonnais;2000000
+Corentin Tolisso;Centrocampista;Olympique Lyonnais;3500000
+Rayan Cherki;Delantero;Olympique Lyonnais;2000000
+Alexandre Lacazette;Delantero;Olympique Lyonnais;4500000
+Mama Baldé;Delantero;Olympique Lyonnais;1800000

@@ -1,3 +1,12 @@
 alejandro;alejandro
 p;p
 p1;p1
+q;q
+;
+a;
+w;w
+r;
+b;b
+o;
+y;
+g;
