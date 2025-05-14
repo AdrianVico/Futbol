@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Futbol
+namespace JornadasTest
 {
     internal class Partido
     {
+
         string resultado;
         int numeroJornada;
         List<Equipo> equipos;
@@ -105,7 +106,7 @@ namespace Futbol
         public void MostrarGuardarPartidos()
         {
             string archivo = "jornadas.txt";
-            StreamWriter stw = new StreamWriter(archivo);
+            StreamWriter stw = new StreamWriter(archivo, true);
 
             MostrarNumeroJornada();
             Console.WriteLine();

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using JornadasTest;
 
 namespace Futbol
 {
@@ -29,7 +28,7 @@ namespace Futbol
             }
 
             string[] lineas = File.ReadAllLines(archivo);
-            int jornadaActual = 1;
+            int jornadaActual = 0;
 
             foreach (string linea in lineas)
             {
@@ -42,32 +41,44 @@ namespace Futbol
                     string[] datos = linea.Split(';');
                     string nombreEquipo = datos[0];
                     string resultado = datos[1];
-                    /*
-                    if (!resultados.ContainsKey(nombreEquipo))
+
+                    Equipo equipo = ObtenerEquipo(nombreEquipo);
+                    if (equipo == null)
                     {
-                        resultados[nombreEquipo] = new List<string>();
-                        puntos[nombreEquipo] = 0;
+                        equipo = new Equipo(nombreEquipo);
+                        resultados[equipo] = new List<string>();
+                        puntos[equipo] = 0;
                     }
 
-                    resultados[nombreEquipo].Add(resultado);
+                    resultados[equipo].Add(resultado);
 
                     string[] goles = resultado.Split('-');
                     int golesFavor = int.Parse(goles[0]);
                     int golesContra = int.Parse(goles[1]);
 
                     if (golesFavor > golesContra)
-                        puntos[nombreEquipo] += 3;
+                        puntos[equipo] += 3;
                     else if (golesFavor == golesContra)
-                        puntos[nombreEquipo] += 1;*/
+                        puntos[equipo] += 1;
                 }
             }
 
             totalJornadas = CalcularTotalJornadas();
         }
 
+        private Equipo ObtenerEquipo(string nombre)
+        {
+            foreach (Equipo eq in resultados.Keys)
+            {
+                if (eq.Nombre == nombre)
+                    return eq;
+            }
+            return null;
+        }
+
         private int CalcularTotalJornadas()
         {
-            int jornadas = 1;
+            int jornadas = 0;
             string[] lineas = File.ReadAllLines(archivo);
 
             foreach (string linea in lineas)
@@ -89,23 +100,21 @@ namespace Futbol
                 Console.Write($"J{j}   ");
 
             Console.WriteLine("PT");
-            /*
-            foreach (var equipo in resultados)
+
+            foreach (var equipo in puntos.OrderByDescending(e => e.Value))
             {
-                string nombre = equipo.Key;
-                List<string> res = equipo.Value;
+                string nombre = equipo.Key.Nombre;
+                List<string> res = resultados[equipo.Key];
 
                 Console.Write(nombre.PadRight(15));
 
                 foreach (string r in res)
                     Console.Write($"{r.PadRight(5)}");
 
-                for (int i = res.Count; i < totalJornadas; i++)
-                    Console.Write("---- ");
-
-                Console.WriteLine($"{puntos[nombre]}");
-            }*/
+                Console.WriteLine($"{equipo.Value}");
+            }
         }
+
 
         public void MostrarJornadas()
         {
