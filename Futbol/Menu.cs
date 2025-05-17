@@ -388,40 +388,29 @@ namespace Futbol
 @"| _ \ | | | | | |    / __|   /_\     |_ _| | \| | |_   _| | _ \  / _ \    | _ \   /_\   | _ \   /_\      / __|  / _ \  | \| | |_   _| |_ _| | \| | | | | |   /_\   | _ \ ",
 @"|  _/ | |_| | | |__  \__ \  / _ \     | |  | .` |   | |   |   / | (_) |   |  _/  / _ \  |   /  / _ \    | (__  | (_) | | .` |   | |    | |  | .` | | |_| |  / _ \  |   / ",
 @"|_|    \___/  |____| |___/ /_/ \_\   |___| |_|\_|   |_|   |_|_\  \___/    |_|   /_/ \_\ |_|_\ /_/ \_\    \___|  \___/  |_|\_|   |_|   |___| |_|\_|  \___/  /_/ \_\ |_|_\ "};
-            string[] lineasCosa2 = {
-@"                                                                                                                                                                         ",
-@"                                                                                                                                                                         ",
-@"                                                                                                                                                                         ",
-@"                                                                                                                                                                         "};
 
             // Obtener ancho total de la consola
             int anchoConsola = 209;
+            int altoConsola = 51;
             bool mostrarCosa = true;
             do
             {
                 Console.Clear();
                 // Mostrar título centrado
-                foreach (string linea in lineasTitulo)
+                for (int i = 0; i < lineasTitulo.Length; i++)
                 {
-                    int padding = (anchoConsola - linea.Length) / 2;
-                    Console.WriteLine(new string(' ', padding) + linea);
+                    Console.SetCursorPosition((anchoConsola - lineasTitulo[i].Length) / 2, i + ((altoConsola - (lineasTitulo.Length+lineasCosa.Length))/2));
+                    Console.WriteLine(lineasTitulo[i]);
                 }
                 // Mostrar o no mostrar "cosa" (parpadeo)
-                if (mostrarCosa)
+
+                for (int i = 0; i < lineasCosa.Length; i++)
                 {
-                    foreach (string linea in lineasCosa)
-                    {
-                        int padding = (anchoConsola - linea.Length) / 2;
-                        Console.WriteLine(new string(' ', padding) + linea);
-                    }
-                }
-                else
-                {
-                    foreach (string linea in lineasCosa2)
-                    {
-                        int padding = (anchoConsola - linea.Length) / 2;
-                        Console.WriteLine(new string(' ', padding) + linea);
-                    }
+                    Console.SetCursorPosition((anchoConsola - lineasCosa[i].Length) / 2, lineasTitulo.Length + i + ((altoConsola - (lineasTitulo.Length + lineasCosa.Length)) / 2));
+                    if (mostrarCosa)
+                        Console.WriteLine(lineasCosa[i]);
+                    else
+                        Console.WriteLine(new string(' ', lineasCosa[i].Length));
                 }
                 // Esperar antes del siguiente parpadeo
                 Thread.Sleep(750);
