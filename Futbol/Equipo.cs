@@ -52,7 +52,11 @@ namespace Futbol
         }
         public string GetSiglas()
         {
-            return nombre.Substring(0, 4);
+            string siglas = nombre.Substring(0, nombre.Length >= 4 ? 4 : nombre.Length);
+            int LeftPad = (4 - siglas.Length)/2;
+            int RightPad = 4-(siglas.Length+LeftPad);
+            siglas = new string(' ', LeftPad) + siglas + new string(' ', RightPad);
+            return siglas;
         }
         public string GetNombreCamiseta()
         {
@@ -76,7 +80,7 @@ namespace Futbol
 
         public string[] MostrarCamisetas()
         {
-            string[] resultado = new string[100];//(6 + 1 +1 ) * (3 + 1) 6 de alto de la camiseta + 1 del nombre, 3 filas de jugadores + 1 del portero
+            string[] resultado = new string[(6 + 1 + 1) * (3 + 1)];//(6 + 1 +1 ) * (3 + 1) 6 de alto de la camiseta + 1 del nombre, 3 filas de jugadores + 1 del portero
             int linea = 0;
             // Verificar que la alineación es válida
             if (alineacion.Length != 4)
@@ -98,18 +102,18 @@ namespace Futbol
                 int anchoCamiseta = 12; // Ancho de caracteres cada camiseta
                 int altoCamiseta = lineasCamiseta.Length; // Alto de la camiseta
                 //padding
-                int anchoMax = alineacion.Max() * anchoCamiseta;
-                foreach (int fila in alineacion)
-                {
-                    int anchoFila = fila * anchoCamiseta;
-                    for (int a = 0; a < altoCamiseta + 1; a++)
-                    {
-                        resultado[linea] = new string(' ', (anchoMax - anchoFila) / 2);
-                        linea++;
-                    }
-                    resultado[linea] = "";
-                    linea++;
-                }
+                //int anchoMax = alineacion.Max() * anchoCamiseta;
+                //foreach (int fila in alineacion)
+                //{
+                //    int anchoFila = fila * anchoCamiseta;
+                //    for (int a = 0; a < altoCamiseta + 1; a++)
+                //    {
+                //        resultado[linea] = new string(' ', (anchoMax - anchoFila) / 2);
+                //        linea++;
+                //    }
+                //    resultado[linea] = "";
+                //    linea++;
+                //}
                 //texto
                 linea = 0;
                 string[] nombresJugadores = jugadores.Select(j => j.Nombre).ToArray();

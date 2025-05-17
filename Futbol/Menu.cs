@@ -215,10 +215,15 @@ namespace Futbol
 
             // Texto adicional
             lineasMenu.Add("");
+            lineasMenu.Add("");
+            lineasMenu.Add("");
             lineasMenu.AddRange(textoAdicional);
 
             // Dibujar el cuadro inicial con todo el contenido excepto las opciones
             int padTopTexto = DibujarCuadro(lineasMenu);
+
+            //poner info usuario
+            MostrarInfoUsuario(usuario);
 
             // Posición vertical para las opciones (una sola línea)
             int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
@@ -291,6 +296,11 @@ namespace Futbol
             return opcionSeleccionada;
         }
 
+        private static void MostrarInfoUsuario(Usuario usuario)
+        {
+            Console.SetCursorPosition(70, 1);
+            Console.WriteLine($"{usuario.Nombre} {usuario.Dinero}$ Pts: {usuario.Puntos}");
+        }
 
 
         public static Usuario Iniciar()
