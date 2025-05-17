@@ -8,12 +8,9 @@ namespace Futbol
     {
         static void Main(string[] args)
         {
-            //Usuario usuario = InicioSesion.Inicio();
-            //Menu menu = new Menu(usuario);
-            while (true) { 
-                Menu m = new Menu(Menu.Iniciar());
-                m.MostrarMenuPrincipal();
-            }
+            Menu m = new Menu(Menu.Iniciar());
+            m.MostrarMenuPrincipal();
+            Menu.DibujarCuadro(m.Usuario.Equipo.MostrarCamisetas().ToList());
         }
     }
 }

@@ -12,6 +12,9 @@ namespace Futbol
         Usuario usuario;
         Mercado mercado;
 
+        internal Usuario Usuario { get => usuario; set => usuario = value; }
+        internal Mercado Mercado { get => mercado; set => mercado = value; }
+
         public Menu(Usuario usuario)
         {
             this.usuario = usuario;
@@ -26,7 +29,7 @@ namespace Futbol
         public void MostrarMenuPrincipal()
         {
             string[] opcionesMenu = { "Mercado", "Equipo", "Liga", "Jornada", "Salir" };
-            switch (Menu.CrearMenuPrincipal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu)))
+            switch (Menu.CrearMenuPrincipal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList()))
             {
                 case 0:
                     MostrarMenuMercado();
@@ -192,7 +195,7 @@ namespace Futbol
             return opcionSeleccionada;
         }
 
-        public static int CrearMenuPrincipal(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
+        public static int CrearMenuPrincipal(List<string> preguntasTexto, List<string> opciones, Usuario usuario, List<string> textoAdicional)
         {
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
@@ -212,7 +215,7 @@ namespace Futbol
 
             // Texto adicional
             lineasMenu.Add("");
-            lineasMenu.Add(textoAdicional);
+            lineasMenu.AddRange(textoAdicional);
 
             // Dibujar el cuadro inicial con todo el contenido excepto las opciones
             int padTopTexto = DibujarCuadro(lineasMenu);
@@ -325,53 +328,23 @@ namespace Futbol
         private void MostrarMenuEquipo()
         {
             string[] opcionesEquipo = { "Ver equipo", "Modificar alineación", "Volver" };
-            int indice = 0;
-            bool volver = false;
-
-            while (!volver)
+            int indice = Menu.CrearMenuVertical(new List<string> {"Plantilla"}, new List<string>(opcionesEquipo));
+            
+            switch (indice)
             {
-                Console.Clear();
-                Console.WriteLine("Equipo\n");
-                for (int i = 0; i < opcionesEquipo.Length; i++)
-                {
-                    if (i == indice)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"> {opcionesEquipo[i]}");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  {opcionesEquipo[i]}");
-                    }
-                }
-                ConsoleKeyInfo tecla = Console.ReadKey(true);
-                switch (tecla.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        indice = (indice == 0) ? opcionesEquipo.Length - 1 : indice - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        indice = (indice + 1) % opcionesEquipo.Length;
-                        break;
-                    case ConsoleKey.Enter:
-                        switch (indice)
-                        {
-                            case 0:
-                                Console.Clear();
-                                usuario.Equipo.Jugadores.ForEach(j => Console.WriteLine(j.ToString()));
-                                Console.ReadKey();
-                                break;
-                            case 1:
-                                // Modificar alineación
-                                break;
-                            case 2:
-                                volver = true;
-                                break;
-                        }
-                        break;
-                }
-            }
+                case 0:
+                    Console.Clear();
+                    usuario.Equipo.Jugadores.ForEach(j => Console.WriteLine(j.ToString()));
+                    Console.ReadKey();
+                    break;
+                case 1:
+                    // Modificar alineación
+                    break;
+                case 2:
+                    //volver = true;
+                    break;
+            } 
+            
         }
 
         private static void PantallaInicio()//mejorarlo
