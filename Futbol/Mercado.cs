@@ -49,16 +49,17 @@ namespace Futbol
         {
             LeerFicheroJugadores(rutaLeyendas);
             AgregarJugadorMercado();
-            ConsoleKeyInfo keyInfo;
             List<string> lista = new List<string>();
             jugadoresMercado.ForEach(j => lista.Add(j.ToString()));
             lista.Add("Salir");
-            int indice = Menu.MakeMenuOf(new List<string> {"Mercado: "}, new List<string>(lista));
+            int indice = Menu.CrearMenuVertical(new List<string> {"Mercado:"}, new List<string>(lista));
+            Menu m = new Menu(this.usuario);
             if (indice != -1 && indice != lista.Count-1)
             {
-                if (Menu.MakeMenuOf(new List<string> { "¿Seguro que quieres comprar","a este jugador?"}, new List<string> {"Si","No"}) == 0)
+                if (Menu.CrearMenuVertical(new List<string> { "¿Seguro que quieres comprar","a este jugador?"}, new List<string> {"Si","No"}) == 0)
                 {
                     ComprarJugador(jugadoresMercado[indice]);
+                    m.MostrarMenuMercado();
                 }
                 else
                 {
@@ -67,7 +68,7 @@ namespace Futbol
             }
             else
             {
-                Menu.SalirMenu(new Menu(this.usuario));
+                new Menu(this.usuario).MostrarMenuMercado();
             }
 
         }
@@ -77,14 +78,15 @@ namespace Futbol
             List<string> lista = new List<string>();
             jugadoresUsuario.ForEach(j => lista.Add(j.ToString()));
             lista.Add("Salir");
-            int indice = Menu.MakeMenuOf(new List<string> { "¿Qué jugador quieres vender?" }, new List<string>(lista));
-
+            int indice = Menu.CrearMenuVertical(new List<string> { "¿Qué jugador quieres vender?" }, new List<string>(lista));
+            Menu m = new Menu(this.usuario);
             if (indice != -1 && indice != lista.Count-1)
             {
                 
-                if (Menu.MakeMenuOf(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" }) == 0)
+                if (Menu.CrearMenuVertical(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" }) == 0)
                 {
                     VenderJugador(jugadoresUsuario[indice]);
+                    m.MostrarMenuMercado();
                 }
                 else
                 {
@@ -93,7 +95,7 @@ namespace Futbol
             }
             else
             {
-                Menu.SalirMenu(new Menu(this.usuario));
+               m.MostrarMenuMercado();
             }
 
 
@@ -104,12 +106,11 @@ namespace Futbol
             {
                 usuario.Dinero -= jugador.Precio;
                 usuario.ActualizarFicheroDatos();
-                Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
+                //Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
                 usuario.Equipo.AddJugador(jugador);
                 AgregarJugadoresAlFicheroDelUsuario(jugador);
                 jugadoresMercado.Remove(jugador);
                 BorrarJugadorDelFichero(jugador);       
-                Console.ReadLine();
             }
             else
             {
@@ -124,11 +125,10 @@ namespace Futbol
             {
                 usuario.Dinero += jugador.Precio;
                 usuario.ActualizarFicheroDatos();
-                Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
+                //Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
                 usuario.Equipo.RemoveJugador(jugador);
                 AgregarJugadorAlFichero(jugador);
                 BorrarJugadoresDelFicheroDelUsuario(jugador);
-                Console.ReadLine();
             }
             else
             {

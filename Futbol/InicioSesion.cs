@@ -238,7 +238,7 @@ namespace Futbol
                 }
 
             } while (key.Key != ConsoleKey.Enter);*/
-            return opciones[Menu.MakeMenuOf(preguntas, opciones)];
+            return opciones[Menu.CrearMenuVertical(preguntas, opciones)];
         }
         public static void CopiarEquipoInicial(string equipo, string usuario)
         {
@@ -290,6 +290,7 @@ namespace Futbol
 
             usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
             // Console.WriteLine(usu);
+            Console.Clear();
             return usu;
         }
     }

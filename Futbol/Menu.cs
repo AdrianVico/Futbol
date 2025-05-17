@@ -26,7 +26,7 @@ namespace Futbol
         public void MostrarMenuPrincipal()
         {
             string[] opcionesMenu = { "Mercado", "Equipo", "Liga", "Jornada", "Salir" };
-            switch (Menu.MakeMenuOfHorizontal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu)))
+            switch (Menu.CrearMenuPrincipal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu)))
             {
                 case 0:
                     MostrarMenuMercado();
@@ -101,7 +101,7 @@ namespace Futbol
             }
             return padTopTexto;
         }
-        public static int MakeMenuOf(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
+        public static int CrearMenuVertical(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
         {
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
@@ -192,7 +192,7 @@ namespace Futbol
             return opcionSeleccionada;
         }
 
-        public static int MakeMenuOfHorizontal(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
+        public static int CrearMenuPrincipal(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
         {
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
@@ -299,28 +299,26 @@ namespace Futbol
         {
             List<string> pregunta = new List<string> { "Tienes una cuenta creada?" };
             List<string> opciones = new List<string> { "Si ", "No " };//si es par se le mete un espacio pq se necesita impar
-            return MakeMenuOf(pregunta, opciones, "") == 0 ? true : false;
+            return CrearMenuVertical(pregunta, opciones, "") == 0 ? true : false;
         }
-        private void MostrarMenuMercado()
+        public void MostrarMenuMercado()
         {
             string[] opcionesMercado = { "Comprar", "Vender", "Volver" };
 
-            switch (Menu.MakeMenuOf(new List<string> { "Mercado" }, new List<string>(opcionesMercado)))
+            switch (Menu.CrearMenuVertical(new List<string> { "Mercado" }, new List<string>(opcionesMercado)))
             {
                 case 0:
                     Console.Clear();
-                    Console.WriteLine("Elige un jugador para comprar:");
                     mercado.IniciarMercado();
                     Console.ReadKey();
                     break;
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Elige un jugador para vender:");
                     mercado.Vender();
                     Console.ReadKey();
                     break;
                 case 2:
-                    //volver = true;
+                    MostrarMenuPrincipal();
                     break;
             }
         }

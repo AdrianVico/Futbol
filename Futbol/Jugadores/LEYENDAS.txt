@@ -47,7 +47,6 @@ Samuel Eto;Delantero;Antalyaspor;44000000
 Rivaldo Vítor;Mediocampista;Kabuscorp;55000000
 Cristiano Ronaldo;Delantero;Al Nassr;100000000
 Erling Haaland;Delantero;Manchester City;30000000
-Neymar Jr;Delantero;Al Hilal;90000000
 Kevin De Bruyne;Mediocampista;Manchester City;34000000
 Karim Benzema;Delantero;Al Ittihad;50000000
 Robert Lewandowski;Delantero;Barcelona;47000000
@@ -79,3 +78,4 @@ Isco Alarcón;Centrocampista;Real Betis;2500000
 Antony dos Santos;Delantero;Real Betis;2000000
 Cucho Hernández;Delantero;Real Betis;2000000
 Jesús Rodríguez;Delantero;Real Betis;1000000
+Neymar Jr;Delantero;Al Hilal;90000000
