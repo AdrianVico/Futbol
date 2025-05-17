@@ -217,15 +217,81 @@ namespace Futbol
 
             return opcionSeleccionada;
         }
+        private static void PantallaInicio()//mejorarlo
+        {
+            string[] lineasTitulo = {
+@"███████╗ █████╗ ███╗   ██╗████████╗ █████╗ ███████╗██╗   ██╗    ██╗     ███████╗ ██████╗ ███████╗███╗   ██╗██████╗ ███████╗",
+@"██╔════╝██╔══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚██╗ ██╔╝    ██║     ██╔════╝██╔════╝ ██╔════╝████╗  ██║██╔══██╗██╔════╝",
+@"█████╗  ███████║██╔██╗ ██║   ██║   ███████║███████╗ ╚████╔╝     ██║     █████╗  ██║  ███╗█████╗  ██╔██╗ ██║██║  ██║███████╗",
+@"██╔══╝  ██╔══██║██║╚██╗██║   ██║   ██╔══██║╚════██║  ╚██╔╝      ██║     ██╔══╝  ██║   ██║██╔══╝  ██║╚██╗██║██║  ██║╚════██║",
+@"██║     ██║  ██║██║ ╚████║   ██║   ██║  ██║███████║   ██║       ███████╗███████╗╚██████╔╝███████╗██║ ╚████║██████╔╝███████║",
+@"╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝       ╚══════╝╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝" };
+            string[] lineasCosa = {
+@" ___   _   _   _      ___     _       ___   _  _   _____   ___    ___      ___     _     ___     _        ___    ___    _  _   _____   ___   _  _   _   _     _     ___  ",
+@"| _ \ | | | | | |    / __|   /_\     |_ _| | \| | |_   _| | _ \  / _ \    | _ \   /_\   | _ \   /_\      / __|  / _ \  | \| | |_   _| |_ _| | \| | | | | |   /_\   | _ \ ",
+@"|  _/ | |_| | | |__  \__ \  / _ \     | |  | .` |   | |   |   / | (_) |   |  _/  / _ \  |   /  / _ \    | (__  | (_) | | .` |   | |    | |  | .` | | |_| |  / _ \  |   / ",
+@"|_|    \___/  |____| |___/ /_/ \_\   |___| |_|\_|   |_|   |_|_\  \___/    |_|   /_/ \_\ |_|_\ /_/ \_\    \___|  \___/  |_|\_|   |_|   |___| |_|\_|  \___/  /_/ \_\ |_|_\ "};
+            string[] lineasCosa2 = {
+@"                                                                                                                                                                         ",
+@"                                                                                                                                                                         ",
+@"                                                                                                                                                                         ",
+@"                                                                                                                                                                         "};
 
+            // Obtener ancho total de la consola
+            int anchoConsola = 209;
+            bool mostrarCosa = true;
+            do
+            {
+                Console.Clear();
+                // Mostrar título centrado
+                foreach (string linea in lineasTitulo)
+                {
+                    int padding = (anchoConsola - linea.Length) / 2;
+                    Console.WriteLine(new string(' ', padding) + linea);
+                }
+                // Mostrar o no mostrar "cosa" (parpadeo)
+                if (mostrarCosa)
+                {
+                    foreach (string linea in lineasCosa)
+                    {
+                        int padding = (anchoConsola - linea.Length) / 2;
+                        Console.WriteLine(new string(' ', padding) + linea);
+                    }
+                }
+                else
+                {
+                    foreach (string linea in lineasCosa2)
+                    {
+                        int padding = (anchoConsola - linea.Length) / 2;
+                        Console.WriteLine(new string(' ', padding) + linea);
+                    }
+                }
+                // Esperar antes del siguiente parpadeo
+                Thread.Sleep(750);
+                // Alternar para crear efecto de parpadeo
+                mostrarCosa = !mostrarCosa;
+            } while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Enter);
+            Console.Clear();
+            for (int i = 0; i < 51; i++)
+            {
+                for (int j = 0; j < 209; j++)
+                {
+                    Console.SetCursorPosition(j, i);
+                    Console.WriteLine("█");
+                }
+            }
+            Console.Clear();
+        }
         public static void Iniciar()
         {
+            //cosa();
+            PantallaInicio();
             MenuIniciarSesion();
         }
         private static bool MenuIniciarSesion()
         {
             List<string> pregunta = new List<string> { "Tienes una cuenta creada?" };
-            List<string> opciones = new List<string> { "Si ", "No " };//si es par se le mete un espacio pq se necesita impar
+            List<string> opciones = new List<string> { "Si", "No" };//si es par se le mete un espacio pq se necesita impar
             return MakeMenuOf(pregunta, opciones, "") == 0 ? true : false;
         }
         private void MostrarMenuMercado()
