@@ -16,61 +16,35 @@ namespace Futbol
         {
             this.usuario = usuario;
             mercado = new Mercado(usuario);
+        }
+
+        public static void SalirMenu(Menu m)
+        {
+            m.MostrarMenuPrincipal();
+        }
+
+        public void MostrarMenuPrincipal()
+        {
             string[] opcionesMenu = { "Mercado", "Equipo", "Liga", "Jornada", "Salir" };
-            int indiceSeleccionado = 0;
-            bool salir = false;
-
-            while (!salir)
+            switch (Menu.MakeMenuOfHorizontal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu)))
             {
-                Console.Clear();
-                Console.WriteLine("Bienvenido al menú\n");
-
-                for (int i = 0; i < opcionesMenu.Length; i++)
-                {
-                    if (i == indiceSeleccionado)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write($"> {opcionesMenu[i]}   ");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.Write($"  {opcionesMenu[i]}   ");
-                    }
-                }
-                ConsoleKeyInfo tecla = Console.ReadKey(true);
-
-                switch (tecla.Key)
-                {
-                    case ConsoleKey.LeftArrow:
-                        indiceSeleccionado = (indiceSeleccionado == 0) ? opcionesMenu.Length - 1 : indiceSeleccionado - 1;
-                        break;
-                    case ConsoleKey.RightArrow:
-                        indiceSeleccionado = (indiceSeleccionado + 1) % opcionesMenu.Length;
-                        break;
-                    case ConsoleKey.Enter:
-                        switch (indiceSeleccionado)
-                        {
-                            case 0:
-                                MostrarMenuMercado();
-                                break;
-                            case 1:
-                                MostrarMenuEquipo();
-                                break;
-                            case 2:
-                                Console.WriteLine("\n(Mostrar liga no implementado)");
-                                Console.ReadKey();
-                                break;
-                            case 3:
-                                Console.WriteLine("\n(Mostrar jornada no implementado)");
-                                Console.ReadKey();
-                                break;
-                            case 4:
-                                salir = true;
-                                break;
-                        }
-                        break;
-                }
+                case 0:
+                    MostrarMenuMercado();
+                    break;
+                case 1:
+                    MostrarMenuEquipo();
+                    break;
+                case 2:
+                    Console.WriteLine("\n(Mostrar liga no implementado)");
+                    Console.ReadKey();
+                    break;
+                case 3:
+                    Console.WriteLine("\n(Mostrar jornada no implementado)");
+                    Console.ReadKey();
+                    break;
+                case 4:
+                    //salir = true;
+                    break;
             }
         }
         public static int DibujarCuadro(List<string> lineas)
@@ -217,6 +191,191 @@ namespace Futbol
 
             return opcionSeleccionada;
         }
+
+        public static int MakeMenuOfHorizontal(List<string> preguntasTexto, List<string> opciones, string textoAdicional = "Usa las flechitas para navegar y Enter para seleccionar")
+        {
+            const int ANCHO_CONSOLA = 209;
+            const int ALTO_CONSOLA = 51;
+
+            // Asegurarse de que todas las opciones tengan el mismo largo para alinearlas mejor
+            int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
+            opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
+
+            // Crear las líneas para el menú completo
+            List<string> lineasMenu = new List<string>();
+
+            // Agregar las preguntas al menú
+            lineasMenu.AddRange(preguntasTexto);
+
+            // Línea en blanco
+            lineasMenu.Add("");
+
+            // Texto adicional
+            lineasMenu.Add("");
+            lineasMenu.Add(textoAdicional);
+
+            // Dibujar el cuadro inicial con todo el contenido excepto las opciones
+            int padTopTexto = DibujarCuadro(lineasMenu);
+
+            // Posición vertical para las opciones (una sola línea)
+            int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
+
+            // Calcular posiciones horizontales para cada opción
+            int espacioEntre = 4;
+            int totalAnchoOpciones = opciones.Count * (longitudMaxima + espacioEntre) - espacioEntre;
+            int inicioX = (ANCHO_CONSOLA - totalAnchoOpciones) / 2;
+
+            int[] posicionesX = new int[opciones.Count];
+            for (int i = 0; i < opciones.Count; i++)
+            {
+                posicionesX[i] = inicioX + i * (longitudMaxima + espacioEntre);
+            }
+
+            // Mostrar todas las opciones inicialmente
+            for (int i = 0; i < opciones.Count; i++)
+            {
+                Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES);
+                Console.Write(" " + opciones[i]); // espacio en lugar de flecha
+            }
+
+            int opcionSeleccionada = 0;
+            int opcionAnterior = -1;
+            ConsoleKey tecla;
+
+            // Marcar inicialmente la primera opción
+            Console.SetCursorPosition(posicionesX[0], POSICION_Y_OPCIONES);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(">" + opciones[0]);
+            Console.ResetColor();
+
+            do
+            {
+                if (opcionAnterior != opcionSeleccionada)
+                {
+                    // Restaurar opción anterior
+                    if (opcionAnterior >= 0)
+                    {
+                        Console.SetCursorPosition(posicionesX[opcionAnterior], POSICION_Y_OPCIONES);
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.Write(" " + opciones[opcionAnterior]);
+                        Console.ResetColor();
+                    }
+
+                    // Resaltar opción nueva
+                    Console.SetCursorPosition(posicionesX[opcionSeleccionada], POSICION_Y_OPCIONES);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(">" + opciones[opcionSeleccionada]);
+                    Console.ResetColor();
+
+                    opcionAnterior = opcionSeleccionada;
+                }
+
+                // Leer tecla
+                tecla = Console.ReadKey(true).Key;
+
+                switch (tecla)
+                {
+                    case ConsoleKey.LeftArrow:
+                        opcionSeleccionada = (opcionSeleccionada > 0) ? opcionSeleccionada - 1 : opciones.Count - 1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
+                        break;
+                }
+
+            } while (tecla != ConsoleKey.Enter);
+
+            return opcionSeleccionada;
+        }
+
+
+
+        public static Usuario Iniciar()
+        {
+            PantallaInicio();
+            return InicioSesion.Inicio(MenuIniciarSesion());
+        }
+        private static bool MenuIniciarSesion()
+        {
+            List<string> pregunta = new List<string> { "Tienes una cuenta creada?" };
+            List<string> opciones = new List<string> { "Si ", "No " };//si es par se le mete un espacio pq se necesita impar
+            return MakeMenuOf(pregunta, opciones, "") == 0 ? true : false;
+        }
+        private void MostrarMenuMercado()
+        {
+            string[] opcionesMercado = { "Comprar", "Vender", "Volver" };
+
+            switch (Menu.MakeMenuOf(new List<string> { "Mercado" }, new List<string>(opcionesMercado)))
+            {
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine("Elige un jugador para comprar:");
+                    mercado.IniciarMercado();
+                    Console.ReadKey();
+                    break;
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Elige un jugador para vender:");
+                    mercado.Vender();
+                    Console.ReadKey();
+                    break;
+                case 2:
+                    //volver = true;
+                    break;
+            }
+        }
+        private void MostrarMenuEquipo()
+        {
+            string[] opcionesEquipo = { "Ver equipo", "Modificar alineación", "Volver" };
+            int indice = 0;
+            bool volver = false;
+
+            while (!volver)
+            {
+                Console.Clear();
+                Console.WriteLine("Equipo\n");
+                for (int i = 0; i < opcionesEquipo.Length; i++)
+                {
+                    if (i == indice)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"> {opcionesEquipo[i]}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"  {opcionesEquipo[i]}");
+                    }
+                }
+                ConsoleKeyInfo tecla = Console.ReadKey(true);
+                switch (tecla.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        indice = (indice == 0) ? opcionesEquipo.Length - 1 : indice - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        indice = (indice + 1) % opcionesEquipo.Length;
+                        break;
+                    case ConsoleKey.Enter:
+                        switch (indice)
+                        {
+                            case 0:
+                                Console.Clear();
+                                usuario.Equipo.Jugadores.ForEach(j => Console.WriteLine(j.ToString()));
+                                Console.ReadKey();
+                                break;
+                            case 1:
+                                // Modificar alineación
+                                break;
+                            case 2:
+                                volver = true;
+                                break;
+                        }
+                        break;
+                }
+            }
+        }
+
         private static void PantallaInicio()//mejorarlo
         {
             string[] lineasTitulo = {
@@ -282,126 +441,6 @@ namespace Futbol
             }
             Console.Clear();
         }
-        public static void Iniciar()
-        {
-            //cosa();
-            PantallaInicio();
-            MenuIniciarSesion();
-        }
-        private static bool MenuIniciarSesion()
-        {
-            List<string> pregunta = new List<string> { "Tienes una cuenta creada?" };
-            List<string> opciones = new List<string> { "Si", "No" };//si es par se le mete un espacio pq se necesita impar
-            return MakeMenuOf(pregunta, opciones, "") == 0 ? true : false;
-        }
-        private void MostrarMenuMercado()
-        {
-            string[] opcionesMercado = { "Comprar", "Vender", "Volver" };
-            int indice = 0;
-            bool volver = false;
-
-            while (!volver)
-            {
-                Console.Clear();
-                Console.WriteLine("Mercado\n");
-
-                for (int i = 0; i < opcionesMercado.Length; i++)
-                {
-                    if (i == indice)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"> {opcionesMercado[i]}");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  {opcionesMercado[i]}");
-                    }
-                }
-
-                ConsoleKeyInfo tecla = Console.ReadKey(true);
-
-                switch (tecla.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        indice = (indice == 0) ? opcionesMercado.Length - 1 : indice - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        indice = (indice + 1) % opcionesMercado.Length;
-                        break;
-                    case ConsoleKey.Enter:
-                        switch (indice)
-                        {
-                            case 0:
-                                Console.Clear();
-                                Console.WriteLine("Elige un jugador para comprar:");
-                                mercado.IniciarMercado();
-                                Console.ReadKey();
-                                break;
-                            case 1:
-                                Console.Clear();
-                                Console.WriteLine("Elige un jugador para vender:");
-                                mercado.Vender();
-                                Console.ReadKey();
-                                break;
-                            case 2:
-                                volver = true;
-                                break;
-                        }
-                        break;
-                }
-            }
-        }
-        private void MostrarMenuEquipo()
-        {
-            string[] opcionesEquipo = { "Ver equipo", "Modificar alineación", "Volver" };
-            int indice = 0;
-            bool volver = false;
-
-            while (!volver)
-            {
-                Console.Clear();
-                Console.WriteLine("Equipo\n");
-                for (int i = 0; i < opcionesEquipo.Length; i++)
-                {
-                    if (i == indice)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"> {opcionesEquipo[i]}");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  {opcionesEquipo[i]}");
-                    }
-                }
-                ConsoleKeyInfo tecla = Console.ReadKey(true);
-                switch (tecla.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        indice = (indice == 0) ? opcionesEquipo.Length - 1 : indice - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        indice = (indice + 1) % opcionesEquipo.Length;
-                        break;
-                    case ConsoleKey.Enter:
-                        switch (indice)
-                        {
-                            case 0:
-                                Console.Clear();
-                                usuario.Equipo.Jugadores.ForEach(j => Console.WriteLine(j.ToString()));
-                                Console.ReadKey();
-                                break;
-                            case 1:
-                                // Modificar alineación
-                                break;
-                            case 2:
-                                volver = true;
-                                break;
-                        }
-                        break;
-                }
-            }
-        }
+        
     }
 }

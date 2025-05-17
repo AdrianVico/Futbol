@@ -52,86 +52,50 @@ namespace Futbol
             ConsoleKeyInfo keyInfo;
             List<string> lista = new List<string>();
             jugadoresMercado.ForEach(j => lista.Add(j.ToString()));
-            int indice = MenuSelector.SeleccionarOpcion(lista, "Jugadores en el mercado:");
-            /*do
+            lista.Add("Salir");
+            int indice = Menu.MakeMenuOf(new List<string> {"Mercado: "}, new List<string>(lista));
+            if (indice != -1 && indice != lista.Count-1)
             {
-                Console.WriteLine("Jugadores en el mercado:");
-                for (int i = 0; i < jugadoresMercado.Count; i++)
+                if (Menu.MakeMenuOf(new List<string> { "¿Seguro que quieres comprar","a este jugador?"}, new List<string> {"Si","No"}) == 0)
                 {
-                    if (i == indice)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Magenta;
-                        Console.WriteLine($"> {jugadoresMercado[i].ToString()}");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  {jugadoresMercado[i].ToString()}");
-                    }
+                    ComprarJugador(jugadoresMercado[indice]);
                 }
-                keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.UpArrow)
+                else
                 {
-                    indice = (indice == 0) ? jugadoresMercado.Count - 1 : indice - 1;
+                    SeleccionarJugadorMercado();
                 }
-                else if (keyInfo.Key == ConsoleKey.DownArrow)
-                {
-                    indice = (indice == jugadoresMercado.Count - 1) ? 0 : indice + 1;
-                }
-                Console.Clear();
-            } while (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Escape);
-            */
-
-            if (indice != -1)
-            {
-                ComprarJugador(jugadoresMercado[indice]);
             }
             else
             {
-                Console.WriteLine();
-                Console.WriteLine("Has salido del mercado.");
+                Menu.SalirMenu(new Menu(this.usuario));
             }
 
         }
         public void SeleccionarJugadorUsuario()
         {
             jugadoresUsuario = usuario.Equipo.Jugadores;
-            ConsoleKeyInfo keyInfo;
-            int indice = 0;
-            do
+            List<string> lista = new List<string>();
+            jugadoresUsuario.ForEach(j => lista.Add(j.ToString()));
+            lista.Add("Salir");
+            int indice = Menu.MakeMenuOf(new List<string> { "¿Qué jugador quieres vender?" }, new List<string>(lista));
+
+            if (indice != -1 && indice != lista.Count-1)
             {
-                Console.WriteLine("Elige un jugador para vender: ");
-                Console.WriteLine("Jugadores en el mercado:");
-                for (int i = 0; i < jugadoresUsuario.Count; i++)
+                
+                if (Menu.MakeMenuOf(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" }) == 0)
                 {
-                    if (i == indice)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Magenta;
-                        Console.WriteLine($"> {jugadoresUsuario[i].ToString()}");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  {jugadoresUsuario[i].ToString()}");
-                    }
+                    VenderJugador(jugadoresUsuario[indice]);
                 }
-                keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.UpArrow)
+                else
                 {
-                    indice = (indice == 0) ? jugadoresUsuario.Count - 1 : indice - 1;
+                    SeleccionarJugadorUsuario();
                 }
-                else if (keyInfo.Key == ConsoleKey.DownArrow)
-                {
-                    indice = (indice == jugadoresUsuario.Count - 1) ? 0 : indice + 1;
-                }
-                Console.Clear();
-            } while (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Escape);
-           
-            if(keyInfo.Key != ConsoleKey.Escape)
-            {
-                VenderJugador(jugadoresUsuario[indice]);
             }
-            
+            else
+            {
+                Menu.SalirMenu(new Menu(this.usuario));
+            }
+
 
         }
         public void ComprarJugador(Jugador jugador)
