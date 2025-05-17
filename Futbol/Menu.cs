@@ -132,6 +132,10 @@ namespace Futbol
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
 
+            //hacer las opciones para que se cuadren bien
+            int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
+            opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
+
             // Crear las líneas para el menú completo
             List<string> lineasMenu = new List<string>();
 

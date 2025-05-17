@@ -10,8 +10,10 @@ namespace Futbol
         {
             //Usuario usuario = InicioSesion.Inicio();
             //Menu menu = new Menu(usuario);
+            while (true) { 
             Console.ReadLine();
             Menu.Iniciar();
+            }
         }
     }
 }
