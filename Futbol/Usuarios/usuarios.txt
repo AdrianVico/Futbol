@@ -1,16 +1,2 @@
-alejandro;alejandro
-p;p
-p1;p1
-<<<<<<< HEAD
-q;q
-;
-a;
-w;w
-r;
-b;b
-o;
-y;
-g;
-=======
-Izan;Izan
->>>>>>> a409eb823f83ece7f5df31c797fe7f84e2991b2c
+
+paco;paco

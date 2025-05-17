@@ -22,7 +22,6 @@ namespace Futbol
 
             if (File.Exists(nombreFichero))
             {
-
                 try
                 {
                     lineas = new List<string>(File.ReadAllLines(nombreFichero));
@@ -127,12 +126,11 @@ namespace Futbol
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-                finally 
+                finally
                 {
                     streamWriter.Close();
                 }
-                Directory.CreateDirectory(NOMBRE_DIRECTORIO+"\\"+nombre);
+                Directory.CreateDirectory(NOMBRE_DIRECTORIO + "\\" + nombre);
                 string rutaDatos = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_datos.txt");
                 string rutaEquipo = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_jugadores_equipo.txt");
 
@@ -170,7 +168,7 @@ namespace Futbol
         public static bool TipoDeInicio()
         {
             string titulo = "¿Tienes una cuenta creada?";
-            List<string> opciones = new List<string>{ "Si", "No" };
+            List<string> opciones = new List<string> { "Si", "No" };
             /*Console.SetCursorPosition(Console.WindowWidth / 2, 0);
             Console.SetCursorPosition(Console.WindowWidth / 2, 1);
             ConsoleKeyInfo key = new ConsoleKeyInfo();
@@ -202,13 +200,14 @@ namespace Futbol
 
             } while (key.Key != ConsoleKey.Enter);
             */
-            return MenuSelector.SeleccionarOpcion(opciones,titulo) == 0 ? true : false;
+            return MenuSelector.SeleccionarOpcion(opciones, titulo) == 0 ? true : false;
         }
         public static string ElegirEquipoInicial()
         {
-            Console.WriteLine("Ahora vamos a elegir el equipo inicial.");
-            string[] opciones = { "Betis", "Borussia_Dortmund", "Olympique_Lyonn", "Roma", "Tottenham" };
-            Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+            List<string> preguntas = new List<string> { "¿Qué plantilla quieres?" };
+            List<string> opciones = new List<string> { "Betis", "Borussia_Dortmund", "Olympique_Lyonn", "Roma", "Tottenham" };
+
+            /*Console.SetCursorPosition(Console.WindowWidth / 2, 0);
             Console.SetCursorPosition(Console.WindowWidth / 2, 1);
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             int indice = 0;
@@ -238,8 +237,8 @@ namespace Futbol
                     indice = (indice + 1) % opciones.Length;
                 }
 
-            } while (key.Key != ConsoleKey.Enter);
-            return opciones[indice];
+            } while (key.Key != ConsoleKey.Enter);*/
+            return opciones[Menu.MakeMenuOf(preguntas, opciones)];
         }
         public static void CopiarEquipoInicial(string equipo, string usuario)
         {
@@ -265,17 +264,17 @@ namespace Futbol
 
         public static void RellenarUsuario(Usuario usuario)
         {
-            string lineas = File.ReadAllText(NOMBRE_DIRECTORIO+$"/{usuario.Nombre}/{usuario.Nombre}_datos.txt");
+            string lineas = File.ReadAllText(NOMBRE_DIRECTORIO + $"/{usuario.Nombre}/{usuario.Nombre}_datos.txt");
             string lineasJugadores;
             string[] partes = lineas.Split(";");
             usuario.Dinero = Convert.ToInt64(partes[0]);
             usuario.Puntos = Convert.ToInt32(partes[1]);
 
         }
-        public static Usuario Inicio()
+        public static Usuario Inicio(bool tipo)
         {
             Usuario usu = null;
-            if (TipoDeInicio())
+            if (tipo)
             {
                 Console.Clear();
                 usu = IniciarSesion();
@@ -288,9 +287,9 @@ namespace Futbol
                 string equipoInicial = ElegirEquipoInicial();
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
             }
-            
+
             usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
-           // Console.WriteLine(usu);
+            // Console.WriteLine(usu);
             return usu;
         }
     }

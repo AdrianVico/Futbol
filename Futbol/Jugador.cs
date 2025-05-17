@@ -34,7 +34,7 @@ namespace Futbol
         {
             string capitan = esCapitan ? "Es Capitan" : "No es Capitan";
 
-            return $"Nombre: {nombre} - Posición: {posicion} - Precio: {precio}";
+            return $"{nombre} - {precio}$";
         }
     }
 }

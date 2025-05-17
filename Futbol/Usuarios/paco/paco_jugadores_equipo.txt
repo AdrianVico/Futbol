@@ -1,0 +1,11 @@
+Rui Patrício;Portero;AS Roma;2500000
+Rick Karsdorp;Defensa;AS Roma;2000000
+Chris Smalling;Defensa;AS Roma;3500000
+Gianluca Mancini;Defensa;AS Roma;3000000
+Leonardo Spinazzola;Defensa;AS Roma;2500000
+Bryan Cristante;Centrocampista;AS Roma;2500000
+Leandro Paredes;Centrocampista;AS Roma;3000000
+Lorenzo Pellegrini;Centrocampista;AS Roma;4000000
+Paulo Dybala;Delantero;AS Roma;6000000
+Romelu Lukaku;Delantero;AS Roma;7000000
+Stephan El Shaarawy;Delantero;AS Roma;2500000
