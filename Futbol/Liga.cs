@@ -93,10 +93,10 @@ namespace Futbol
         {
             CargarResultados();
             Console.WriteLine("\nCLASIFICACIÓN GENERAL\n");
-            Console.Write("Equipo".PadRight(15));
+            Console.WriteLine("Equipo".PadRight(15));
 
             for (int j = 1; j <= totalJornadas; j++)
-                Console.Write($"J{j}   ");
+                Console.WriteLine($"J{j}   ");
 
             Console.WriteLine("PT");
 
@@ -105,10 +105,10 @@ namespace Futbol
                 string nombre = equipo.Key.Nombre;
                 List<string> res = resultados[equipo.Key];
 
-                Console.Write(nombre.PadRight(15));
+                Console.WriteLine(nombre.PadRight(15));
 
                 foreach (string r in res)
-                    Console.Write($"{r.PadRight(5)}");
+                    Console.WriteLine($"{r.PadRight(5)}");
 
                 Console.WriteLine($"{equipo.Value}");
             }
