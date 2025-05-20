@@ -11,6 +11,8 @@ namespace Futbol
     {
         Usuario usuario;
         Mercado mercado;
+        Liga liga;
+        Partido partido;
 
         internal Usuario Usuario { get => usuario; set => usuario = value; }
         internal Mercado Mercado { get => mercado; set => mercado = value; }
@@ -19,6 +21,8 @@ namespace Futbol
         {
             this.usuario = usuario;
             mercado = new Mercado(usuario);
+            liga = new Liga();
+            partido = new Partido();
         }
 
         public static void SalirMenu(Menu m)
@@ -38,12 +42,12 @@ namespace Futbol
                     MostrarMenuEquipo();
                     break;
                 case 2:
-                    Console.WriteLine("\n(Mostrar liga no implementado)");
-                    Console.ReadKey();
+                    liga.MostrarClasificacion();
                     break;
                 case 3:
-                    Console.WriteLine("\n(Mostrar jornada no implementado)");
-                    Console.ReadKey();
+                    partido.AnyadirPartidos();
+                    partido.AnyadirEquiposAPartidos();
+                    partido.MostrarGuardarPartidos();
                     break;
                 case 4:
                     //salir = true;
