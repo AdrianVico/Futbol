@@ -13,16 +13,18 @@ namespace Futbol
         Mercado mercado;
         Liga liga;
         Partido partido;
+        Jornada jornada;
 
         internal Usuario Usuario { get => usuario; set => usuario = value; }
         internal Mercado Mercado { get => mercado; set => mercado = value; }
 
         public Menu(Usuario usuario)
         {
+            jornada = new Jornada();
             this.usuario = usuario;
             mercado = new Mercado(usuario);
             liga = new Liga();
-            partido = new Partido();
+            partido = new Partido(usuario);
         }
 
         public static void SalirMenu(Menu m)
@@ -32,7 +34,7 @@ namespace Futbol
 
         public void MostrarMenuPrincipal()
         {
-            string[] opcionesMenu = { "Mercado", "Equipo", "Liga", "Jornada", "Salir" };
+            string[] opcionesMenu = { "Mercado", "Equipo", "Jornada", "Liga", "Salir" };
             switch (Menu.CrearMenuPrincipal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList()))
             {
                 case 0:
@@ -42,12 +44,10 @@ namespace Futbol
                     MostrarMenuEquipo();
                     break;
                 case 2:
-                    liga.MostrarClasificacion();
+                    jugarJornada();
                     break;
                 case 3:
-                    partido.AnyadirPartidos();
-                    partido.AnyadirEquiposAPartidos();
-                    partido.MostrarGuardarPartidos();
+                    mostrarLiga();
                     break;
                 case 4:
                     //salir = true;
@@ -361,6 +361,37 @@ namespace Futbol
                     break;
             } 
             
+        }
+        private void jugarJornada()
+        {
+            ConsoleKey tecla;
+
+            Console.Clear();
+            partido.AnyadirPartidos();
+            partido.AnyadirEquiposAPartidos();
+            partido.MostrarGuardarPartidos();
+            jornada.MostrarPartidos();
+            partido.Partidos.Clear();
+            partido.ResultadosPorEquipo.Clear();
+
+            tecla = Console.ReadKey(true).Key;
+            if (tecla == ConsoleKey.Enter)
+            {
+                MostrarMenuPrincipal();
+            }
+        }
+        private void mostrarLiga()
+        {
+            ConsoleKey tecla;
+
+            Console.Clear();
+            liga.MostrarClasificacion();
+
+            tecla = Console.ReadKey(true).Key;
+            if (tecla == ConsoleKey.Enter)
+            {
+                MostrarMenuPrincipal();
+            }
         }
 
         private void ModificarAlineacion()

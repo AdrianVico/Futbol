@@ -14,8 +14,10 @@ namespace Futbol
         List<Equipo> equipos;
         Dictionary<Equipo, Equipo> partidos;
         Dictionary<Equipo, string> resultadosPorEquipo;
-        public Partido()
+        Usuario usuario;
+        public Partido(Usuario usuario)
         {
+            this.usuario = usuario;
             equipos = RellenarListaEquipos();
             partidos = new Dictionary<Equipo, Equipo>();
             resultadosPorEquipo = new Dictionary<Equipo, string>();
@@ -25,7 +27,7 @@ namespace Futbol
         public List<Equipo> RellenarListaEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
-            equipos.Add(new Equipo("Equipo1"));
+            equipos.Add(new Equipo(usuario.Nombre));
             equipos.Add(new Equipo("Equipo2"));
             equipos.Add(new Equipo("Equipo3"));
             equipos.Add(new Equipo("Equipo4"));
