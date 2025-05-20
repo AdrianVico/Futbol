@@ -83,7 +83,7 @@ namespace Futbol
             if (indice != -1 && indice != lista.Count-1)
             {
                 
-                if (Menu.CrearMenuVertical(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" }) == 0)
+                if (Menu.CrearMenuVertical(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" },"") == 0)
                 {
                     VenderJugador(jugadoresUsuario[indice]);
                     m.MostrarMenuMercado();
@@ -121,19 +121,27 @@ namespace Futbol
 
         public void VenderJugador(Jugador jugador)
         {
-            if (usuario.Equipo.Jugadores.Contains(jugador))
+            if(usuario.Equipo.Jugadores.Count > 11) 
             {
-                usuario.Dinero += jugador.Precio;
-                usuario.ActualizarFicheroDatos();
-                //Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
-                usuario.Equipo.RemoveJugador(jugador);
-                AgregarJugadorAlFichero(jugador);
-                BorrarJugadoresDelFicheroDelUsuario(jugador);
+                if (usuario.Equipo.Jugadores.Contains(jugador))
+                {
+                    usuario.Dinero += jugador.Precio;
+                    usuario.ActualizarFicheroDatos();
+                    //Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
+                    usuario.Equipo.RemoveJugador(jugador);
+                    AgregarJugadorAlFichero(jugador);
+                    BorrarJugadoresDelFicheroDelUsuario(jugador);
+                }
+                else
+                {
+                    Console.WriteLine("No tienes el jugador en tu equipo.");
+                }
             }
             else
             {
-                Console.WriteLine("No tienes el jugador en tu equipo.");
+                Menu.CrearMenuVertical(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" }, "No se puede vender cuando solamente tienes 11 jugadores");
             }
+
         }
         public void BorrarJugadorDelFichero(Jugador jugador)
         {

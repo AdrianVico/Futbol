@@ -74,8 +74,8 @@ Natan;Defensa;Real Betis;1500000
 Romain Perraud;Defensa;Real Betis;1800000
 Johnny Cardoso;Centrocampista;Real Betis;1500000
 Marc Roca;Centrocampista;Real Betis;2200000
-Isco Alarcón;Centrocampista;Real Betis;2500000
 Antony dos Santos;Delantero;Real Betis;2000000
 Cucho Hernández;Delantero;Real Betis;2000000
 Jesús Rodríguez;Delantero;Real Betis;1000000
 Neymar Jr;Delantero;Al Hilal;90000000
+Isco Alarcón;Centrocampista;Real Betis;2500000

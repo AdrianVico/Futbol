@@ -350,12 +350,14 @@ namespace Futbol
                     Console.Clear();
                     usuario.Equipo.Jugadores.ForEach(j => Console.WriteLine(j.ToString()));
                     Console.ReadKey();
+                    Console.Clear();
+                    MostrarMenuEquipo();
                     break;
                 case 1:
                     // Modificar alineación
                     break;
                 case 2:
-                    //volver = true;
+                    MostrarMenuPrincipal();
                     break;
             } 
             
