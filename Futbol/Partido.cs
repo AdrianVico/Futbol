@@ -129,6 +129,7 @@ namespace Futbol
             string archivo = "jornadas.txt";
             StreamWriter stw = new StreamWriter(archivo);
             stw.WriteLine();
+            stw.Close ();
         }
     }
 }

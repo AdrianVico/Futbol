@@ -13,8 +13,10 @@ namespace Futbol
         public Jornada()
         {
             partidos = new List<Partido>();
-            numeroJornada = 1;
+            NumeroJornada = 1;
         }
+
+        public int NumeroJornada { get => numeroJornada; set => numeroJornada = value; }
 
         public void AddPartido(Partido partido)
         {
@@ -23,13 +25,13 @@ namespace Futbol
         public void MostrarPartidos()
         {
             Console.SetCursorPosition(Console.WindowWidth / 2, 0);
-            Console.WriteLine($"Partidos de la J{numeroJornada}");
+            Console.WriteLine($"Partidos de la J{NumeroJornada}");
             Console.WriteLine();
             foreach (Partido partido in partidos)
             {
                 Console.WriteLine(partido.ToString());
             }
-            numeroJornada++;
+            NumeroJornada++;
         }
     }
 }

@@ -150,6 +150,7 @@ namespace Futbol
             }
             return resultado;
         }
+        
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -162,6 +163,11 @@ namespace Futbol
         public override int GetHashCode()
         {
             return nombre.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return nombre;
         }
     }
 }

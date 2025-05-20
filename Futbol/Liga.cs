@@ -20,6 +20,9 @@ namespace Futbol
 
         public void CargarResultados()
         {
+            resultados.Clear();
+            puntos.Clear();
+            totalJornadas = 0;
             if (!File.Exists(archivo))
             {
                 Console.WriteLine("El archivo no se encontró.");
@@ -62,53 +65,54 @@ namespace Futbol
                 }
             }
 
-            totalJornadas = CalcularTotalJornadas();
+            CalcularTotalJornadas();
         }
 
         private Equipo ObtenerEquipo(string nombre)
         {
+            Equipo equipo = null;
             foreach (Equipo eq in resultados.Keys)
             {
                 if (eq.Nombre == nombre)
-                    return eq;
+                {
+                    equipo = eq;
+                }   
             }
-            return null;
+            return equipo;
         }
 
-        private int CalcularTotalJornadas()
+        private void CalcularTotalJornadas()
         {
-            int jornadas = 0;
             string[] lineas = File.ReadAllLines(archivo);
 
             foreach (string linea in lineas)
             {
                 if (linea.StartsWith("-"))
-                    jornadas++;
+                    totalJornadas++;
             }
-
-            return jornadas;
         }
-
         public void MostrarClasificacion()
         {
             CargarResultados();
             Console.WriteLine("\nCLASIFICACIÓN GENERAL\n");
-            Console.WriteLine("Equipo".PadRight(15));
+            Console.Write("Equipo".PadRight(15));
 
             for (int j = 1; j <= totalJornadas; j++)
-                Console.WriteLine($"J{j}   ");
+            {
+                Console.Write($"J{j}   ");
+            }
 
             Console.WriteLine("PT");
 
-            foreach (var equipo in puntos.OrderByDescending(e => e.Value))
+            foreach (KeyValuePair<Equipo,int> equipo in puntos.OrderByDescending(e => e.Value).ToList())
             {
                 string nombre = equipo.Key.Nombre;
                 List<string> res = resultados[equipo.Key];
 
-                Console.WriteLine(nombre.PadRight(15));
+                Console.Write(nombre.PadRight(15));
 
                 foreach (string r in res)
-                    Console.WriteLine($"{r.PadRight(5)}");
+                    Console.Write($"{r.PadRight(5)}");
 
                 Console.WriteLine($"{equipo.Value}");
             }
@@ -132,12 +136,13 @@ namespace Futbol
             {
                 if (linea.StartsWith("-"))
                 {
-                    jornadaActual++;
                     Console.WriteLine();
+                    Console.WriteLine($"J{jornadaActual}:");
+                    jornadaActual++;
                 }
                 else
                 {
-                    Console.WriteLine($"J{jornadaActual}: {linea}");
+                    Console.WriteLine(linea);
                 }
             }
         }
