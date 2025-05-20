@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,25 +10,41 @@ namespace Futbol
     internal class Partido
     {
         private Random rand = new Random();
-        string resultado;
-        int numeroJornada;
-        List<Equipo> equipos;
-        Dictionary<Equipo, Equipo> partidos;
-        Dictionary<Equipo, string> resultadosPorEquipo;
-        Usuario usuario;
+        private string resultado;
+        private string archivo;
+        private int numeroJornada;
+        private string rutaNumeroJornada;
+        private List<Equipo> equipos;
+        private Dictionary<Equipo, Equipo> partidos;
+        private Dictionary<Equipo, string> resultadosPorEquipo;
+        private Usuario usuario;
+
         public Partido(Usuario usuario)
         {
             this.usuario = usuario;
             equipos = RellenarListaEquipos();
             partidos = new Dictionary<Equipo, Equipo>();
             resultadosPorEquipo = new Dictionary<Equipo, string>();
-            numeroJornada = 0;
+
+            archivo = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
+            rutaNumeroJornada = $"../../../Usuarios/{usuario.Nombre}/numeroJornada.txt";
+
+            // Leer número de jornada desde archivo si existe
+            if (File.Exists(rutaNumeroJornada))
+            {
+                string texto = File.ReadAllText(rutaNumeroJornada).Trim();
+                int.TryParse(texto, out numeroJornada); // Si no es válido, será 0
+            }
+            else
+            {
+                numeroJornada = 0;
+            }
         }
 
         public List<Equipo> RellenarListaEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
-            equipos.Add(new Equipo(usuario==null? "salami" : usuario.Nombre));
+            equipos.Add(new Equipo(usuario == null ? "salami" : usuario.Nombre));
             equipos.Add(new Equipo("Equipo2"));
             equipos.Add(new Equipo("Equipo3"));
             equipos.Add(new Equipo("Equipo4"));
@@ -41,8 +58,8 @@ namespace Futbol
             equipos.Add(new Equipo("Equipo12"));
             return equipos;
         }
+
         public string Resultado { get => resultado; set => resultado = value; }
-        public string Resultado1 { get => resultado; set => resultado = value; }
         public int NumeroJornada { get => numeroJornada; set => numeroJornada = value; }
         internal List<Equipo> Equipos { get => equipos; set => equipos = value; }
         internal Dictionary<Equipo, Equipo> Partidos { get => partidos; set => partidos = value; }
@@ -50,26 +67,25 @@ namespace Futbol
 
         public string SimularResultado()
         {
-            Random rand = new Random();
             int goles1 = rand.Next(0, 9);
             int goles2 = rand.Next(0, 9);
-
-            resultado = $"{goles1}-{goles2}";
-            return resultado;
+            string resultadoSimulado = goles1 + "-" + goles2;
+            return resultadoSimulado;
         }
+
         public void AnyadirPartidos()
         {
             List<Equipo> clubes = new List<Equipo>(equipos);
 
             while (clubes.Count >= 2)
             {
-                int equipo1 = rand.Next(clubes.Count);
-                Equipo local = clubes[equipo1];
-                clubes.RemoveAt(equipo1);
+                int indice1 = rand.Next(clubes.Count);
+                Equipo local = clubes[indice1];
+                clubes.RemoveAt(indice1);
 
-                int equipo2 = rand.Next(clubes.Count);
-                Equipo visitante = clubes[equipo2];
-                clubes.RemoveAt(equipo2);
+                int indice2 = rand.Next(clubes.Count);
+                Equipo visitante = clubes[indice2];
+                clubes.RemoveAt(indice2);
 
                 partidos.Add(local, visitante);
             }
@@ -77,59 +93,70 @@ namespace Futbol
 
         public void AnyadirEquiposAPartidos()
         {
-            foreach (KeyValuePair<Equipo, Equipo> e in partidos)
+            foreach (KeyValuePair<Equipo, Equipo> emparejamiento in partidos)
             {
                 string resultadoPartido = SimularResultado();
+                string[] partes = resultadoPartido.Split('-');
+                string invertido = partes[1] + "-" + partes[0];
 
-                resultadosPorEquipo.Add(e.Key, resultadoPartido);
-
-                string invertido = resultado.Split('-')[1] + "-" + resultado.Split('-')[0];
-                resultadosPorEquipo.Add(e.Value, invertido);
+                resultadosPorEquipo.Add(emparejamiento.Key, resultadoPartido);
+                resultadosPorEquipo.Add(emparejamiento.Value, invertido);
             }
         }
 
         public void MostrarNumeroJornada()
         {
             numeroJornada++;
-            string titulo = $"Partidos de la J{numeroJornada}";
+            GuardarNumeroJornada(); // Guardar el nuevo número
+            string titulo = "Partidos de la J" + numeroJornada;
             int posX = (Console.WindowWidth - titulo.Length) / 2;
-
             Console.SetCursorPosition(posX, Console.CursorTop);
             Console.WriteLine(titulo);
         }
 
+        private void GuardarNumeroJornada()
+        {
+            try
+            {
+                File.WriteAllText(rutaNumeroJornada, numeroJornada.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al guardar el número de jornada: " + e.Message);
+            }
+        }
+
         public void MostrarGuardarPartidos()
         {
-            string archivo = "jornadas.txt";
-            StreamWriter stw = new StreamWriter(archivo);
-
-            MostrarNumeroJornada();
-            Console.WriteLine();
-
-            foreach (KeyValuePair<Equipo, Equipo> e in partidos)
+            using (StreamWriter stw = new StreamWriter(archivo, true))
             {
-                string resultadoPartido = SimularResultado();
-                string invertido = resultado.Split('-')[1] + "-" + resultado.Split('-')[0];
+                MostrarNumeroJornada();
+                Console.WriteLine();
 
-                string lineaConsola = e.Key.Nombre.PadRight(10) + resultadoPartido.PadLeft(5).PadRight(9) + e.Value.Nombre.PadLeft(10);
-                Console.SetCursorPosition((Console.WindowWidth - lineaConsola.Length) / 2, Console.CursorTop);
-                Console.WriteLine(lineaConsola);
+                foreach (KeyValuePair<Equipo, Equipo> emparejamiento in partidos)
+                {
+                    string resultadoLocal = resultadosPorEquipo[emparejamiento.Key];
+                    string resultadoVisitante = resultadosPorEquipo[emparejamiento.Value];
 
-                stw.WriteLine(e.Key + ";" + resultadoPartido);
-                stw.WriteLine(e.Value + ";" + invertido);
+                    string lineaConsola = emparejamiento.Key.Nombre.PadRight(10) + resultadoLocal.PadLeft(5).PadRight(9) + emparejamiento.Value.Nombre.PadLeft(10);
+                    Console.SetCursorPosition((Console.WindowWidth - lineaConsola.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(lineaConsola);
+
+                    stw.WriteLine(emparejamiento.Key.Nombre + ";" + resultadoLocal);
+                    stw.WriteLine(emparejamiento.Value.Nombre + ";" + resultadoVisitante);
+                }
+
+                Console.WriteLine();
+                stw.WriteLine("--------------");
             }
-
-            Console.WriteLine();
-            stw.WriteLine("--------------");
-            stw.Close();
         }
 
         public void LimpiarArchivo()
         {
-            string archivo = "jornadas.txt";
-            StreamWriter stw = new StreamWriter(archivo);
-            stw.WriteLine();
-            stw.Close ();
+            using (StreamWriter stw = new StreamWriter(archivo))
+            {
+                stw.WriteLine();
+            }
         }
     }
 }

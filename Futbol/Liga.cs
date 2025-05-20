@@ -6,145 +6,120 @@ namespace Futbol
 {
     internal class Liga
     {
-        Dictionary<Equipo, List<string>> resultados;
-        Dictionary<Equipo, int> puntos;
-        int totalJornadas;
-        string archivo = "jornadas.txt";
+        private Dictionary<string, List<string>> resultadosPorEquipo = new Dictionary<string, List<string>>();
+        private Dictionary<string, int> puntosPorEquipo = new Dictionary<string, int>();
 
-        public Liga()
+        public void CargarJornadas(string rutaArchivo)
         {
-            resultados = new Dictionary<Equipo, List<string>>();
-            puntos = new Dictionary<Equipo, int>();
-            totalJornadas = 0;
-        }
+            resultadosPorEquipo.Clear();
+            puntosPorEquipo.Clear();
 
-        public void CargarResultados()
-        {
-            resultados.Clear();
-            puntos.Clear();
-            totalJornadas = 0;
-            if (!File.Exists(archivo))
+            if (!File.Exists(rutaArchivo))
             {
-                Console.WriteLine("El archivo no se encontró.");
+                Console.WriteLine("No hay archivo");
                 return;
             }
 
-            string[] lineas = File.ReadAllLines(archivo);
-            int jornadaActual = 0;
+            string[] lineas = File.ReadAllLines(rutaArchivo);
+            List<string> jornadaActual = new List<string>();
+            bool ultimaFueSeparador = false;
 
-            foreach (string linea in lineas)
+            for (int i = 0; i < lineas.Length; i++)
             {
-                if (linea.StartsWith("-"))
-                {
-                    jornadaActual++;
-                }
-                else
-                {
-                    string[] datos = linea.Split(';');
-                    string nombreEquipo = datos[0];
-                    string resultado = datos[1];
+                string lineaLimpia = lineas[i].Trim();
 
-                    Equipo equipo = ObtenerEquipo(nombreEquipo);
-                    if (equipo == null)
+                if (lineaLimpia.StartsWith("-----"))
+                {
+                    if (jornadaActual.Count > 0)
                     {
-                        equipo = new Equipo(nombreEquipo);
-                        resultados[equipo] = new List<string>();
-                        puntos[equipo] = 0;
+                        ProcesarJornada(jornadaActual);
+                        jornadaActual = new List<string>();
                     }
-
-                    resultados[equipo].Add(resultado);
-
-                    string[] goles = resultado.Split('-');
-                    int golesFavor = int.Parse(goles[0]);
-                    int golesContra = int.Parse(goles[1]);
-
-                    if (golesFavor > golesContra)
-                        puntos[equipo] += 3;
-                    else if (golesFavor == golesContra)
-                        puntos[equipo] += 1;
+                    ultimaFueSeparador = true;
+                }
+                else if (lineaLimpia.Length > 0)
+                {
+                    jornadaActual.Add(lineaLimpia);
+                    ultimaFueSeparador = false;
                 }
             }
 
-            CalcularTotalJornadas();
+            if (jornadaActual.Count > 0 && !ultimaFueSeparador)
+            {
+                ProcesarJornada(jornadaActual);
+            }
         }
 
-        private Equipo ObtenerEquipo(string nombre)
+
+        private void ProcesarJornada(List<string> jornada)
         {
-            Equipo equipo = null;
-            foreach (Equipo eq in resultados.Keys)
+            for (int i = 0; i < jornada.Count; i++)
             {
-                if (eq.Nombre == nombre)
+                string linea = jornada[i];
+                string[] partes = linea.Split(';');
+
+                if (partes.Length == 2)
                 {
-                    equipo = eq;
-                }   
-            }
-            return equipo;
-        }
+                    string equipo = partes[0];
+                    string resultado = partes[1];
 
-        private void CalcularTotalJornadas()
-        {
-            string[] lineas = File.ReadAllLines(archivo);
+                    if (resultado.Contains("-"))
+                    {
+                        string[] goles = resultado.Split('-');
 
-            foreach (string linea in lineas)
-            {
-                if (linea.StartsWith("-"))
-                    totalJornadas++;
-            }
-        }
-        public void MostrarClasificacion()
-        {
-            CargarResultados();
-            Console.WriteLine("\nCLASIFICACIÓN GENERAL\n");
-            Console.Write("Equipo".PadRight(15));
+                        if (goles.Length == 2)
+                        {
+                            bool exito1 = int.TryParse(goles[0], out int golesFavor);
+                            bool exito2 = int.TryParse(goles[1], out int golesContra);
 
-            for (int j = 1; j <= totalJornadas; j++)
-            {
-                Console.Write($"J{j}   ");
-            }
+                            if (exito1 && exito2)
+                            {
+                                if (!resultadosPorEquipo.ContainsKey(equipo))
+                                {
+                                    resultadosPorEquipo[equipo] = new List<string>();
+                                    puntosPorEquipo[equipo] = 0;
+                                }
 
-            Console.WriteLine("PT");
+                                resultadosPorEquipo[equipo].Add(resultado);
 
-            foreach (KeyValuePair<Equipo,int> equipo in puntos.OrderByDescending(e => e.Value).ToList())
-            {
-                string nombre = equipo.Key.Nombre;
-                List<string> res = resultados[equipo.Key];
+                                int puntos = 0;
+                                if (golesFavor > golesContra)
+                                {
+                                    puntos = 3;
+                                }
+                                else if (golesFavor == golesContra)
+                                {
+                                    puntos = 1;
+                                }
 
-                Console.Write(nombre.PadRight(15));
-
-                foreach (string r in res)
-                    Console.Write($"{r.PadRight(5)}");
-
-                Console.WriteLine($"{equipo.Value}");
-            }
-        }
-
-
-        public void MostrarJornadas()
-        {
-            if (!File.Exists(archivo))
-            {
-                Console.WriteLine("El archivo no se encontró.");
-                return;
-            }
-
-            string[] lineas = File.ReadAllLines(archivo);
-            int jornadaActual = 1;
-
-            Console.WriteLine("\nRESULTADOS POR JORNADA:\n");
-
-            foreach (string linea in lineas)
-            {
-                if (linea.StartsWith("-"))
-                {
-                    Console.WriteLine();
-                    Console.WriteLine($"J{jornadaActual}:");
-                    jornadaActual++;
-                }
-                else
-                {
-                    Console.WriteLine(linea);
+                                puntosPorEquipo[equipo] += puntos;
+                            }
+                        }
+                    }
                 }
             }
         }
+        public void MostrarTabla()
+        {
+            Console.WriteLine("Equipo\t\tResultados por jornada\t\t\tPuntos");
+
+            List<string> nombresEquipos = resultadosPorEquipo.Keys.ToList();
+
+            List<string> equiposOrdenados = nombresEquipos
+                .OrderByDescending(nombre => puntosPorEquipo.ContainsKey(nombre) ? puntosPorEquipo[nombre] : 0)
+                .ToList();
+
+            for (int i = 0; i < equiposOrdenados.Count; i++)
+            {
+                string nombre = equiposOrdenados[i];
+                List<string> resultados = resultadosPorEquipo[nombre];
+                string resultadosTexto = string.Join(" | ", resultados);
+                int puntos = puntosPorEquipo[nombre];
+
+                Console.WriteLine($"{nombre.PadRight(12)}\t{resultadosTexto.PadRight(40)}\t{puntos}");
+            }
+        }
+
+
     }
 }

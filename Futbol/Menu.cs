@@ -370,7 +370,6 @@ namespace Futbol
             partido.AnyadirPartidos();
             partido.AnyadirEquiposAPartidos();
             partido.MostrarGuardarPartidos();
-            jornada.MostrarPartidos();
             partido.Partidos.Clear();
             partido.ResultadosPorEquipo.Clear();
 
@@ -383,9 +382,12 @@ namespace Futbol
         private void mostrarLiga()
         {
             ConsoleKey tecla;
-
+            string archivo = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
             Console.Clear();
-            liga.MostrarClasificacion();
+            liga.CargarJornadas(archivo);
+            liga.MostrarTabla();
+            
+            //archivoLiga = $"../../../Usuarios/{usuario.Nombre}/liga.txt";
 
             tecla = Console.ReadKey(true).Key;
             if (tecla == ConsoleKey.Enter)
