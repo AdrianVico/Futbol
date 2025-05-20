@@ -114,11 +114,10 @@ namespace Futbol
             }
             else
             {
-                Console.WriteLine("No tienes suficiente dinero disponible para comprar el jugador.");
+                Menu.CrearMenuVertical(new List<string> { "¿Seguro que quieres vender", "a este jugador?" }, new List<string> { "Si", "No" }, "No tienes suficiente dinero disponible para comprar el jugador.");
             }
             
         }
-
         public void VenderJugador(Jugador jugador)
         {
             if(usuario.Equipo.Jugadores.Count > 11) 

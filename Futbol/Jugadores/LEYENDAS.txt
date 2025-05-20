@@ -40,7 +40,6 @@ Miroslav Klose;Delantero;Lazio;42000000
 Roberto Donato;Defensa;Real Betis;39000000
 Philipp Lahm;Defensa;Bayern Múnich;52000000
 Arjen Robben;Delantero;Groningen;56000000
-Frank Lampard;Mediocampista;New York City;60000000
 Steven Gerrard;Mediocampista;LA Galaxy;35000000
 Michael Ballack;Mediocampista;Bayer Leverkusen;27000000
 Samuel Eto;Delantero;Antalyaspor;44000000
@@ -57,16 +56,13 @@ Virgil van Dijk;Defensa;Liverpool;20000000
 Trent Alexander Arnold;Defensa;Liverpool;7000000
 Manuel Neuer;Portero;Bayern Múnich;31000000
 Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
-Vinícius Júnior;Delantero;Real Madrid;28000000
 Toni Kroos;Mediocampista;Real Madrid;23000000
 Paolo Maldini;Defensa;Milan;38000000
 Ferenc Puskás;Delantero;Real Madrid;70000000
 Michel Platini;Mediocampista;Juventus;45000000
 Xavi Hernández;Mediocampista;Al Sadd;61000000
-Fernando Hierro;Defensa;Bolton Wanderers;11000000
 Zlatan Ibrahimović;Delantero;AC Milan;80000000
 Luka Modrić;Mediocampista;Real Madrid;26000000
-Roberto Baggio;Delantero;Brescia;23000000
 Adrián San Miguel;Portero;Real Betis;120000
 Aitor Ruibal;Defensa;Real Betis;1000000
 Marc Bartra;Defensa;Real Betis;2000000
@@ -79,3 +75,6 @@ Cucho Hernández;Delantero;Real Betis;2000000
 Jesús Rodríguez;Delantero;Real Betis;1000000
 Neymar Jr;Delantero;Al Hilal;90000000
 Isco Alarcón;Centrocampista;Real Betis;2500000
+Rui Patrício;Portero;AS Roma;2500000
+Rick Karsdorp;Defensa;AS Roma;2000000
+Frank Lampard;Mediocampista;New York City;60000000

@@ -354,7 +354,7 @@ namespace Futbol
                     MostrarMenuEquipo();
                     break;
                 case 1:
-                    // Modificar alineación
+                    ModificarAlineacion();
                     break;
                 case 2:
                     MostrarMenuPrincipal();
@@ -363,7 +363,62 @@ namespace Futbol
             
         }
 
-        private static void PantallaInicio()//mejorarlo
+        private void ModificarAlineacion()
+        {
+            Console.Clear();
+            List<string> opcionesAlineacion = new List<string>
+           {
+               "4-4-2",
+               "4-3-3",
+               "5-3-2",
+               "4-2-4",
+               "3-5-2",
+               "5-4-1",
+               "Volver"
+           };
+            int opcionSeleccionada = Menu.CrearMenuVertical(new List<string> { "Modificar alineación" }, opcionesAlineacion);
+
+            if (opcionSeleccionada == 6)
+            {
+                MostrarMenuEquipo();
+            }
+            else
+            {
+                int[] nuevaAlineacion;
+                switch (opcionSeleccionada)
+                {
+                    case 0:
+                        nuevaAlineacion = new int[] { 1, 4, 4, 2 };
+                        break;
+                    case 1:
+                        nuevaAlineacion = new int[] { 1, 4, 3, 3 };
+                        break;
+                    case 2:
+                        nuevaAlineacion = new int[] { 1, 5, 3, 2 };
+                        break;
+                    case 3:
+                        nuevaAlineacion = new int[] { 1, 4, 2, 4 };
+                        break;
+                    case 4:
+                        nuevaAlineacion = new int[] { 1, 3, 5, 2 };
+                        break;
+                    case 5:
+                        nuevaAlineacion = new int[] { 1, 5, 4, 1 };
+                        break;
+                    default:
+                        nuevaAlineacion = null;
+                        break;
+                }
+                if (nuevaAlineacion != null)
+                {
+                    usuario.Equipo.Alineacion = nuevaAlineacion;
+                    Console.Clear();
+                }
+                MostrarMenuPrincipal();
+            }
+        }
+
+        private static void PantallaInicio()
         {
             string[] lineasTitulo = {
 @"███████╗ █████╗ ███╗   ██╗████████╗ █████╗ ███████╗██╗   ██╗    ██╗     ███████╗ ██████╗ ███████╗███╗   ██╗██████╗ ███████╗",
