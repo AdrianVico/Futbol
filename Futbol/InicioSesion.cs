@@ -10,6 +10,73 @@ namespace Futbol
     {
         const string NOMBRE_FICHERO = "../../../Usuarios/usuarios.txt";
         const string NOMBRE_DIRECTORIO = "../../../Usuarios";
+        //public static Usuario IniciarSesion()
+        //{
+        //    string nombreFichero = NOMBRE_FICHERO;
+        //    string nombreDirectorio = NOMBRE_DIRECTORIO;
+        //    bool encontrado;
+        //    string nombre = null;
+        //    string password = "";
+        //    List<string> lineas = null;
+        //    int posicion = 0;
+
+        //    if (File.Exists(nombreFichero))
+        //    {
+        //        try
+        //        {
+        //            lineas = new List<string>(File.ReadAllLines(nombreFichero));
+
+        //        }
+        //        catch (IOException ex)
+        //        {
+        //            Console.WriteLine("Error en el fichero " + ex.Message);
+        //        }
+
+
+        //        do
+        //        {
+        //            encontrado = false;
+        //            Console.WriteLine("Dime el nombre del usuario: ");
+        //            nombre = Console.ReadLine();
+        //            encontrado = EncontrarNombre(lineas, nombre, ref posicion);
+        //            if (!encontrado)
+        //            {
+        //                Console.WriteLine("No existe el usuario.");
+        //            }
+
+        //        } while (!encontrado);
+
+        //        string[] partes = lineas[posicion].Split(";");
+        //        int intentos = 3;
+        //        bool registrado = false;
+        //        do
+        //        {
+        //            Console.WriteLine("Dime la contraseña del usuario:");
+        //            password = Console.ReadLine();
+        //            if (password != partes[1])
+        //            {
+        //                intentos--;
+        //                Console.WriteLine("Contraseña incorrecta.");
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("Inicio de sesión de satisfactorio.");
+        //                registrado = true;
+        //            }
+
+
+        //        } while (intentos > 0 && !registrado);
+
+        //        if (intentos == 0)
+        //        {
+        //            Console.WriteLine("Te has quedado sin intentos");
+        //        }
+        //    }
+        //    Usuario usuario = new Usuario(nombre, password);
+        //    RellenarUsuario(usuario);
+        //    return usuario;
+        //}
+
         public static Usuario IniciarSesion()
         {
             string nombreFichero = NOMBRE_FICHERO;
@@ -19,64 +86,174 @@ namespace Futbol
             string password = "";
             List<string> lineas = null;
             int posicion = 0;
+            Usuario usuario = null;
 
             if (File.Exists(nombreFichero))
             {
                 try
                 {
                     lineas = new List<string>(File.ReadAllLines(nombreFichero));
-
                 }
                 catch (IOException ex)
                 {
                     Console.WriteLine("Error en el fichero " + ex.Message);
                 }
 
-
                 do
                 {
                     encontrado = false;
-                    Console.WriteLine("Dime el nombre del usuario: ");
+
+                    List<string> mensajeNombre = new List<string>
+                    {
+                        "INICIO DE SESIÓN",
+                        "",
+                        "Dime el nombre del usuario:",
+                        "---------------------------",
+                       "|                           |",
+                        "---------------------------"
+                    };
+
+                    int padTopTexto = Menu.DibujarCuadro(mensajeNombre);
+
+                    int posicionX = (209 - 29) / 2;
+                    int posicionY = padTopTexto + mensajeNombre.Count-2;
+
+                    Console.SetCursorPosition(posicionX, posicionY);
                     nombre = Console.ReadLine();
+
                     encontrado = EncontrarNombre(lineas, nombre, ref posicion);
+
                     if (!encontrado)
                     {
-                        Console.WriteLine("No existe el usuario.");
+                        Menu.DibujarCuadro(new List<string> { "ERROR :(","No existe el usuario."});
+                        Console.ReadKey();
                     }
-
                 } while (!encontrado);
 
                 string[] partes = lineas[posicion].Split(";");
                 int intentos = 3;
                 bool registrado = false;
+
                 do
                 {
-                    Console.WriteLine("Dime la contraseña del usuario:");
+                    List<string> mensajePassword = new List<string>
+                    {
+                        "INICIO DE SESIÓN",
+                        "",
+                        $"Usuario: {nombre}",
+                        "",
+                        $"Contraseña de {nombre}:",
+                        "---------------------------",
+                       "|                           |",
+                        "---------------------------",
+                        $"(Intentos restantes: {intentos})"
+                    };
+
+                    int padTopTexto = Menu.DibujarCuadro(mensajePassword);
+
+                    int posicionX = (209 - 29) / 2; // Centrado aprox para campo de texto
+                    int posicionY = padTopTexto + mensajePassword.Count-3;
+
+                    Console.SetCursorPosition(posicionX, posicionY);
                     password = Console.ReadLine();
+
                     if (password != partes[1])
                     {
                         intentos--;
-                        Console.WriteLine("Contraseña incorrecta.");
+                        Menu.DibujarCuadro(new List<string> { "ERROR :(", "Contraseña incorrecta." });
+                        Console.ReadKey();
                     }
                     else
                     {
-                        Console.WriteLine("Inicio de sesión de satisfactorio.");
+                        Menu.DibujarCuadro(new List<string> { $"Sesión iniciada como {nombre.ToUpper()}" });
+                        Console.ReadKey();
                         registrado = true;
                     }
-
-
                 } while (intentos > 0 && !registrado);
 
                 if (intentos == 0)
                 {
-                    Console.WriteLine("Te has quedado sin intentos");
+                    Menu.DibujarCuadro(new List<string> { "ERROR :(", "Te has quedado sin intentos" });
+                    Console.ReadKey();
+
+                }
+                else
+                {
+                    usuario = new Usuario(nombre, password);
+                    RellenarUsuario(usuario);
                 }
             }
-            Usuario usuario = new Usuario(nombre, password);
-            RellenarUsuario(usuario);
+            else
+            {
+                Console.WriteLine("ERROR :(  : El archivo de usuarios no existe");
+            }
             return usuario;
         }
 
+        //public static Usuario RegistroUsuario()
+        //{
+        //    string nombreFichero = NOMBRE_FICHERO;
+        //    string nombreDirectorio = NOMBRE_DIRECTORIO;
+        //    bool encontrado;
+        //    string nombre = null;
+        //    int indice = 0;
+        //    List<string> lineas = null;
+        //    if (File.Exists(nombreFichero))
+        //    {
+
+        //        try
+        //        {
+        //            lineas = new List<string>(File.ReadAllLines(nombreFichero));
+
+        //        }
+        //        catch (IOException ex)
+        //        {
+        //            Console.WriteLine("Error en el fichero " + ex.Message);
+        //        }
+
+
+        //        do
+        //        {
+        //            encontrado = false;
+        //            Console.WriteLine("Dime el nombre del nuevo usuario: ");
+        //            nombre = Console.ReadLine();
+        //            encontrado = EncontrarNombre(lineas, nombre, ref indice);
+        //            if (encontrado)
+        //            {
+        //                Console.WriteLine("Ya hay un usuario con ese nombre.");
+        //            }
+
+        //        } while (encontrado);
+        //    }
+        //    Console.WriteLine("Dime la contraseña: ");
+        //    string password = Console.ReadLine();
+        //    StreamWriter streamWriter = null;
+        //    if (Directory.Exists(nombreDirectorio))
+        //    {
+        //        try
+        //        {
+        //            streamWriter = new StreamWriter(nombreFichero, true);
+        //            streamWriter.WriteLine(nombre + ";" + password);
+        //        }
+        //        catch (IOException ex)
+        //        {
+        //            Console.WriteLine(ex.Message);
+        //        }
+        //        finally
+        //        {
+        //            streamWriter.Close();
+        //        }
+        //        Directory.CreateDirectory(NOMBRE_DIRECTORIO + "\\" + nombre);
+        //        string rutaDatos = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_datos.txt");
+        //        string rutaEquipo = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_jugadores_equipo.txt");
+
+        //        using (FileStream fs = File.Create(rutaDatos)) { }
+        //        using (FileStream fs = File.Create(rutaEquipo)) { }
+        //    }
+        //    Usuario usu = new Usuario(nombre, password);
+        //    usu.ActualizarFicheroDatos();
+        //    return usu;
+        //}
         public static Usuario RegistroUsuario()
         {
             string nombreFichero = NOMBRE_FICHERO;
@@ -85,36 +262,66 @@ namespace Futbol
             string nombre = null;
             int indice = 0;
             List<string> lineas = null;
+
             if (File.Exists(nombreFichero))
             {
-
                 try
                 {
                     lineas = new List<string>(File.ReadAllLines(nombreFichero));
-
                 }
                 catch (IOException ex)
                 {
                     Console.WriteLine("Error en el fichero " + ex.Message);
                 }
 
-
                 do
                 {
                     encontrado = false;
-                    Console.WriteLine("Dime el nombre del nuevo usuario: ");
+
+                    List<string> mensajeNombre = new List<string>
+                    {
+                        "REGISTRO DE USUARIO",
+                        "",
+                        "Dime el nombre del nuevo usuario:",
+                        "---------------------------",
+                       "|                           |",
+                        "---------------------------"
+                    };
+
+                    int padTopTexto = Menu.DibujarCuadro(mensajeNombre);
+                    int posicionX = (209 - 29) / 2;
+                    int posicionY = padTopTexto + mensajeNombre.Count - 2;
+                    Console.SetCursorPosition(posicionX, posicionY);
+
                     nombre = Console.ReadLine();
                     encontrado = EncontrarNombre(lineas, nombre, ref indice);
+
                     if (encontrado)
                     {
-                        Console.WriteLine("Ya hay un usuario con ese nombre.");
+                        Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ya hay un usuario con ese nombre." });
+                        Console.ReadKey();
                     }
-
                 } while (encontrado);
             }
-            Console.WriteLine("Dime la contraseña: ");
+
+            List<string> mensajePassword = new List<string>
+            {
+                "REGISTRO DE USUARIO",
+                "",
+                $"Dime la contraseña para {nombre}:",
+                "---------------------------",
+               "|                           |",
+                "---------------------------"
+            };
+
+            int padTopTextoPass = Menu.DibujarCuadro(mensajePassword);
+            int posicionXPass = (209 - 29) / 2;
+            int posicionYPass = padTopTextoPass + mensajePassword.Count - 2;
+            Console.SetCursorPosition(posicionXPass, posicionYPass);
+
             string password = Console.ReadLine();
             StreamWriter streamWriter = null;
+
             if (Directory.Exists(nombreDirectorio))
             {
                 try
@@ -128,8 +335,9 @@ namespace Futbol
                 }
                 finally
                 {
-                    streamWriter.Close();
+                    streamWriter?.Close();
                 }
+
                 Directory.CreateDirectory(NOMBRE_DIRECTORIO + "\\" + nombre);
                 string rutaDatos = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_datos.txt");
                 string rutaEquipo = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_jugadores_equipo.txt");
@@ -287,8 +495,9 @@ namespace Futbol
                 string equipoInicial = ElegirEquipoInicial();
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
             }
+            if(usu is not null)
+                usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
 
-            usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
             // Console.WriteLine(usu);
             Console.Clear();
             return usu;
