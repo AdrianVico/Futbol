@@ -27,7 +27,7 @@ namespace Futbol
         public List<Equipo> RellenarListaEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
-            equipos.Add(new Equipo(usuario.Nombre));
+            equipos.Add(new Equipo(usuario==null? "salami" : usuario.Nombre));
             equipos.Add(new Equipo("Equipo2"));
             equipos.Add(new Equipo("Equipo3"));
             equipos.Add(new Equipo("Equipo4"));
