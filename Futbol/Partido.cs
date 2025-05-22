@@ -107,7 +107,7 @@ namespace Futbol
         public void MostrarNumeroJornada()
         {
             numeroJornada++;
-            GuardarNumeroJornada(); // Guardar el nuevo número
+            GuardarNumeroJornada();
             string titulo = "Partidos de la J" + numeroJornada;
             int posX = (Console.WindowWidth - titulo.Length) / 2;
             Console.SetCursorPosition(posX, Console.CursorTop);

@@ -369,6 +369,7 @@ namespace Futbol
             Console.Clear();
             partido.AnyadirPartidos();
             partido.AnyadirEquiposAPartidos();
+            partido.MostrarNumeroJornada();
 
             List<string> partidosTexto = partido.ObtenerPartidosComoTexto();
             DibujarCuadro(partidosTexto);
@@ -377,6 +378,16 @@ namespace Futbol
 
             partido.Partidos.Clear();
             partido.ResultadosPorEquipo.Clear();
+
+            
+            if (liga.ComprobarFinal(usuario) >= 8)
+            {
+                tecla = Console.ReadKey(true).Key;
+                if (tecla == ConsoleKey.Enter)
+                {
+                    mostrarLiga();
+                }
+            }
 
             tecla = Console.ReadKey(true).Key;
             if (tecla == ConsoleKey.Enter)

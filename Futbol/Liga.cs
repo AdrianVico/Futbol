@@ -8,11 +8,17 @@ namespace Futbol
     {
         private Dictionary<string, List<string>> resultadosPorEquipo = new Dictionary<string, List<string>>();
         private Dictionary<string, int> puntosPorEquipo = new Dictionary<string, int>();
-
+        public Liga()
+        {
+            this.ResultadosPorEquipo = resultadosPorEquipo;
+            this.PuntosPorEquipo = puntosPorEquipo;
+        }
+        public Dictionary<string, List<string>> ResultadosPorEquipo { get => resultadosPorEquipo; set => resultadosPorEquipo = value; }
+        public Dictionary<string, int> PuntosPorEquipo { get => puntosPorEquipo; set => puntosPorEquipo = value; }
         public void CargarJornadas(string rutaArchivo)
         {
-            resultadosPorEquipo.Clear();
-            puntosPorEquipo.Clear();
+            ResultadosPorEquipo.Clear();
+            PuntosPorEquipo.Clear();
 
             if (!File.Exists(rutaArchivo))
             {
@@ -74,13 +80,13 @@ namespace Futbol
 
                             if (exito1 && exito2)
                             {
-                                if (!resultadosPorEquipo.ContainsKey(equipo))
+                                if (!ResultadosPorEquipo.ContainsKey(equipo))
                                 {
-                                    resultadosPorEquipo[equipo] = new List<string>();
-                                    puntosPorEquipo[equipo] = 0;
+                                    ResultadosPorEquipo[equipo] = new List<string>();
+                                    PuntosPorEquipo[equipo] = 0;
                                 }
 
-                                resultadosPorEquipo[equipo].Add(resultado);
+                                ResultadosPorEquipo[equipo].Add(resultado);
 
                                 int puntos = 0;
                                 if (golesFavor > golesContra)
@@ -92,7 +98,7 @@ namespace Futbol
                                     puntos = 1;
                                 }
 
-                                puntosPorEquipo[equipo] += puntos;
+                                PuntosPorEquipo[equipo] += puntos;
                             }
                         }
                     }
@@ -104,17 +110,17 @@ namespace Futbol
             List<string> lineas = new List<string>();
             lineas.Add("Equipo        Resultados por jornada                  Puntos");
 
-            List<string> nombresEquipos = resultadosPorEquipo.Keys.ToList();
+            List<string> nombresEquipos = ResultadosPorEquipo.Keys.ToList();
 
             List<string> equiposOrdenados = nombresEquipos
-                .OrderByDescending(nombre => puntosPorEquipo.ContainsKey(nombre) ? puntosPorEquipo[nombre] : 0)
+                .OrderByDescending(nombre => PuntosPorEquipo.ContainsKey(nombre) ? PuntosPorEquipo[nombre] : 0)
                 .ToList();
 
             foreach (string nombre in equiposOrdenados)
             {
-                List<string> resultados = resultadosPorEquipo[nombre];
+                List<string> resultados = ResultadosPorEquipo[nombre];
                 string resultadosTexto = string.Join(" | ", resultados);
-                int puntos = puntosPorEquipo[nombre];
+                int puntos = PuntosPorEquipo[nombre];
 
                 string linea = $"{nombre.PadRight(12)} {resultadosTexto.PadRight(40)} {puntos}";
                 lineas.Add(linea);
@@ -123,6 +129,20 @@ namespace Futbol
             return lineas;
         }
 
+        public int ComprobarFinal(Usuario usuario)
+        {
+            string archivo = $"../../../Usuarios/{usuario.Nombre}/numeroJornada.txt";
+            bool final = false;
+            int numero = 0;
+            if (File.Exists(archivo))
+            {
+                StreamReader sr = new StreamReader(archivo);
+                string line = sr.ReadLine();   
+                numero = Convert.ToInt32(line);
+                sr.Close();
+            }
 
+            return numero;
+        }
     }
 }
