@@ -348,7 +348,7 @@ namespace Futbol
             {
                 case 0:
                     Console.Clear();
-                    usuario.Equipo.Jugadores.ForEach(j => Console.WriteLine(j.ToString()));
+                    DibujarCuadro(MostrarEquipo());
                     Console.ReadKey();
                     Console.Clear();
                     MostrarMenuEquipo();
@@ -457,6 +457,23 @@ namespace Futbol
                 MostrarMenuPrincipal();
             }
         }
+        private List<string> MostrarEquipo()
+        {
+            List<string> lineas = new List<string>();
+
+            lineas.Add("LISTA DE JUGADORES");
+            lineas.Add(""); // Línea vacía
+            lineas.Add("Nombre".PadRight(20) + "Posición".PadRight(15) + "Equipo Origen".PadRight(20));
+            lineas.Add(new string('-', 60)); // Separador
+
+            foreach (var j in usuario.Equipo.Jugadores)
+            {
+                string linea = j.Nombre.PadRight(20) + j.Posicion.PadRight(15) + j.EquipoOrigen.PadRight(20);
+                lineas.Add(linea);
+            }
+            return lineas;
+        }
+
 
         private static void PantallaInicio()
         {
