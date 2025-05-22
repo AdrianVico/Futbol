@@ -38,12 +38,14 @@ namespace Futbol
         public void ActualizarFicheroDatos()
         {
             string ruta = $"../../../Usuarios/{nombre}/{nombre}_datos.txt";
+            string alineacion = string.Join(",", Equipo.Alineacion);
 
             using (StreamWriter sw = new StreamWriter(ruta))
             {
-                sw.WriteLine(dinero+";"+puntos);
+                sw.WriteLine(dinero+";"+puntos+";"+alineacion);
             }
         }
+
 
         public override string ToString()
         {

@@ -463,6 +463,7 @@ namespace Futbol
                 if (nuevaAlineacion != null)
                 {
                     usuario.Equipo.Alineacion = nuevaAlineacion;
+                    usuario.ActualizarFicheroDatos();
                     Console.Clear();
                 }
                 MostrarMenuPrincipal();

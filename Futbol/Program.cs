@@ -13,8 +13,10 @@ namespace Futbol
             do
             {
                 u = Menu.Iniciar();
-                if (u != null)
+                if (u != null) 
+                {
                     m = new Menu(u);
+                }   
             }while (u == null);
             m.MostrarMenuPrincipal();
             Menu.DibujarCuadro(m.Usuario.Equipo.MostrarCamisetas().ToList());

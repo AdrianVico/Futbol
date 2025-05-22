@@ -21,11 +21,10 @@ namespace Futbol
             alineacion = new int[4];
         }
 
-        public Equipo(string nombre, List<Jugador> jugadores, List<Jugador> banquillo, int[] alineacion)
+        public Equipo(string nombre, List<Jugador> jugadores, int[] alineacion)
         {
             this.nombre = nombre;
             this.jugadores = jugadores;
-            this.banquillo = banquillo;
             this.alineacion = alineacion;
         }
 
@@ -34,7 +33,7 @@ namespace Futbol
             this.nombre = nombre;
             this.jugadores = jugadores;
             banquillo = new List<Jugador>();
-            alineacion = new int[] {1, 4, 4, 2};
+            alineacion = new int[] { 1, 4, 4, 2 };
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
@@ -44,7 +43,7 @@ namespace Futbol
 
         public void AddJugador(Jugador jugador)
         {
-            jugadores.Add(jugador); 
+            jugadores.Add(jugador);
         }
         public void RemoveJugador(Jugador jugador)
         {
@@ -53,8 +52,8 @@ namespace Futbol
         public string GetSiglas()
         {
             string siglas = nombre.Substring(0, nombre.Length >= 4 ? 4 : nombre.Length);
-            int LeftPad = (4 - siglas.Length)/2;
-            int RightPad = 4-(siglas.Length+LeftPad);
+            int LeftPad = (4 - siglas.Length) / 2;
+            int RightPad = 4 - (siglas.Length + LeftPad);
             siglas = new string(' ', LeftPad) + siglas + new string(' ', RightPad);
             return siglas;
         }
@@ -69,7 +68,7 @@ namespace Futbol
             string ruta = $"../../../Usuarios/{nombre}/{nombre}_jugadores_equipo.txt";
             string[] jugadoresFichero = File.ReadAllLines(ruta);
             string[] partes = null;
-            foreach (string l in  jugadoresFichero)
+            foreach (string l in jugadoresFichero)
             {
                 partes = l.Split(';');
                 jugadores.Add(new Jugador(partes[0], partes[1], partes[2],
@@ -150,7 +149,7 @@ namespace Futbol
             }
             return resultado;
         }
-        
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())

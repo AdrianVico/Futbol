@@ -116,7 +116,7 @@ namespace Futbol
                     int padTopTexto = Menu.DibujarCuadro(mensajeNombre);
 
                     int posicionX = (209 - 29) / 2;
-                    int posicionY = padTopTexto + mensajeNombre.Count-2;
+                    int posicionY = padTopTexto + mensajeNombre.Count - 2;
 
                     Console.SetCursorPosition(posicionX, posicionY);
                     nombre = Console.ReadLine();
@@ -125,7 +125,7 @@ namespace Futbol
 
                     if (!encontrado)
                     {
-                        Menu.DibujarCuadro(new List<string> { "ERROR :(","No existe el usuario."});
+                        Menu.DibujarCuadro(new List<string> { "ERROR :(", "No existe el usuario." });
                         Console.ReadKey();
                     }
                 } while (!encontrado);
@@ -152,7 +152,7 @@ namespace Futbol
                     int padTopTexto = Menu.DibujarCuadro(mensajePassword);
 
                     int posicionX = (209 - 29) / 2; // Centrado aprox para campo de texto
-                    int posicionY = padTopTexto + mensajePassword.Count-3;
+                    int posicionY = padTopTexto + mensajePassword.Count - 3;
 
                     Console.SetCursorPosition(posicionX, posicionY);
                     password = Console.ReadLine();
@@ -180,7 +180,6 @@ namespace Futbol
                 else
                 {
                     usuario = new Usuario(nombre, password);
-                    RellenarUsuario(usuario);
                 }
             }
             else
@@ -189,71 +188,6 @@ namespace Futbol
             }
             return usuario;
         }
-
-        //public static Usuario RegistroUsuario()
-        //{
-        //    string nombreFichero = NOMBRE_FICHERO;
-        //    string nombreDirectorio = NOMBRE_DIRECTORIO;
-        //    bool encontrado;
-        //    string nombre = null;
-        //    int indice = 0;
-        //    List<string> lineas = null;
-        //    if (File.Exists(nombreFichero))
-        //    {
-
-        //        try
-        //        {
-        //            lineas = new List<string>(File.ReadAllLines(nombreFichero));
-
-        //        }
-        //        catch (IOException ex)
-        //        {
-        //            Console.WriteLine("Error en el fichero " + ex.Message);
-        //        }
-
-
-        //        do
-        //        {
-        //            encontrado = false;
-        //            Console.WriteLine("Dime el nombre del nuevo usuario: ");
-        //            nombre = Console.ReadLine();
-        //            encontrado = EncontrarNombre(lineas, nombre, ref indice);
-        //            if (encontrado)
-        //            {
-        //                Console.WriteLine("Ya hay un usuario con ese nombre.");
-        //            }
-
-        //        } while (encontrado);
-        //    }
-        //    Console.WriteLine("Dime la contraseña: ");
-        //    string password = Console.ReadLine();
-        //    StreamWriter streamWriter = null;
-        //    if (Directory.Exists(nombreDirectorio))
-        //    {
-        //        try
-        //        {
-        //            streamWriter = new StreamWriter(nombreFichero, true);
-        //            streamWriter.WriteLine(nombre + ";" + password);
-        //        }
-        //        catch (IOException ex)
-        //        {
-        //            Console.WriteLine(ex.Message);
-        //        }
-        //        finally
-        //        {
-        //            streamWriter.Close();
-        //        }
-        //        Directory.CreateDirectory(NOMBRE_DIRECTORIO + "\\" + nombre);
-        //        string rutaDatos = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_datos.txt");
-        //        string rutaEquipo = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_jugadores_equipo.txt");
-
-        //        using (FileStream fs = File.Create(rutaDatos)) { }
-        //        using (FileStream fs = File.Create(rutaEquipo)) { }
-        //    }
-        //    Usuario usu = new Usuario(nombre, password);
-        //    usu.ActualizarFicheroDatos();
-        //    return usu;
-        //}
         public static Usuario RegistroUsuario()
         {
             string nombreFichero = NOMBRE_FICHERO;
@@ -346,7 +280,7 @@ namespace Futbol
                 using (FileStream fs = File.Create(rutaEquipo)) { }
             }
             Usuario usu = new Usuario(nombre, password);
-            usu.ActualizarFicheroDatos();
+            //usu.ActualizarFicheroDatos();
             return usu;
         }
         public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)
@@ -377,75 +311,12 @@ namespace Futbol
         {
             string titulo = "¿Tienes una cuenta creada?";
             List<string> opciones = new List<string> { "Si", "No" };
-            /*Console.SetCursorPosition(Console.WindowWidth / 2, 0);
-            Console.SetCursorPosition(Console.WindowWidth / 2, 1);
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
-            int indice = 0;
-            do
-            {
-                Console.Clear();
-                Console.SetCursorPosition(5, 2);
-                Console.Write("¿Tienes una cuenta creada?");
-                for (int i = 0; i < opciones.Length; i++)
-                {
-                    int x = Console.WindowWidth / 2;
-                    int y = 2 + i;
-                    Console.SetCursorPosition(x, y);
-                    if (i == indice)
-                        Console.Write($"> {opciones[i]}");
-                    else
-                        Console.Write($"  {opciones[i]}");
-                }
-                key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.UpArrow)
-                {
-                    indice = (indice - 1 + opciones.Length) % opciones.Length;
-                }
-                else if (key.Key == ConsoleKey.DownArrow)
-                {
-                    indice = (indice + 1) % opciones.Length;
-                }
-
-            } while (key.Key != ConsoleKey.Enter);
-            */
             return MenuSelector.SeleccionarOpcion(opciones, titulo) == 0 ? true : false;
         }
         public static string ElegirEquipoInicial()
         {
             List<string> preguntas = new List<string> { "¿Qué plantilla quieres?" };
             List<string> opciones = new List<string> { "Betis", "Borussia_Dortmund", "Olympique_Lyonn", "Roma", "Tottenham" };
-
-            /*Console.SetCursorPosition(Console.WindowWidth / 2, 0);
-            Console.SetCursorPosition(Console.WindowWidth / 2, 1);
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
-            int indice = 0;
-            do
-            {
-                Console.Clear();
-                Console.SetCursorPosition(5, 2);
-                Console.Write("¿Qué plantilla quieres?");
-                for (int i = 0; i < opciones.Length; i++)
-                {
-                    int x = Console.WindowWidth / 2;
-                    int y = 2 + i;
-                    Console.SetCursorPosition(x, y);
-                    if (i == indice)
-                        Console.Write($"> {opciones[i]}");
-                    else
-                        Console.Write($"  {opciones[i]}");
-                }
-
-                key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.UpArrow)
-                {
-                    indice = (indice - 1 + opciones.Length) % opciones.Length;
-                }
-                else if (key.Key == ConsoleKey.DownArrow)
-                {
-                    indice = (indice + 1) % opciones.Length;
-                }
-
-            } while (key.Key != ConsoleKey.Enter);*/
             return opciones[Menu.CrearMenuVertical(preguntas, opciones)];
         }
         public static void CopiarEquipoInicial(string equipo, string usuario)
@@ -477,6 +348,13 @@ namespace Futbol
             string[] partes = lineas.Split(";");
             usuario.Dinero = Convert.ToInt64(partes[0]);
             usuario.Puntos = Convert.ToInt32(partes[1]);
+            string[] alineacionPartes = partes[2].Split(",");
+            int[] alineacion = new int[alineacionPartes.Length];
+            for (int i = 0; i < alineacionPartes.Length; i++)
+            {
+                alineacion[i] = Convert.ToInt32(alineacionPartes[i]);
+            }
+            usuario.Equipo.Alineacion = alineacion;
 
         }
         public static Usuario Inicio(bool tipo)
@@ -486,6 +364,12 @@ namespace Futbol
             {
                 Console.Clear();
                 usu = IniciarSesion();
+                if (usu != null)
+                {
+                    usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
+                    RellenarUsuario(usu);
+                }
+
             }
             else
             {
@@ -494,11 +378,12 @@ namespace Futbol
                 string nombreUsuario = usu.Nombre;
                 string equipoInicial = ElegirEquipoInicial();
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
+                if (usu != null)
+                {
+                    usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
+                }
+                usu.ActualizarFicheroDatos();
             }
-            if(usu is not null)
-                usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
-
-            // Console.WriteLine(usu);
             Console.Clear();
             return usu;
         }
