@@ -369,7 +369,12 @@ namespace Futbol
             Console.Clear();
             partido.AnyadirPartidos();
             partido.AnyadirEquiposAPartidos();
-            partido.MostrarGuardarPartidos();
+
+            List<string> partidosTexto = partido.ObtenerPartidosComoTexto();
+            DibujarCuadro(partidosTexto);
+
+            partido.GuardarPartidos();
+
             partido.Partidos.Clear();
             partido.ResultadosPorEquipo.Clear();
 

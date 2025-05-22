@@ -126,27 +126,39 @@ namespace Futbol
             }
         }
 
-        public void MostrarGuardarPartidos()
+        public List<string> ObtenerPartidosComoTexto()
+        {
+            List<string> lineas = new List<string>();
+
+            lineas.Add($"Jornada {numeroJornada}");
+
+            foreach (KeyValuePair<Equipo, Equipo> emparejamiento in partidos)
+            {
+                string resultadoLocal = resultadosPorEquipo[emparejamiento.Key];
+                string resultadoVisitante = resultadosPorEquipo[emparejamiento.Value];
+
+                string linea = emparejamiento.Key.Nombre.PadRight(10)
+                             + resultadoLocal.PadLeft(5).PadRight(9)
+                             + emparejamiento.Value.Nombre.PadLeft(10);
+
+                lineas.Add(linea);
+            }
+
+            return lineas;
+        }
+        public void GuardarPartidos()
         {
             using (StreamWriter stw = new StreamWriter(archivo, true))
             {
-                MostrarNumeroJornada();
-                Console.WriteLine();
-
+                stw.WriteLine($"Jornada {numeroJornada}");
                 foreach (KeyValuePair<Equipo, Equipo> emparejamiento in partidos)
                 {
                     string resultadoLocal = resultadosPorEquipo[emparejamiento.Key];
                     string resultadoVisitante = resultadosPorEquipo[emparejamiento.Value];
 
-                    string lineaConsola = emparejamiento.Key.Nombre.PadRight(10) + resultadoLocal.PadLeft(5).PadRight(9) + emparejamiento.Value.Nombre.PadLeft(10);
-                    Console.SetCursorPosition((Console.WindowWidth - lineaConsola.Length) / 2, Console.CursorTop);
-                    Console.WriteLine(lineaConsola);
-
                     stw.WriteLine(emparejamiento.Key.Nombre + ";" + resultadoLocal);
                     stw.WriteLine(emparejamiento.Value.Nombre + ";" + resultadoVisitante);
                 }
-
-                Console.WriteLine();
                 stw.WriteLine("--------------");
             }
         }
