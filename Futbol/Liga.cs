@@ -99,9 +99,10 @@ namespace Futbol
                 }
             }
         }
-        public void MostrarTabla()
+        public List<string> ObtenerTablaComoTexto()
         {
-            Console.WriteLine("Equipo\t\tResultados por jornada\t\t\tPuntos");
+            List<string> lineas = new List<string>();
+            lineas.Add("Equipo        Resultados por jornada                  Puntos");
 
             List<string> nombresEquipos = resultadosPorEquipo.Keys.ToList();
 
@@ -109,15 +110,17 @@ namespace Futbol
                 .OrderByDescending(nombre => puntosPorEquipo.ContainsKey(nombre) ? puntosPorEquipo[nombre] : 0)
                 .ToList();
 
-            for (int i = 0; i < equiposOrdenados.Count; i++)
+            foreach (string nombre in equiposOrdenados)
             {
-                string nombre = equiposOrdenados[i];
                 List<string> resultados = resultadosPorEquipo[nombre];
                 string resultadosTexto = string.Join(" | ", resultados);
                 int puntos = puntosPorEquipo[nombre];
 
-                Console.WriteLine($"{nombre.PadRight(12)}\t{resultadosTexto.PadRight(40)}\t{puntos}");
+                string linea = $"{nombre.PadRight(12)} {resultadosTexto.PadRight(40)} {puntos}";
+                lineas.Add(linea);
             }
+
+            return lineas;
         }
 
 

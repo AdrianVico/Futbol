@@ -384,10 +384,12 @@ namespace Futbol
             ConsoleKey tecla;
             string archivo = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
             Console.Clear();
+
             liga.CargarJornadas(archivo);
-            liga.MostrarTabla();
-            
-            //archivoLiga = $"../../../Usuarios/{usuario.Nombre}/liga.txt";
+
+            List<string> tablaComoTexto = liga.ObtenerTablaComoTexto();
+
+            DibujarCuadro(tablaComoTexto);
 
             tecla = Console.ReadKey(true).Key;
             if (tecla == ConsoleKey.Enter)
