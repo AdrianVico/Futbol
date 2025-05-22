@@ -376,18 +376,17 @@ namespace Futbol
 
             partido.GuardarPartidos();
 
-            partido.Partidos.Clear();
-            partido.ResultadosPorEquipo.Clear();
-
-            
             if (liga.ComprobarFinal(usuario) >= 8)
             {
                 tecla = Console.ReadKey(true).Key;
                 if (tecla == ConsoleKey.Enter)
                 {
-                    mostrarLiga();
+                    DibujarCuadro(liga.GanadorLiga());
                 }
             }
+
+            partido.Partidos.Clear();
+            partido.ResultadosPorEquipo.Clear();
 
             tecla = Console.ReadKey(true).Key;
             if (tecla == ConsoleKey.Enter)
@@ -395,6 +394,7 @@ namespace Futbol
                 MostrarMenuPrincipal();
             }
         }
+
         private void mostrarLiga()
         {
             ConsoleKey tecla;

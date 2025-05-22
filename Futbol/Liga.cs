@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.NetworkInformation;
+using System.Linq;
 
 namespace Futbol
 {
@@ -143,6 +145,36 @@ namespace Futbol
             }
 
             return numero;
+        }
+
+        public List<string> GanadorLiga()
+        {
+            List<string> lineas = new List<string>();
+
+            List<string> nombresEquipos = ResultadosPorEquipo.Keys.ToList();
+
+            List<string> equiposOrdenados = nombresEquipos
+                .OrderByDescending(
+                    nombre => PuntosPorEquipo.ContainsKey(nombre) ? PuntosPorEquipo[nombre] : 0
+                )
+                .ToList();
+
+            if (equiposOrdenados.Count > 0)
+            {
+                string mejorEquipo = equiposOrdenados[0];
+
+                List<string> resultados = ResultadosPorEquipo[mejorEquipo];
+                string resultadosTexto = string.Join(" | ", resultados);
+                int puntos = PuntosPorEquipo.ContainsKey(mejorEquipo) ? PuntosPorEquipo[mejorEquipo] : 0;
+
+                string linea = mejorEquipo.PadRight(12) + " " +
+                               resultadosTexto.PadRight(40) + " " +
+                               puntos.ToString();
+
+                lineas.Add(linea);
+            }
+
+            return lineas;
         }
     }
 }
