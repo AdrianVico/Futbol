@@ -1,6 +1,1 @@
-
 paco;paco
-Izan;Izan
-a;
-lolo;
-ale;ale

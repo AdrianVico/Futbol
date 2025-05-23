@@ -32,6 +32,7 @@ namespace Futbol
                 Console.WriteLine(partido.ToString());
             }
             NumeroJornada++;
+            
         }
     }
 }

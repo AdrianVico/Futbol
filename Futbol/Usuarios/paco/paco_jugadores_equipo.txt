@@ -1,12 +1,11 @@
-Chris Smalling;Defensa;AS Roma;3500000
-Gianluca Mancini;Defensa;AS Roma;3000000
-Leonardo Spinazzola;Defensa;AS Roma;2500000
-Bryan Cristante;Centrocampista;AS Roma;2500000
-Leandro Paredes;Centrocampista;AS Roma;3000000
-Lorenzo Pellegrini;Centrocampista;AS Roma;4000000
-Paulo Dybala;Delantero;AS Roma;6000000
-Romelu Lukaku;Delantero;AS Roma;7000000
-Stephan El Shaarawy;Delantero;AS Roma;2500000
-Vinícius Júnior;Delantero;Real Madrid;28000000
-Fernando Hierro;Defensa;Bolton Wanderers;11000000
-Roberto Baggio;Delantero;Brescia;23000000
+Adrián San Miguel;Portero;Real Betis;120000
+Aitor Ruibal;Defensa;Real Betis;1000000
+Marc Bartra;Defensa;Real Betis;2000000
+Natan;Defensa;Real Betis;1500000
+Romain Perraud;Defensa;Real Betis;1800000
+Johnny Cardoso;Centrocampista;Real Betis;1500000
+Marc Roca;Centrocampista;Real Betis;2200000
+Isco Alarcón;Centrocampista;Real Betis;2500000
+Antony dos Santos;Delantero;Real Betis;2000000
+Cucho Hernández;Delantero;Real Betis;2000000
+Jesús Rodríguez;Delantero;Real Betis;1000000

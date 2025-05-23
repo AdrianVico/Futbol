@@ -110,7 +110,9 @@ namespace Futbol
         public List<string> ObtenerTablaComoTexto()
         {
             List<string> lineas = new List<string>();
-            lineas.Add("Equipo        Resultados por jornada                  Puntos");
+            lineas.Add("  Equipos           Resultados por jornada            Puntos");
+            lineas.Add(" _____________________________________________________________ ");
+            lineas.Add(" ");
 
             List<string> nombresEquipos = ResultadosPorEquipo.Keys.ToList();
 
@@ -124,7 +126,7 @@ namespace Futbol
                 string resultadosTexto = string.Join(" | ", resultados);
                 int puntos = PuntosPorEquipo[nombre];
 
-                string linea = $"{nombre.PadRight(12)} {resultadosTexto.PadRight(40)} {puntos}";
+                string linea = $"{nombre.PadRight(12)} {resultadosTexto.PadRight(40)}  {puntos}";
                 lineas.Add(linea);
             }
 
@@ -162,15 +164,12 @@ namespace Futbol
             if (equiposOrdenados.Count > 0)
             {
                 string mejorEquipo = equiposOrdenados[0];
-
-                List<string> resultados = ResultadosPorEquipo[mejorEquipo];
-                string resultadosTexto = string.Join(" | ", resultados);
                 int puntos = PuntosPorEquipo.ContainsKey(mejorEquipo) ? PuntosPorEquipo[mejorEquipo] : 0;
 
-                string linea = mejorEquipo.PadRight(12) + " " +
-                               resultadosTexto.PadRight(40) + " " +
-                               puntos.ToString();
-
+                string linea = $"{mejorEquipo} - {puntos} puntos";
+                lineas.Add("¡FIN DE LA LIGA!");
+                lineas.Add("");
+                lineas.Add("Equipo ganador:");
                 lineas.Add(linea);
             }
 

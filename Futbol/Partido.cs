@@ -45,17 +45,17 @@ namespace Futbol
         {
             List<Equipo> equipos = new List<Equipo>();
             equipos.Add(new Equipo(usuario == null ? "salami" : usuario.Nombre));
-            equipos.Add(new Equipo("Equipo2"));
-            equipos.Add(new Equipo("Equipo3"));
-            equipos.Add(new Equipo("Equipo4"));
-            equipos.Add(new Equipo("Equipo5"));
-            equipos.Add(new Equipo("Equipo6"));
-            equipos.Add(new Equipo("Equipo7"));
-            equipos.Add(new Equipo("Equipo8"));
-            equipos.Add(new Equipo("Equipo9"));
-            equipos.Add(new Equipo("Equipo10"));
-            equipos.Add(new Equipo("Equipo11"));
-            equipos.Add(new Equipo("Equipo12"));
+            equipos.Add(new Equipo("Barcelona"));
+            equipos.Add(new Equipo("Madrid"));
+            equipos.Add(new Equipo("Liverpool"));
+            equipos.Add(new Equipo("Arsenal"));
+            equipos.Add(new Equipo("PSG"));
+            equipos.Add(new Equipo("Monaco"));
+            equipos.Add(new Equipo("Napoles"));
+            equipos.Add(new Equipo("Milan"));
+            equipos.Add(new Equipo("Bayern"));
+            equipos.Add(new Equipo("Leipzig"));
+            equipos.Add(new Equipo("Elche"));
             return equipos;
         }
 
@@ -106,12 +106,20 @@ namespace Futbol
 
         public void MostrarNumeroJornada()
         {
-            numeroJornada++;
-            GuardarNumeroJornada();
-            string titulo = "Partidos de la J" + numeroJornada;
-            int posX = (Console.WindowWidth - titulo.Length) / 2;
-            Console.SetCursorPosition(posX, Console.CursorTop);
-            Console.WriteLine(titulo);
+            if (numeroJornada == 8)
+            {
+                numeroJornada = 1;
+            }
+            else
+            {
+                numeroJornada++;
+                GuardarNumeroJornada();
+                string titulo = "Partidos de la J" + numeroJornada;
+                int posX = (Console.WindowWidth - titulo.Length) / 2;
+                Console.SetCursorPosition(posX, Console.CursorTop);
+                Console.WriteLine(titulo);
+            }
+            
         }
 
         private void GuardarNumeroJornada()
@@ -160,14 +168,6 @@ namespace Futbol
                     stw.WriteLine(emparejamiento.Value.Nombre + ";" + resultadoVisitante);
                 }
                 stw.WriteLine("--------------");
-            }
-        }
-
-        public void LimpiarArchivo()
-        {
-            using (StreamWriter stw = new StreamWriter(archivo))
-            {
-                stw.WriteLine();
             }
         }
     }

@@ -376,13 +376,14 @@ namespace Futbol
 
             partido.GuardarPartidos();
 
-            if (liga.ComprobarFinal(usuario) >= 8)
+            if (liga.ComprobarFinal(usuario) == 8)
             {
-                tecla = Console.ReadKey(true).Key;
-                if (tecla == ConsoleKey.Enter)
-                {
-                    DibujarCuadro(liga.GanadorLiga());
-                }
+                string archivo = $"../../../Usuarios/{usuario.Nombre}/numeroJornada.txt";
+                string archivoLiga = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
+                liga.CargarJornadas(archivoLiga);
+                DibujarCuadro(liga.GanadorLiga());
+                File.WriteAllText(archivo, "0");
+                File.WriteAllText(archivoLiga, "");
             }
 
             partido.Partidos.Clear();
