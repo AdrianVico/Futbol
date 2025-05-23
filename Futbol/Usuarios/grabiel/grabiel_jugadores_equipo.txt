@@ -1,0 +1,11 @@
+Gregor Kobel;Portero;Borussia Dortmund;3000000
+Julian Ryerson;Defensa;Borussia Dortmund;2000000
+Niklas Süle;Defensa;Borussia Dortmund;5000000
+Mats Hummels;Defensa;Borussia Dortmund;4000000
+Ian Maatsen;Defensa;Borussia Dortmund;2500000
+Emre Can;Centrocampista;Borussia Dortmund;5000000
+Marcel Sabitzer;Centrocampista;Borussia Dortmund;4500000
+Julian Brandt;Centrocampista;Borussia Dortmund;4000000
+Donyell Malen;Delantero;Borussia Dortmund;3500000
+Karim Adeyemi;Delantero;Borussia Dortmund;3000000
+Serhou Guirassy;Delantero;Borussia Dortmund;3000000

@@ -155,7 +155,7 @@ namespace Futbol
                     int posicionY = padTopTexto + mensajePassword.Count - 3;
 
                     Console.SetCursorPosition(posicionX, posicionY);
-                    password = Console.ReadLine();
+                    password = LeerPasswordConAsteriscos();
 
                     if (password != partes[1])
                     {
@@ -253,7 +253,7 @@ namespace Futbol
             int posicionYPass = padTopTextoPass + mensajePassword.Count - 2;
             Console.SetCursorPosition(posicionXPass, posicionYPass);
 
-            string password = Console.ReadLine();
+            string password = LeerPasswordConAsteriscos();
             StreamWriter streamWriter = null;
 
             if (Directory.Exists(nombreDirectorio))
@@ -282,6 +282,30 @@ namespace Futbol
             Usuario usu = new Usuario(nombre, password);
             //usu.ActualizarFicheroDatos();
             return usu;
+        }
+
+        static string LeerPasswordConAsteriscos()
+        {
+            string password = "";
+            ConsoleKeyInfo tecla;
+
+            do
+            {
+                tecla = Console.ReadKey(true); // true = no muestra la tecla
+
+                if (tecla.Key == ConsoleKey.Backspace && password.Length > 0)
+                {
+                    password = password.Substring(0, password.Length - 1);
+                    Console.Write("\b \b"); // borra el último asterisco, \b = retrocede el cursor
+                }
+                else if (!char.IsControl(tecla.KeyChar))// .IsControl es para comprobar que el caracter sea imprimible(no enter,backspace,etc.)
+                {
+                    password += tecla.KeyChar;// añade el caracter a la password
+                    Console.Write("*");
+                }
+            } while (tecla.Key != ConsoleKey.Enter);
+
+            return password;
         }
         public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)
         {
