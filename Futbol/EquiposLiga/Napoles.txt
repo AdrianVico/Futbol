@@ -1,0 +1,11 @@
+Alex Meret;Portero;Napoles;3500000
+Giovanni Di Lorenzo;Defensa;Napoles;5000000
+Amir Rrahmani;Defensa;Napoles;4500000
+Leo Østigård;Defensa;Napoles;3000000
+Mathías Olivera;Defensa;Napoles;3500000
+Stanislav Lobotka;Centrocampista;Napoles;4000000
+Piotr Zieliński;Centrocampista;Napoles;5000000
+André-Frank Zambo Anguissa;Centrocampista;Napoles;4500000
+Khvicha Kvaratskhelia;Delantero;Napoles;7000000
+Victor Osimhen;Delantero;Napoles;9500000
+Giacomo Raspadori;Delantero;Napoles;6000000

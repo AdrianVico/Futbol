@@ -1,0 +1,11 @@
+Aaron Ramsdale;Portero;Arsenal;6000000
+Ben White;Defensa;Arsenal;7000000
+William Saliba;Defensa;Arsenal;7500000
+Gabriel Magalhães;Defensa;Arsenal;7000000
+Oleksandr Zinchenko;Defensa;Arsenal;6500000
+Declan Rice;Centrocampista;Arsenal;9500000
+Martin Ødegaard;Centrocampista;Arsenal;9000000
+Thomas Partey;Centrocampista;Arsenal;7500000
+Bukayo Saka;Delantero;Arsenal;10000000
+Gabriel Jesus;Delantero;Arsenal;8500000
+Leandro Trossard;Delantero;Arsenal;8000000

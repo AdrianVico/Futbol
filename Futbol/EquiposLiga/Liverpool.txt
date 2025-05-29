@@ -1,0 +1,11 @@
+Alisson Becker;Portero;Liverpool;9000000
+Trent Alexander-Arnold;Defensa;Liverpool;8500000
+Virgil van Dijk;Defensa;Liverpool;8500000
+Andrew Robertson;Defensa;Liverpool;7500000
+Ibrahima Konaté;Defensa;Liverpool;7000000
+Alexis Mac Allister;Centrocampista;Liverpool;7500000
+Dominik Szoboszlai;Centrocampista;Liverpool;8000000
+Wataru Endo;Centrocampista;Liverpool;5000000
+Mohamed Salah;Delantero;Liverpool;10000000
+Darwin Núñez;Delantero;Liverpool;8500000
+Luis Díaz;Delantero;Liverpool;8000000

@@ -1,0 +1,11 @@
+Marc-André ter Stegen;Portero;Barcelona;8000000
+Jules Koundé;Defensa;Barcelona;7000000
+Ronald Araújo;Defensa;Barcelona;7500000
+Alejandro Balde;Defensa;Barcelona;5000000
+Andreas Christensen;Defensa;Barcelona;6000000
+Frenkie de Jong;Centrocampista;Barcelona;9000000
+Gavi;Centrocampista;Barcelona;8500000
+Pedri;Centrocampista;Barcelona;9500000
+Robert Lewandowski;Delantero;Barcelona;10000000
+Raphinha;Delantero;Barcelona;7000000
+João Félix;Delantero;Barcelona;8000000

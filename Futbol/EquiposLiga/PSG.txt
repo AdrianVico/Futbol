@@ -1,0 +1,11 @@
+Gianluigi Donnarumma;Portero;PSG;8500000
+Achraf Hakimi;Defensa;PSG;8000000
+Marquinhos;Defensa;PSG;7500000
+Lucas Hernández;Defensa;PSG;7000000
+Nuno Mendes;Defensa;PSG;6500000
+Manuel Ugarte;Centrocampista;PSG;7000000
+Fabián Ruiz;Centrocampista;PSG;6500000
+Vitinha;Centrocampista;PSG;7500000
+Kylian Mbappé;Delantero;PSG;12000000
+Ousmane Dembélé;Delantero;PSG;8500000
+Randal Kolo Muani;Delantero;PSG;8000000

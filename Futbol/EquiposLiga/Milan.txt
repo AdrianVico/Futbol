@@ -1,0 +1,11 @@
+Mike Maignan;Portero;Milan;7000000
+Davide Calabria;Defensa;Milan;5000000
+Fikayo Tomori;Defensa;Milan;6000000
+Theo Hernández;Defensa;Milan;7500000
+Malick Thiaw;Defensa;Milan;4500000
+Ismaël Bennacer;Centrocampista;Milan;6000000
+Tijjani Reijnders;Centrocampista;Milan;5500000
+Ruben Loftus-Cheek;Centrocampista;Milan;5000000
+Rafael Leão;Delantero;Milan;9500000
+Olivier Giroud;Delantero;Milan;6000000
+Christian Pulisic;Delantero;Milan;7000000

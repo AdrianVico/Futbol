@@ -1,0 +1,11 @@
+Manuel Neuer;Portero;Bayern;7000000
+Matthijs de Ligt;Defensa;Bayern;8000000
+Dayot Upamecano;Defensa;Bayern;7500000
+Alphonso Davies;Defensa;Bayern;8500000
+Noussair Mazraoui;Defensa;Bayern;6500000
+Joshua Kimmich;Centrocampista;Bayern;9500000
+Leon Goretzka;Centrocampista;Bayern;8000000
+Konrad Laimer;Centrocampista;Bayern;7000000
+Harry Kane;Delantero;Bayern;11000000
+Serge Gnabry;Delantero;Bayern;8500000
+Kingsley Coman;Delantero;Bayern;8500000

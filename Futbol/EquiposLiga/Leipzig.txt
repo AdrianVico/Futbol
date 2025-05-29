@@ -1,0 +1,11 @@
+Janis Blaswich;Portero;Leipzig;3000000
+Mohamed Simakan;Defensa;Leipzig;3500000
+Castello Lukeba;Defensa;Leipzig;3200000
+David Raum;Defensa;Leipzig;3000000
+Lukas Klostermann;Defensa;Leipzig;2800000
+Xaver Schlager;Centrocampista;Leipzig;3500000
+Amadou Haidara;Centrocampista;Leipzig;3300000
+Kevin Kampl;Centrocampista;Leipzig;3000000
+Loïs Openda;Delantero;Leipzig;6000000
+Benjamin Šeško;Delantero;Leipzig;5500000
+Dani Olmo;Delantero;Leipzig;6500000

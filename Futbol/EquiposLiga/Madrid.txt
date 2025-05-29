@@ -1,0 +1,11 @@
+Thibaut Courtois;Portero;Madrid;8500000
+Éder Militão;Defensa;Madrid;8000000
+David Alaba;Defensa;Madrid;7500000
+Antonio Rüdiger;Defensa;Madrid;7000000
+Ferland Mendy;Defensa;Madrid;6000000
+Luka Modrić;Centrocampista;Madrid;6500000
+Toni Kroos;Centrocampista;Madrid;7000000
+Eduardo Camavinga;Centrocampista;Madrid;8500000
+Vinícius Júnior;Delantero;Madrid;9500000
+Rodrygo Goes;Delantero;Madrid;9000000
+Jude Bellingham;Delantero;Madrid;10000000

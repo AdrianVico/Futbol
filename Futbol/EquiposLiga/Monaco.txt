@@ -1,0 +1,11 @@
+Philipp Köhn;Portero;Monaco;3000000
+Vanderson;Defensa;Monaco;3500000
+Wilfried Singo;Defensa;Monaco;3200000
+Guillermo Maripán;Defensa;Monaco;3000000
+Caio Henrique;Defensa;Monaco;3500000
+Youssouf Fofana;Centrocampista;Monaco;4500000
+Denis Zakaria;Centrocampista;Monaco;4000000
+Mohamed Camara;Centrocampista;Monaco;3800000
+Wissam Ben Yedder;Delantero;Monaco;6000000
+Folarin Balogun;Delantero;Monaco;5500000
+Takumi Minamino;Delantero;Monaco;5000000

@@ -1,0 +1,11 @@
+Édgar Badía;Portero;Elche;1200000
+Josan;Defensa;Elche;900000
+Diego González;Defensa;Elche;1000000
+Carlos Clerc;Defensa;Elche;1000000
+Lautaro Blanco;Defensa;Elche;950000
+Fidel Chaves;Centrocampista;Elche;1300000
+Nicolás Castro;Centrocampista;Elche;1100000
+Óscar Plano;Centrocampista;Elche;1200000
+Lucas Boyé;Delantero;Elche;1500000
+Tete Morente;Delantero;Elche;1200000
+Randy Nteka;Delantero;Elche;1000000
