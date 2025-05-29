@@ -474,7 +474,25 @@ namespace Futbol
                 string archivo = $"../../../Usuarios/{usuario.Nombre}/numeroJornada.txt";
                 string archivoLiga = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
                 liga.CargarJornadas(archivoLiga);
+
+                int puntosUsuario = 0;
+                if (liga.PuntosPorEquipo.ContainsKey(usuario.Equipo.Nombre))
+                    puntosUsuario = liga.PuntosPorEquipo[usuario.Equipo.Nombre];
+
+                long dineroGanado = puntosUsuario * 1000000;
+                usuario.Dinero += dineroGanado;
+                usuario.ActualizarFicheroDatos();
+
                 DibujarCuadro(liga.GanadorLiga());
+
+                Console.ReadKey();
+
+                DibujarCuadro(new List<string> {
+                $"¡Has ganado {dineroGanado:N0}$ por tus {puntosUsuario} puntos!",
+                "Pulsa Intro tecla para continuar..."
+                });
+
+
                 File.WriteAllText(archivo, "0");
                 File.WriteAllText(archivoLiga, "");
             }
