@@ -10,72 +10,6 @@ namespace Futbol
     {
         const string NOMBRE_FICHERO = "../../../Usuarios/usuarios.txt";
         const string NOMBRE_DIRECTORIO = "../../../Usuarios";
-        //public static Usuario IniciarSesion()
-        //{
-        //    string nombreFichero = NOMBRE_FICHERO;
-        //    string nombreDirectorio = NOMBRE_DIRECTORIO;
-        //    bool encontrado;
-        //    string nombre = null;
-        //    string password = "";
-        //    List<string> lineas = null;
-        //    int posicion = 0;
-
-        //    if (File.Exists(nombreFichero))
-        //    {
-        //        try
-        //        {
-        //            lineas = new List<string>(File.ReadAllLines(nombreFichero));
-
-        //        }
-        //        catch (IOException ex)
-        //        {
-        //            Console.WriteLine("Error en el fichero " + ex.Message);
-        //        }
-
-
-        //        do
-        //        {
-        //            encontrado = false;
-        //            Console.WriteLine("Dime el nombre del usuario: ");
-        //            nombre = Console.ReadLine();
-        //            encontrado = EncontrarNombre(lineas, nombre, ref posicion);
-        //            if (!encontrado)
-        //            {
-        //                Console.WriteLine("No existe el usuario.");
-        //            }
-
-        //        } while (!encontrado);
-
-        //        string[] partes = lineas[posicion].Split(";");
-        //        int intentos = 3;
-        //        bool registrado = false;
-        //        do
-        //        {
-        //            Console.WriteLine("Dime la contraseña del usuario:");
-        //            password = Console.ReadLine();
-        //            if (password != partes[1])
-        //            {
-        //                intentos--;
-        //                Console.WriteLine("Contraseña incorrecta.");
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine("Inicio de sesión de satisfactorio.");
-        //                registrado = true;
-        //            }
-
-
-        //        } while (intentos > 0 && !registrado);
-
-        //        if (intentos == 0)
-        //        {
-        //            Console.WriteLine("Te has quedado sin intentos");
-        //        }
-        //    }
-        //    Usuario usuario = new Usuario(nombre, password);
-        //    RellenarUsuario(usuario);
-        //    return usuario;
-        //}
 
         public static Usuario IniciarSesion()
         {
@@ -361,8 +295,6 @@ namespace Futbol
             {
                 Console.WriteLine("Ocurrió un error inesperado: " + ex.Message);
             }
-
-
         }
 
         public static void RellenarUsuario(Usuario usuario)

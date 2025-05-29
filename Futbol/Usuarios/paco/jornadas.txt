@@ -1,0 +1,14 @@
+Jornada 1
+Leipzig;6-3
+Napoles;3-6
+Liverpool;1-5
+paco;5-1
+Bayern;7-3
+Arsenal;3-7
+Madrid;2-7
+Monaco;7-2
+Elche;2-7
+Milan;7-2
+Barcelona;8-1
+PSG;1-8
+--------------
