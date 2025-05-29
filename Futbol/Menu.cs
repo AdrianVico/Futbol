@@ -50,7 +50,8 @@ namespace Futbol
                     mostrarLiga();
                     break;
                 case 4:
-                    //salir = true;
+                    DibujarCuadro(new List<string> { "Gracias por jugar!", "Pulsa Intro para salir..." });
+                    Console.ReadKey();
                     break;
             }
         }
