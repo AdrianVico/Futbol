@@ -477,7 +477,9 @@ namespace Futbol
 
                 int puntosUsuario = 0;
                 if (liga.PuntosPorEquipo.ContainsKey(usuario.Equipo.Nombre))
+                { 
                     puntosUsuario = liga.PuntosPorEquipo[usuario.Equipo.Nombre];
+                }
 
                 long dineroGanado = puntosUsuario * 1000000;
                 usuario.Dinero += dineroGanado;

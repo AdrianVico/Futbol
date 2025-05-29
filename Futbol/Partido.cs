@@ -40,11 +40,11 @@ namespace Futbol
                 numeroJornada = 0;
             }
         }
-
+        
         public List<Equipo> RellenarListaEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
-            equipos.Add(new Equipo(usuario == null ? "salami" : usuario.Nombre));
+            equipos.Add(new Equipo(usuario == null ? "Invitado" : usuario.Nombre, usuario.Equipo.Jugadores));
             equipos.Add(new Equipo("Barcelona"));
             equipos.Add(new Equipo("Madrid"));
             equipos.Add(new Equipo("Liverpool"));
@@ -65,12 +65,25 @@ namespace Futbol
         internal Dictionary<Equipo, Equipo> Partidos { get => partidos; set => partidos = value; }
         internal Dictionary<Equipo, string> ResultadosPorEquipo { get => resultadosPorEquipo; set => resultadosPorEquipo = value; }
 
-        public string SimularResultado()
+        public string SimularResultado(Equipo local, Equipo visitante)
         {
-            int goles1 = rand.Next(0, 9);
-            int goles2 = rand.Next(0, 9);
-            string resultadoSimulado = goles1 + "-" + goles2;
-            return resultadoSimulado;
+            // Suma de precios de los jugadores
+            int valorLocal = local.Jugadores?.Sum(j => j.Precio) ?? 1;
+            int valorVisitante = visitante.Jugadores?.Sum(j => j.Precio) ?? 1;
+
+            // Si no hay jugadores, el valor será 1 (mínimo)
+            if (valorLocal == 0) valorLocal = 1;
+            if (valorVisitante == 0) valorVisitante = 1;
+
+            // Calcula el factor de ventaja
+            double factorLocal = (double)valorLocal / (valorLocal + valorVisitante);
+            double factorVisitante = (double)valorVisitante / (valorLocal + valorVisitante);
+
+            // Ajusta el rango de goles posibles según el factor
+            int golesLocal = rand.Next(0, (int)(8 * factorLocal) + 1);
+            int golesVisitante = rand.Next(0, (int)(8 * factorVisitante) + 1);
+
+            return $"{golesLocal}-{golesVisitante}";
         }
 
         public void AnyadirPartidos()
@@ -95,7 +108,7 @@ namespace Futbol
         {
             foreach (KeyValuePair<Equipo, Equipo> emparejamiento in partidos)
             {
-                string resultadoPartido = SimularResultado();
+                string resultadoPartido = SimularResultado(emparejamiento.Key, emparejamiento.Value);
                 string[] partes = resultadoPartido.Split('-');
                 string invertido = partes[1] + "-" + partes[0];
 

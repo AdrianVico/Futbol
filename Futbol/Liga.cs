@@ -125,8 +125,9 @@ namespace Futbol
                 List<string> resultados = ResultadosPorEquipo[nombre];
                 string resultadosTexto = string.Join(" | ", resultados);
                 int puntos = PuntosPorEquipo[nombre];
+                string puntosTexto = puntos.ToString("D2");
 
-                string linea = $"{nombre.PadRight(12)} {resultadosTexto.PadRight(40)}  {puntos}";
+                string linea = $"{nombre.PadRight(12)} {resultadosTexto.PadRight(40)} {puntosTexto}";
                 lineas.Add(linea);
             }
 
