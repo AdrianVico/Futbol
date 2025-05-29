@@ -40,6 +40,22 @@ namespace Futbol
         internal List<Jugador> Jugadores { get => jugadores; set => jugadores = value; }
         internal List<Jugador> Banquillo { get => banquillo; set => banquillo = value; }
         public int[] Alineacion { get => alineacion; set => alineacion = value; }
+        
+
+        public static List<Jugador> JugadoresJornada(string nombre)
+        {
+            List<Jugador> jugadoresEquipo = new List<Jugador>();
+            string ruta = $"../../../EquiposLiga/{nombre}.txt";
+            string[] jugadores = File.ReadAllLines(ruta);
+            string[] partes = null;
+            foreach (string j in jugadores)
+            {
+                partes = j.Split(';');
+                jugadoresEquipo.Add(new Jugador(partes[0], partes[1], partes[2],
+                    Convert.ToInt32(partes[3])));
+            }
+            return jugadoresEquipo;
+        }
 
         public void AddJugador(Jugador jugador)
         {

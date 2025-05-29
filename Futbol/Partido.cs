@@ -45,17 +45,17 @@ namespace Futbol
         {
             List<Equipo> equipos = new List<Equipo>();
             equipos.Add(new Equipo(usuario == null ? "Invitado" : usuario.Nombre, usuario.Equipo.Jugadores));
-            equipos.Add(new Equipo("Barcelona"));
-            equipos.Add(new Equipo("Madrid"));
-            equipos.Add(new Equipo("Liverpool"));
-            equipos.Add(new Equipo("Arsenal"));
-            equipos.Add(new Equipo("PSG"));
-            equipos.Add(new Equipo("Monaco"));
-            equipos.Add(new Equipo("Napoles"));
-            equipos.Add(new Equipo("Milan"));
-            equipos.Add(new Equipo("Bayern"));
-            equipos.Add(new Equipo("Leipzig"));
-            equipos.Add(new Equipo("Elche"));
+            equipos.Add(new Equipo("Barcelona", Equipo.JugadoresJornada("Barcelona")));
+            equipos.Add(new Equipo("Madrid", Equipo.JugadoresJornada("Madrid")));
+            equipos.Add(new Equipo("Liverpool", Equipo.JugadoresJornada("Liverpool")));
+            equipos.Add(new Equipo("Arsenal", Equipo.JugadoresJornada("Arsenal")));
+            equipos.Add(new Equipo("PSG", Equipo.JugadoresJornada("PSG")));
+            equipos.Add(new Equipo("Monaco", Equipo.JugadoresJornada("Monaco")));
+            equipos.Add(new Equipo("Napoles", Equipo.JugadoresJornada("Napoles")));
+            equipos.Add(new Equipo("Milan", Equipo.JugadoresJornada("Milan")));
+            equipos.Add(new Equipo("Bayern", Equipo.JugadoresJornada("Bayern")));
+            equipos.Add(new Equipo("Leipzig", Equipo.JugadoresJornada("Leipzig")));
+            equipos.Add(new Equipo("Elche", Equipo.JugadoresJornada("Elche")));
             return equipos;
         }
 
