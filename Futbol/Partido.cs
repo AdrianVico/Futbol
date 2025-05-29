@@ -29,11 +29,10 @@ namespace Futbol
             archivo = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
             rutaNumeroJornada = $"../../../Usuarios/{usuario.Nombre}/numeroJornada.txt";
 
-            // Leer número de jornada desde archivo si existe
             if (File.Exists(rutaNumeroJornada))
             {
                 string texto = File.ReadAllText(rutaNumeroJornada).Trim();
-                int.TryParse(texto, out numeroJornada); // Si no es válido, será 0
+                int.TryParse(texto, out numeroJornada);
             }
             else
             {
@@ -67,19 +66,12 @@ namespace Futbol
 
         public string SimularResultado(Equipo local, Equipo visitante)
         {
-            // Suma de precios de los jugadores
-            int valorLocal = local.Jugadores?.Sum(j => j.Precio) ?? 1;
-            int valorVisitante = visitante.Jugadores?.Sum(j => j.Precio) ?? 1;
+            int valorLocal = local.Jugadores.Sum(j => j.Precio);
+            int valorVisitante = visitante.Jugadores.Sum(j => j.Precio);
 
-            // Si no hay jugadores, el valor será 1 (mínimo)
-            if (valorLocal == 0) valorLocal = 1;
-            if (valorVisitante == 0) valorVisitante = 1;
-
-            // Calcula el factor de ventaja
             double factorLocal = (double)valorLocal / (valorLocal + valorVisitante);
             double factorVisitante = (double)valorVisitante / (valorLocal + valorVisitante);
 
-            // Ajusta el rango de goles posibles según el factor
             int golesLocal = rand.Next(0, (int)(8 * factorLocal) + 1);
             int golesVisitante = rand.Next(0, (int)(8 * factorVisitante) + 1);
 

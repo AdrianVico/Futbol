@@ -116,20 +116,6 @@ namespace Futbol
                 string[] lineasCamiseta = plantillaCamiseta.Split("\r\n");//6
                 int anchoCamiseta = 12; // Ancho de caracteres cada camiseta
                 int altoCamiseta = lineasCamiseta.Length; // Alto de la camiseta
-                //padding
-                //int anchoMax = alineacion.Max() * anchoCamiseta;
-                //foreach (int fila in alineacion)
-                //{
-                //    int anchoFila = fila * anchoCamiseta;
-                //    for (int a = 0; a < altoCamiseta + 1; a++)
-                //    {
-                //        resultado[linea] = new string(' ', (anchoMax - anchoFila) / 2);
-                //        linea++;
-                //    }
-                //    resultado[linea] = "";
-                //    linea++;
-                //}
-                //texto
                 linea = 0;
                 string[] nombresJugadores = jugadores.Select(j => j.Nombre).ToArray();
                 for (int i = 0; i < nombresJugadores.Length; i++)

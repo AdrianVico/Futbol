@@ -2,10 +2,10 @@ Adrián San Miguel;Portero;Real Betis;120000
 Aitor Ruibal;Defensa;Real Betis;1000000
 Marc Bartra;Defensa;Real Betis;2000000
 Natan;Defensa;Real Betis;1500000
-Romain Perraud;Defensa;Real Betis;1800000
-Johnny Cardoso;Centrocampista;Real Betis;1500000
-Marc Roca;Centrocampista;Real Betis;2200000
-Isco Alarcón;Centrocampista;Real Betis;2500000
-Antony dos Santos;Delantero;Real Betis;2000000
-Cucho Hernández;Delantero;Real Betis;2000000
-Jesús Rodríguez;Delantero;Real Betis;1000000
+Romain Perraud;Defensa;Real Betis;18000000
+Johnny Cardoso;Centrocampista;Real Betis;15000000
+Marc Roca;Centrocampista;Real Betis;22000000
+Isco Alarcón;Centrocampista;Real Betis;25000000
+Antony dos Santos;Delantero;Real Betis;20000000
+Cucho Hernández;Delantero;Real Betis;20000000
+Jesús Rodríguez;Delantero;Real Betis;10000000

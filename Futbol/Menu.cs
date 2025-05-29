@@ -54,7 +54,7 @@ namespace Futbol
                     break;
             }
         }
-        public static int DibujarCuadro(List<string> lineas)
+        public static int DibujarCuadro(List<string> lineas, Usuario usuario = null)
         {
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
@@ -104,7 +104,17 @@ namespace Futbol
                 int yTexto = padTopTexto + i;
 
                 Console.SetCursorPosition(xTexto, yTexto);
+
+                if (usuario != null && linea.Contains(usuario.Nombre))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
                 Console.Write(linea);
+                Console.ResetColor();
             }
             return padTopTexto;
         }
@@ -465,7 +475,7 @@ namespace Futbol
             partido.MostrarNumeroJornada();
 
             List<string> partidosTexto = partido.ObtenerPartidosComoTexto();
-            DibujarCuadro(partidosTexto);
+            DibujarCuadro(partidosTexto,usuario);
 
             partido.GuardarPartidos();
 
@@ -519,7 +529,7 @@ namespace Futbol
 
             List<string> tablaComoTexto = liga.ObtenerTablaComoTexto();
 
-            DibujarCuadro(tablaComoTexto);
+            DibujarCuadro(tablaComoTexto, usuario);
 
             tecla = Console.ReadKey(true).Key;
             if (tecla == ConsoleKey.Enter)
