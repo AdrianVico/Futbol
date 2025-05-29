@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,6 @@ namespace Futbol
     {
         const string NOMBRE_FICHERO = "../../../Usuarios/usuarios.txt";
         const string NOMBRE_DIRECTORIO = "../../../Usuarios";
-
         public static Usuario IniciarSesion()
         {
             string nombreFichero = NOMBRE_FICHERO;
@@ -21,17 +21,11 @@ namespace Futbol
             List<string> lineas = null;
             int posicion = 0;
             Usuario usuario = null;
+            Dictionary<string, string> credenciales = new Dictionary<string, string>();
 
             if (File.Exists(nombreFichero))
             {
-                try
-                {
-                    lineas = new List<string>(File.ReadAllLines(nombreFichero));
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine("Error en el fichero " + ex.Message);
-                }
+                credenciales = Usuario.Deserializar();
 
                 do
                 {
@@ -55,7 +49,7 @@ namespace Futbol
                     Console.SetCursorPosition(posicionX, posicionY);
                     nombre = Console.ReadLine();
 
-                    encontrado = EncontrarNombre(lineas, nombre, ref posicion);
+                    encontrado = EncontrarNombre(credenciales, nombre);
 
                     if (!encontrado)
                     {
@@ -64,7 +58,7 @@ namespace Futbol
                     }
                 } while (!encontrado);
 
-                string[] partes = lineas[posicion].Split(";");
+                string passwordUsuario = credenciales[nombre];
                 int intentos = 3;
                 bool registrado = false;
 
@@ -91,7 +85,7 @@ namespace Futbol
                     Console.SetCursorPosition(posicionX, posicionY);
                     password = LeerPasswordConAsteriscos();
 
-                    if (password != partes[1])
+                    if (password != passwordUsuario)
                     {
                         intentos--;
                         Menu.DibujarCuadro(new List<string> { "ERROR :(", "Contraseña incorrecta." });
@@ -128,19 +122,11 @@ namespace Futbol
             string nombreDirectorio = NOMBRE_DIRECTORIO;
             bool encontrado;
             string nombre = null;
-            int indice = 0;
-            List<string> lineas = null;
+            Dictionary<string, string> credenciales = new Dictionary<string, string>();
 
             if (File.Exists(nombreFichero))
             {
-                try
-                {
-                    lineas = new List<string>(File.ReadAllLines(nombreFichero));
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine("Error en el fichero " + ex.Message);
-                }
+                credenciales = Usuario.Deserializar();
 
                 do
                 {
@@ -162,7 +148,7 @@ namespace Futbol
                     Console.SetCursorPosition(posicionX, posicionY);
 
                     nombre = Console.ReadLine();
-                    encontrado = EncontrarNombre(lineas, nombre, ref indice);
+                    encontrado = EncontrarNombre(credenciales, nombre);
 
                     if (encontrado)
                     {
@@ -192,19 +178,8 @@ namespace Futbol
 
             if (Directory.Exists(nombreDirectorio))
             {
-                try
-                {
-                    streamWriter = new StreamWriter(nombreFichero, true);
-                    streamWriter.WriteLine(nombre + ";" + password);
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    streamWriter?.Close();
-                }
+                credenciales.Add(nombre, password);
+                Usuario.Serializar(credenciales);
 
                 Directory.CreateDirectory(NOMBRE_DIRECTORIO + "\\" + nombre);
                 string rutaDatos = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_datos.txt");
@@ -214,7 +189,7 @@ namespace Futbol
                 using (FileStream fs = File.Create(rutaEquipo)) { }
             }
             Usuario usu = new Usuario(nombre, password);
-            //usu.ActualizarFicheroDatos();
+
             return usu;
         }
 
@@ -241,28 +216,9 @@ namespace Futbol
 
             return password;
         }
-        public static bool EncontrarNombre(List<string> lineas, string nombre, ref int posicion)
+        public static bool EncontrarNombre(Dictionary<string, string> credenciales, string nombre)
         {
-            int indice = 0;
-            bool encontrado = false;
-            string[] partes = null;
-            if (lineas.Count >= 1)
-            {
-                while (!encontrado && indice < lineas.Count)
-                {
-                    partes = lineas[indice].Split(";");
-                    if (partes[0] == nombre)
-                    {
-                        encontrado = true;
-                    }
-                    else
-                    {
-                        indice++;
-                    }
-                }
-            }
-            posicion = indice;
-            return encontrado;
+            return credenciales.ContainsKey(nombre);
         }
 
         public static bool TipoDeInicio()

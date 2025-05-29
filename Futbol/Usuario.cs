@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Futbol
 {
@@ -46,6 +48,29 @@ namespace Futbol
             }
         }
 
+        public static void Serializar(Dictionary<string, string> credenciales)
+        {
+            string ruta = $"../../../Usuarios/Usuarios.txt";
+            JsonSerializerOptions options = new JsonSerializerOptions {WriteIndented = true};  
+            string jsonString = JsonSerializer.Serialize(credenciales, options);
+            File.WriteAllText(ruta, jsonString);
+        }
+
+        public static Dictionary<string, string> Deserializar()
+        {
+            Dictionary<string, string> credenciales = new Dictionary<string, string>();
+            string ruta = $"../../../Usuarios/Usuarios.txt";
+            string jsonString = File.ReadAllText(ruta);
+            try
+            {
+                credenciales = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return credenciales;
+        }
 
         public override string ToString()
         {
