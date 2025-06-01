@@ -51,7 +51,11 @@ namespace Futbol
                     break;
                 case 4:
                     DibujarCuadro(new List<string> { "Gracias por jugar!", "Pulsa Intro para salir..." });
-                    Console.ReadKey();
+                    ConsoleKey key;
+                    do
+                    {
+                        key = Console.ReadKey(true).Key;
+                    } while (key != ConsoleKey.Enter);
                     break;
             }
         }
@@ -66,7 +70,6 @@ namespace Futbol
             int padLeft = (ANCHO_CONSOLA - anchoCuadro) / 2; // 69
             int padTop = 0;
 
-            // Agregar líneas de transición
             for (int y = 0; y < altoCuadro; y++)
             {
                 for (int x = 0; x < anchoCuadro; x++)
@@ -88,17 +91,16 @@ namespace Futbol
                 }
             }
 
-            // Imprimir líneas centradas dentro del cuadro
-            int altoTexto = altoCuadro - 2; // espacio entre los bordes
+            int altoTexto = altoCuadro - 2;
             int padTopTexto = padTop + 1 + (altoTexto - lineas.Count) / 2;
 
             for (int i = 0; i < lineas.Count && i < altoTexto; i++)
             {
                 string linea = lineas[i];
                 if (linea.Length > anchoCuadro - 2)
-                    linea = linea.Substring(0, anchoCuadro - 2); // cortar si es muy larga
+                    linea = linea.Substring(0, anchoCuadro - 2);
 
-                int anchoTexto = anchoCuadro - 2; // sin los bordes
+                int anchoTexto = anchoCuadro - 2;
                 int padLeftTexto = (anchoTexto - linea.Length) / 2;
 
                 int xTexto = padLeft + 1 + padLeftTexto;
@@ -124,46 +126,36 @@ namespace Futbol
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
 
-            //hacer las opciones para que se cuadren bien
             int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
             opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
 
-            // Crear las líneas para el menú completo
             List<string> lineasMenu = new List<string>();
 
-            // Agregar las preguntas al menú
             lineasMenu.AddRange(preguntasTexto);
 
-            // Agregar una línea en blanco entre las preguntas y las opciones
             lineasMenu.Add("");
 
-            // Agregar las opciones al menú
             lineasMenu.AddRange(opciones);
 
-            // Agregar una línea en blanco y el texto adicional
             lineasMenu.Add("");
             lineasMenu.Add(textoAdicional);
 
-            // Dibujar el cuadro inicial con todo el contenido
             int padTopTexto = DibujarCuadro(lineasMenu);
 
-            // Calcular posiciones para las opciones
             int maxLargo = opciones.Max(o => o.Length);
-            int POSICION_X_OPCIONES = (ANCHO_CONSOLA / 2) - (maxLargo / 2) - 2; // Centrado aproximado
-            int POSICION_Y_PRIMERA_OPCION = padTopTexto + preguntasTexto.Count + 1; // Después de las líneas de preguntas
+            int POSICION_X_OPCIONES = (ANCHO_CONSOLA / 2) - (maxLargo / 2) - 2;
+            int POSICION_Y_PRIMERA_OPCION = padTopTexto + preguntasTexto.Count + 1;
 
             int opcionSeleccionada = 0;
             int opcionAnterior = -1;
             ConsoleKey tecla;
 
-            // Calcular la posición Y de cada opción en la pantalla
             int[] posicionesY = new int[opciones.Count];
             for (int i = 0; i < opciones.Count; i++)
             {
                 posicionesY[i] = POSICION_Y_PRIMERA_OPCION + i;
             }
 
-            // Marcar inicialmente la primera opción (seleccionada por defecto)
             Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[0]);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(">" + opciones[0]);
@@ -171,10 +163,8 @@ namespace Futbol
 
             do
             {
-                // Si la opción cambió, actualizamos solo las líneas necesarias
                 if (opcionAnterior != opcionSeleccionada)
                 {
-                    // Actualizar opción anterior (quitar el cursor y restaurar color)
                     if (opcionAnterior >= 0)
                     {
                         Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[opcionAnterior]);
@@ -183,7 +173,6 @@ namespace Futbol
                         Console.ResetColor();
                     }
 
-                    // Actualizar opción actual (poner el cursor y colorear de verde)
                     Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[opcionSeleccionada]);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(">" + opciones[opcionSeleccionada]);
@@ -192,10 +181,8 @@ namespace Futbol
                     opcionAnterior = opcionSeleccionada;
                 }
 
-                // Leer la tecla presionada
                 tecla = Console.ReadKey(true).Key;
 
-                // Actualizar la opción seleccionada según la tecla
                 switch (tecla)
                 {
                     case ConsoleKey.UpArrow:
@@ -215,48 +202,38 @@ namespace Futbol
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
 
-            //hacer las opciones para que se cuadren bien
             int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
             opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
 
-            // Crear las líneas para el menú completo
             List<string> lineasMenu = new List<string>();
 
-            // Agregar las preguntas al menú
             lineasMenu.AddRange(preguntasTexto);
 
-            // Agregar una línea en blanco entre las preguntas y las opciones
             lineasMenu.Add("");
 
-            // Agregar las opciones al menú
             lineasMenu.AddRange(opciones);
 
-            // Agregar una línea en blanco y el texto adicional
             lineasMenu.Add("");
             lineasMenu.Add(textoAdicional);
 
-            // Dibujar el cuadro inicial con todo el contenido
             int padTopTexto = DibujarCuadro(lineasMenu);
 
             MostrarInfoUsuario(usuario);
 
-            // Calcular posiciones para las opciones
             int maxLargo = opciones.Max(o => o.Length);
-            int POSICION_X_OPCIONES = (ANCHO_CONSOLA / 2) - (maxLargo / 2) - 2; // Centrado aproximado
-            int POSICION_Y_PRIMERA_OPCION = padTopTexto + preguntasTexto.Count + 1; // Después de las líneas de preguntas
+            int POSICION_X_OPCIONES = (ANCHO_CONSOLA / 2) - (maxLargo / 2) - 2;
+            int POSICION_Y_PRIMERA_OPCION = padTopTexto + preguntasTexto.Count + 1;
 
             int opcionSeleccionada = 0;
             int opcionAnterior = -1;
             ConsoleKey tecla;
 
-            // Calcular la posición Y de cada opción en la pantalla
             int[] posicionesY = new int[opciones.Count];
             for (int i = 0; i < opciones.Count; i++)
             {
                 posicionesY[i] = POSICION_Y_PRIMERA_OPCION + i;
             }
 
-            // Marcar inicialmente la primera opción (seleccionada por defecto)
             Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[0]);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(">" + opciones[0]);
@@ -264,10 +241,8 @@ namespace Futbol
 
             do
             {
-                // Si la opción cambió, actualizamos solo las líneas necesarias
                 if (opcionAnterior != opcionSeleccionada)
                 {
-                    // Actualizar opción anterior (quitar el cursor y restaurar color)
                     if (opcionAnterior >= 0)
                     {
                         Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[opcionAnterior]);
@@ -276,7 +251,6 @@ namespace Futbol
                         Console.ResetColor();
                     }
 
-                    // Actualizar opción actual (poner el cursor y colorear de verde)
                     Console.SetCursorPosition(POSICION_X_OPCIONES, posicionesY[opcionSeleccionada]);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(">" + opciones[opcionSeleccionada]);
@@ -285,10 +259,8 @@ namespace Futbol
                     opcionAnterior = opcionSeleccionada;
                 }
 
-                // Leer la tecla presionada
                 tecla = Console.ReadKey(true).Key;
 
-                // Actualizar la opción seleccionada según la tecla
                 switch (tecla)
                 {
                     case ConsoleKey.UpArrow:
@@ -312,31 +284,23 @@ namespace Futbol
             int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
             opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
 
-            // Crear las líneas para el menú completo
             List<string> lineasMenu = new List<string>();
 
-            // Agregar las preguntas al menú
             lineasMenu.AddRange(preguntasTexto);
 
-            // Línea en blanco
             lineasMenu.Add("");
 
-            // Texto adicional
             lineasMenu.Add("");
             lineasMenu.Add("");
             lineasMenu.Add("");
             lineasMenu.AddRange(textoAdicional);
 
-            // Dibujar el cuadro inicial con todo el contenido excepto las opciones
             int padTopTexto = DibujarCuadro(lineasMenu);
 
-            //poner info usuario
             MostrarInfoUsuario(usuario);
 
-            // Posición vertical para las opciones (una sola línea)
             int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
 
-            // Calcular posiciones horizontales para cada opción
             int espacioEntre = 4;
             int totalAnchoOpciones = opciones.Count * (longitudMaxima + espacioEntre) - espacioEntre;
             int inicioX = (ANCHO_CONSOLA - totalAnchoOpciones) / 2;
@@ -347,18 +311,16 @@ namespace Futbol
                 posicionesX[i] = inicioX + i * (longitudMaxima + espacioEntre);
             }
 
-            // Mostrar todas las opciones inicialmente
             for (int i = 0; i < opciones.Count; i++)
             {
                 Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES);
-                Console.Write(" " + opciones[i]); // espacio en lugar de flecha
+                Console.Write(" " + opciones[i]);
             }
 
             int opcionSeleccionada = 0;
             int opcionAnterior = -1;
             ConsoleKey tecla;
 
-            // Marcar inicialmente la primera opción
             Console.SetCursorPosition(posicionesX[0], POSICION_Y_OPCIONES);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(">" + opciones[0]);
@@ -368,7 +330,6 @@ namespace Futbol
             {
                 if (opcionAnterior != opcionSeleccionada)
                 {
-                    // Restaurar opción anterior
                     if (opcionAnterior >= 0)
                     {
                         Console.SetCursorPosition(posicionesX[opcionAnterior], POSICION_Y_OPCIONES);
@@ -377,7 +338,6 @@ namespace Futbol
                         Console.ResetColor();
                     }
 
-                    // Resaltar opción nueva
                     Console.SetCursorPosition(posicionesX[opcionSeleccionada], POSICION_Y_OPCIONES);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(">" + opciones[opcionSeleccionada]);
@@ -386,7 +346,6 @@ namespace Futbol
                     opcionAnterior = opcionSeleccionada;
                 }
 
-                // Leer tecla
                 tecla = Console.ReadKey(true).Key;
 
                 switch (tecla)
@@ -419,7 +378,7 @@ namespace Futbol
         private static bool MenuIniciarSesion()
         {
             List<string> pregunta = new List<string> { "Tienes una cuenta creada?" };
-            List<string> opciones = new List<string> { "Si ", "No " };//si es par se le mete un espacio pq se necesita impar
+            List<string> opciones = new List<string> { "Si ", "No " };
             return CrearMenuVertical(pregunta, opciones, "") == 0 ? true : false;
         }
         public void MostrarMenuMercado()
@@ -431,12 +390,19 @@ namespace Futbol
                 case 0:
                     Console.Clear();
                     mercado.IniciarMercado();
-                    Console.ReadKey();
+                    ConsoleKey key;
+                    do
+                    {
+                        key = Console.ReadKey(true).Key;
+                    } while (key != ConsoleKey.Enter);
                     break;
                 case 1:
                     Console.Clear();
                     mercado.Vender();
-                    Console.ReadKey();
+                    do
+                    {
+                        key = Console.ReadKey(true).Key;
+                    } while (key != ConsoleKey.Enter);
                     break;
                 case 2:
                     MostrarMenuPrincipal();
@@ -446,14 +412,18 @@ namespace Futbol
         private void MostrarMenuEquipo()
         {
             string[] opcionesEquipo = { "Ver equipo", "Modificar alineación", "Volver" };
-            int indice = Menu.CrearMenuVertical(new List<string> {"Plantilla"}, new List<string>(opcionesEquipo));
-            
+            int indice = Menu.CrearMenuVertical(new List<string> { "Plantilla" }, new List<string>(opcionesEquipo));
+
             switch (indice)
             {
                 case 0:
                     Console.Clear();
                     DibujarCuadro(MostrarEquipo());
-                    Console.ReadKey();
+                    ConsoleKey key;
+                    do
+                    {
+                        key = Console.ReadKey(true).Key;
+                    } while (key != ConsoleKey.Enter);
                     Console.Clear();
                     MostrarMenuEquipo();
                     break;
@@ -463,20 +433,23 @@ namespace Futbol
                 case 2:
                     MostrarMenuPrincipal();
                     break;
-            } 
-            
+            }
         }
         private void jugarJornada()
         {
-            ConsoleKey tecla;
-
             Console.Clear();
             partido.AnyadirPartidos();
             partido.AnyadirEquiposAPartidos();
             partido.MostrarNumeroJornada();
 
             List<string> partidosTexto = partido.ObtenerPartidosComoTexto();
-            DibujarCuadro(partidosTexto,usuario);
+            DibujarCuadro(partidosTexto, usuario);
+
+            ConsoleKey key;
+            do
+            {
+                key = Console.ReadKey(true).Key;
+            } while (key != ConsoleKey.Enter);
 
             partido.GuardarPartidos();
 
@@ -488,7 +461,7 @@ namespace Futbol
 
                 int puntosUsuario = 0;
                 if (liga.PuntosPorEquipo.ContainsKey(usuario.Equipo.Nombre))
-                { 
+                {
                     puntosUsuario = liga.PuntosPorEquipo[usuario.Equipo.Nombre];
                 }
 
@@ -498,13 +471,15 @@ namespace Futbol
 
                 DibujarCuadro(liga.GanadorLiga());
 
-                Console.ReadKey();
+                do
+                {
+                    key = Console.ReadKey(true).Key;
+                } while (key != ConsoleKey.Enter);
 
                 DibujarCuadro(new List<string> {
-                $"¡Has ganado {dineroGanado:N0}$ por tus {puntosUsuario} puntos!",
-                "Pulsa Intro tecla para continuar..."
+                    $"¡Has ganado {dineroGanado:N0}$ por tus {puntosUsuario} puntos!",
+                    "Pulsa Intro tecla para continuar..."
                 });
-
 
                 File.WriteAllText(archivo, "0");
                 File.WriteAllText(archivoLiga, "");
@@ -513,16 +488,16 @@ namespace Futbol
             partido.Partidos.Clear();
             partido.ResultadosPorEquipo.Clear();
 
-            tecla = Console.ReadKey(true).Key;
-            if (tecla == ConsoleKey.Enter)
+            do
             {
-                MostrarMenuPrincipal();
-            }
+                key = Console.ReadKey(true).Key;
+            } while (key != ConsoleKey.Enter);
+
+            MostrarMenuPrincipal();
         }
 
         private void mostrarLiga()
         {
-            ConsoleKey tecla;
             string archivo = $"../../../Usuarios/{usuario.Nombre}/jornadas.txt";
             Console.Clear();
 
@@ -532,11 +507,13 @@ namespace Futbol
 
             DibujarCuadro(tablaComoTexto, usuario);
 
-            tecla = Console.ReadKey(true).Key;
-            if (tecla == ConsoleKey.Enter)
+            ConsoleKey tecla;
+            do
             {
-                MostrarMenuPrincipal();
-            }
+                tecla = Console.ReadKey(true).Key;
+            } while (tecla != ConsoleKey.Enter);
+
+            MostrarMenuPrincipal();
         }
 
         private void ModificarAlineacion()
@@ -599,9 +576,9 @@ namespace Futbol
             List<string> lineas = new List<string>();
 
             lineas.Add("LISTA DE JUGADORES");
-            lineas.Add(""); // Línea vacía
+            lineas.Add("");
             lineas.Add("Nombre".PadRight(20) + "Posición".PadRight(15) + "Equipo Origen".PadRight(20));
-            lineas.Add(new string('-', 60)); // Separador
+            lineas.Add(new string('-', 60));
 
             foreach (var j in usuario.Equipo.Jugadores)
             {
@@ -627,20 +604,17 @@ namespace Futbol
 @"|  _/ | |_| | | |__  \__ \  / _ \     | |  | .` |   | |   |   / | (_) |   |  _/  / _ \  |   /  / _ \    | (__  | (_) | | .` |   | |    | |  | .` | | |_| |  / _ \  |   / ",
 @"|_|    \___/  |____| |___/ /_/ \_\   |___| |_|\_|   |_|   |_|_\  \___/    |_|   /_/ \_\ |_|_\ /_/ \_\    \___|  \___/  |_|\_|   |_|   |___| |_|\_|  \___/  /_/ \_\ |_|_\ "};
 
-            // Obtener ancho total de la consola
             int anchoConsola = 209;
             int altoConsola = 51;
             bool mostrarCosa = true;
             do
             {
                 Console.Clear();
-                // Mostrar título centrado
                 for (int i = 0; i < lineasTitulo.Length; i++)
                 {
                     Console.SetCursorPosition((anchoConsola - lineasTitulo[i].Length) / 2, i + ((altoConsola - (lineasTitulo.Length+lineasCosa.Length))/2));
                     Console.WriteLine(lineasTitulo[i]);
                 }
-                // Mostrar o no mostrar "cosa" (parpadeo)
 
                 for (int i = 0; i < lineasCosa.Length; i++)
                 {
@@ -650,9 +624,7 @@ namespace Futbol
                     else
                         Console.WriteLine(new string(' ', lineasCosa[i].Length));
                 }
-                // Esperar antes del siguiente parpadeo
                 Thread.Sleep(750);
-                // Alternar para crear efecto de parpadeo
                 mostrarCosa = !mostrarCosa;
             } while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Enter);
             Console.Clear();

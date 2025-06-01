@@ -43,7 +43,6 @@ Arjen Robben;Delantero;Groningen;56000000
 Steven Gerrard;Mediocampista;LA Galaxy;35000000
 Michael Ballack;Mediocampista;Bayer Leverkusen;27000000
 Samuel Eto;Delantero;Antalyaspor;44000000
-Cristiano Ronaldo;Delantero;Al Nassr;100000000
 Erling Haaland;Delantero;Manchester City;30000000
 Kevin De Bruyne;Mediocampista;Manchester City;34000000
 Karim Benzema;Delantero;Al Ittihad;50000000
@@ -78,3 +77,4 @@ Rick Karsdorp;Defensa;AS Roma;2000000
 Frank Lampard;Mediocampista;New York City;60000000
 Trent Alexander Arnold;Defensa;Liverpool;7000000
 Rivaldo Vítor;Mediocampista;Kabuscorp;55000000
+Jesús Rodríguez;Delantero;Real Betis;10000000
