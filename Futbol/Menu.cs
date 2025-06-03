@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Futbol
 {
@@ -34,7 +35,7 @@ namespace Futbol
 
         public void MostrarMenuPrincipal()
         {
-            string[] opcionesMenu = { "Mercado", "Equipo", "Jornada", "Liga", "Salir" };
+            string[] opcionesMenu = { "Mercado", "Equipo", "Jornada", "Liga", "Penaltis", "Salir" };
             switch (Menu.CrearMenuPrincipal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList()))
             {
                 case 0:
@@ -50,6 +51,9 @@ namespace Futbol
                     mostrarLiga();
                     break;
                 case 4:
+                    penaltis();
+                    break;
+                case 5:
                     DibujarCuadro(new List<string> { "Gracias por jugar!", "Pulsa Intro para salir..." });
                     ConsoleKey key;
                     do
@@ -59,6 +63,281 @@ namespace Futbol
                     break;
             }
         }
+
+        public void penaltis()
+        {
+            long dinero = usuario.Dinero;
+            bool correcto = false;
+            long cantidadApostada;
+            do
+            {
+                List<string> mensajeDinero = new List<string>
+                    {
+                        "PENALTIS",
+                        "",
+                        "Cuanto quieres apostar ( Max: "+dinero+" )",
+                        "---------------------------",
+                       "|                          $|",
+                        "---------------------------"
+                    };
+
+                int padTopTexto = Menu.DibujarCuadro(mensajeDinero);
+
+                int posicionX = (209 - 29) / 2;
+                int posicionY = padTopTexto + mensajeDinero.Count - 2;
+
+                Console.SetCursorPosition(posicionX, posicionY);
+                string cantidadApostadaString = Console.ReadLine() ?? "0";
+                correcto = long.TryParse(cantidadApostadaString, out cantidadApostada) && cantidadApostada > 0 && cantidadApostada <= dinero;
+                if (!correcto)
+                {
+                    Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ingreso no valido" });
+                    Console.ReadKey();
+                }
+            } while (!correcto);
+            bool gol = jugarPenaltis();
+            usuario.Dinero -= cantidadApostada;
+            usuario.Dinero += gol ? (long)(cantidadApostada * 1.5) : 0;
+            //List<string> mensaje = new List<string> {
+            //    @"                     ___    ",
+            //    @" o__        o__     |   |\  ",
+            //    @"/|          /|      |   |X\ ",
+            //    @"/ >o         /\     |   |XX\"
+            //};
+            //List<string> mensaje = new List<string> {
+            //    @"                     ___    ",
+            //    @" o__        o__     |   |\  ",
+            //    @"/|          /\      |   |X\ ",
+            //    @"/ \o         /\     |   |XX\"
+            //};
+            //List<string> mensaje = new List<string> {
+            //    @"                     ___    ",
+            //    @" o__        o__     |   |\  ",
+            //    @"/|__      o /\      |   |X\ ",
+            //    @"/            /\     |   |XX\"
+            //};
+            //List<string> mensaje = new List<string> {
+            //    @"                     ___    ",
+            //    @" o__        o__     |   |\  ",
+            //    @"/|__        /\      |   |X\ ",
+            //    @"/            /\     |   |XX\"
+            //};
+            List<string> mensaje = new List<string> {
+                @"                     ___    ",
+                @" o__        o__     |   |\  ",
+                @"/|          /\      |   |X\ ",
+                @"/ > o        <\     |   |XX\",
+                @"^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+                "",
+            };
+            mensaje.AddRange(new List<string> { gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(", gol ? "HAS GANADO:" : "HAS PERDIDO:", gol ? (cantidadApostada * 1.5).ToString() + "$" : cantidadApostada.ToString() + "$" });
+            Menu.DibujarCuadro(mensaje);
+            Console.ReadKey();
+            MostrarMenuPrincipal();
+        }
+        public static bool jugarPenaltis()
+        {
+            Console.CursorVisible = false;
+            List<string> mensajes = new List<string>
+            {
+                "¡Apunta bien!",
+                "Solo los valientes marcan.",
+                "Demuestra tu puntería.",
+                "¡Este gol es tuyo!",
+                "Golpea con precisión.",
+                "¿Tienes lo que se necesita?",
+                "Reta al portero.",
+                "¡Solo los cracks marcan aquí!",
+                "¡Atrévete a disparar!",
+                "¿Podrás con el portero?",
+                "¡Dispara al destino!",
+                "¡La gloria te espera!",
+                "¡Momento de la verdad!",
+                "¡Es ahora o nunca!",
+                "¡Gol de campeonato!"
+            };
+
+            Random random = new Random();
+            string titulo = mensajes[random.Next(mensajes.Count)];
+
+            List<string> porteria = new List<string>
+            {
+                titulo,
+                "",
+                "╔══════════════════════════════════════════════════════════╗",
+                "║ ╔══════════════════════════════════════════════════════╗ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+                "║ ║                                                      ║ ║",
+               @"/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\",
+            };
+            int padTop = DibujarCuadro(porteria)+2;
+            int padLeft = 74;
+
+            int[][] posiciones = new int[6][]
+            {
+                new int[] { 5, 3 },    // Arriba Izquierda
+                new int[] { 27, 3 },   // Arriba Centro
+                new int[] { 50, 3 },   // Arriba Derecha
+                new int[] { 5, 11 },   // Abajo Izquierda
+                new int[] { 27, 11 },  // Abajo Centro
+                new int[] { 50, 11 }   // Abajo Derecha
+            };
+
+            bool[] paradas = new bool[6];
+
+            int seleccionado = 0;
+            ConsoleKey tecla;
+
+            do
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    int x = posiciones[i][0];
+                    int y = posiciones[i][1];
+                    if (i == seleccionado)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.SetCursorPosition(padLeft + x, padTop + y);
+                        Console.Write("╔═══╗");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 1);
+                        Console.Write("║ + ║");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 2);
+                        Console.Write("╚═══╝");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.SetCursorPosition(padLeft + x, padTop + y);
+                        Console.Write("╔═══╗");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 1);
+                        Console.Write("║   ║");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 2);
+                        Console.Write("╚═══╝");
+                        Console.ResetColor();
+                    }
+                }
+
+                tecla = Console.ReadKey(true).Key;
+
+                // Movimiento: 0 1 2 (arriba), 3 4 5 (abajo)
+                switch (tecla)
+                {
+                    case ConsoleKey.LeftArrow:
+                        if (seleccionado != 0 && seleccionado != 3) seleccionado--;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (seleccionado != 2 && seleccionado != 5) seleccionado++;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        if (seleccionado > 2) seleccionado -= 3;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (seleccionado <= 2) seleccionado += 3;
+                        break;
+                }
+            } while (tecla != ConsoleKey.Enter);
+            Thread.Sleep(500);
+
+            int parada = random.Next(1, 4);
+
+            if (parada == 1)
+            {
+                // Parar una columna aleatoria (0=izq, 1=centro, 2=dcha)
+                int colParada = random.Next(0, 3);
+                List<int> posicionesParadas = new List<int> { colParada, 3 + colParada };
+
+                for (int i = 0; i < 6; i++)
+                {
+                    if (posicionesParadas.Contains(i))
+                    {
+                        int x = posiciones[i][0];
+                        int y = posiciones[i][1];
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(padLeft + x, padTop + y);
+                        Console.Write("╔═══╗");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 1);
+                        Console.Write("║ X ║");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 2);
+                        Console.Write("╚═══╝");
+                        Console.ResetColor();
+                        paradas[i] = true;
+                        Thread.Sleep(500);
+                    }
+                }
+            }
+            else if (parada == 2)
+            {
+                // Parar dos columnas aleatorias
+                int col1 = random.Next(0, 3);
+                int col2;
+                do
+                {
+                    col2 = random.Next(0, 3);
+                } while (col2 == col1);
+                List<int> posicionesParadas = new List<int> { col1, 3 + col1, col2, 3 + col2 };
+
+                for (int i = 0; i < 6; i++)
+                {
+                    if (posicionesParadas.Contains(i))
+                    {
+                        int x = posiciones[i][0];
+                        int y = posiciones[i][1];
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(padLeft + x, padTop + y);
+                        Console.Write("╔═══╗");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 1);
+                        Console.Write("║ X ║");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 2);
+                        Console.Write("╚═══╝");
+                        Console.ResetColor();
+                        paradas[i] = true;
+                        Thread.Sleep(500);
+                    }
+                }
+            }
+            else if (parada == 3)
+            {
+                // Parar una fila aleatoria (0=arriba, 1=abajo)
+                int filaParada = random.Next(0, 2);
+                List<int> posicionesParadas = new List<int> { filaParada * 3 , filaParada * 3 + 1, filaParada * 3 + 2 };
+
+                for (int i = 0; i < 6; i++)
+                {
+                    if (posicionesParadas.Contains(i))
+                    {
+                        int x = posiciones[i][0];
+                        int y = posiciones[i][1];
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(padLeft + x, padTop + y);
+                        Console.Write("╔═══╗");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 1);
+                        Console.Write("║ X ║");
+                        Console.SetCursorPosition(padLeft + x, padTop + y + 2);
+                        Console.Write("╚═══╝");
+                        Console.ResetColor();
+                        paradas[i] = true;
+                        Thread.Sleep(500);
+                    }
+                }
+            }
+            Thread.Sleep(1500);
+            return !paradas[seleccionado];
+        }
+
+
+
         public static int DibujarCuadro(List<string> lineas, Usuario usuario = null)
         {
             const int ANCHO_CONSOLA = 209;
@@ -301,7 +580,7 @@ namespace Futbol
 
             int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
 
-            int espacioEntre = 4;
+            int espacioEntre = 2;
             int totalAnchoOpciones = opciones.Count * (longitudMaxima + espacioEntre) - espacioEntre;
             int inicioX = (ANCHO_CONSOLA - totalAnchoOpciones) / 2;
 
