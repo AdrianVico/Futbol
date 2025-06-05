@@ -14,14 +14,12 @@ namespace Futbol
         Mercado mercado;
         Liga liga;
         Partido partido;
-        Jornada jornada;
 
         internal Usuario Usuario { get => usuario; set => usuario = value; }
         internal Mercado Mercado { get => mercado; set => mercado = value; }
 
         public Menu(Usuario usuario)
         {
-            jornada = new Jornada();
             this.usuario = usuario;
             mercado = new Mercado(usuario);
             liga = new Liga();

@@ -1,4 +1,5 @@
 {
   "paco": "paco",
-  "marta": "marta"
+  "marta": "marta",
+  "Izan": "Izan"
 }

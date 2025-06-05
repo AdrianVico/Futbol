@@ -1,0 +1,14 @@
+Jornada 1
+Napoles;1-0
+Milan;0-1
+Leipzig;0-4
+Monaco;4-0
+Arsenal;1-0
+Madrid;0-1
+Elche;0-1
+PSG;1-0
+Liverpool;3-1
+Izan;1-3
+Bayern;4-0
+Barcelona;0-4
+--------------
