@@ -620,7 +620,7 @@ namespace Futbol
         public static void MostrarInfoUsuario(Usuario usuario)
         {
             Console.SetCursorPosition(70, 1);
-            Console.WriteLine($"{usuario.Nombre} {usuario.Dinero}$ Pts: {usuario.Puntos}");
+            Console.WriteLine($"{usuario.Nombre} {usuario.Dinero}");
         }
 
 
