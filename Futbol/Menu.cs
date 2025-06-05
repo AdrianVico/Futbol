@@ -96,30 +96,7 @@ namespace Futbol
             bool gol = jugarPenaltis();
             usuario.Dinero -= cantidadApostada;
             usuario.Dinero += gol ? (long)(cantidadApostada * 1.5) : 0;
-            //List<string> mensaje = new List<string> {
-            //    @"                     ___    ",
-            //    @" o__        o__     |   |\  ",
-            //    @"/|          /|      |   |X\ ",
-            //    @"/ >o         /\     |   |XX\"
-            //};
-            //List<string> mensaje = new List<string> {
-            //    @"                     ___    ",
-            //    @" o__        o__     |   |\  ",
-            //    @"/|          /\      |   |X\ ",
-            //    @"/ \o         /\     |   |XX\"
-            //};
-            //List<string> mensaje = new List<string> {
-            //    @"                     ___    ",
-            //    @" o__        o__     |   |\  ",
-            //    @"/|__      o /\      |   |X\ ",
-            //    @"/            /\     |   |XX\"
-            //};
-            //List<string> mensaje = new List<string> {
-            //    @"                     ___    ",
-            //    @" o__        o__     |   |\  ",
-            //    @"/|__        /\      |   |X\ ",
-            //    @"/            /\     |   |XX\"
-            //};
+            usuario.ActualizarFicheroDatos();
             List<string> mensaje = new List<string> {
                 @"                     ___    ",
                 @" o__        o__     |   |\  ",
