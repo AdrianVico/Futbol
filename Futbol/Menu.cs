@@ -67,17 +67,18 @@ namespace Futbol
             long dinero = usuario.Dinero;
             bool correcto = false;
             long cantidadApostada;
+            bool salir = false;
             do
             {
                 List<string> mensajeDinero = new List<string>
-                    {
-                        "PENALTIS",
-                        "",
-                        "Cuanto quieres apostar ( Max: "+dinero.ToString("N0")+" )",
-                        "---------------------------",
-                       "|                          $|",
-                        "---------------------------"
-                    };
+                {
+                    "PENALTIS",
+                    "",
+                    "Cuanto quieres apostar ( Max: " + dinero.ToString("N0") + " )",
+                     "---------------------------",
+                    "|                          $|",
+                     "---------------------------"
+                };
 
                 int padTopTexto = Menu.DibujarCuadro(mensajeDinero);
 
@@ -85,18 +86,47 @@ namespace Futbol
                 int posicionY = padTopTexto + mensajeDinero.Count - 2;
 
                 Console.SetCursorPosition(posicionX, posicionY);
-                string cantidadApostadaString = Console.ReadLine() ?? "0";
+
+                string cantidadApostadaString = "";
+                ConsoleKeyInfo tecla;
+                do
+                {
+                    tecla = Console.ReadKey(true);
+
+                    if (tecla.Key == ConsoleKey.Escape) 
+                    {
+                        MostrarMenuPrincipal();
+                    }
+                    else if (tecla.Key == ConsoleKey.Enter) 
+                    {
+                        salir = true; 
+                    }
+                    else if (tecla.Key == ConsoleKey.Backspace && cantidadApostadaString.Length > 0)
+                    {
+                        cantidadApostadaString = cantidadApostadaString.Substring(0, cantidadApostadaString.Length - 1);
+                        Console.Write("\b \b");
+                    }
+                    else
+                    {
+                        cantidadApostadaString += tecla.KeyChar;
+                        Console.Write(tecla.KeyChar);
+                    }
+                } while (!salir);
+
                 correcto = long.TryParse(cantidadApostadaString, out cantidadApostada) && cantidadApostada > 0 && cantidadApostada <= dinero;
                 if (!correcto)
                 {
                     Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ingreso no valido" });
                     Console.ReadKey();
+                    salir = false;
                 }
             } while (!correcto);
+
             bool gol = jugarPenaltis();
             usuario.Dinero -= cantidadApostada;
             usuario.Dinero += gol ? (long)(cantidadApostada * 1.5) : 0;
             usuario.ActualizarFicheroDatos();
+
             List<string> mensaje = new List<string> {
                 @"                     ___    ",
                 @" o__        o__     |   |\  ",
@@ -105,11 +135,19 @@ namespace Futbol
                 @"^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
                 "",
             };
-            mensaje.AddRange(new List<string> { gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(", gol ? "HAS GANADO:" : "HAS PERDIDO:", gol ? (cantidadApostada * 1.5).ToString("N0") + "$" : cantidadApostada.ToString("N0") + "$" });
+            mensaje.AddRange(new List<string> {
+                gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(",
+                gol ? "HAS GANADO:" : "HAS PERDIDO:",
+                gol ? (cantidadApostada * 1.5).ToString("N0") + "$" : cantidadApostada.ToString("N0") + "$"
+            });
+
             Menu.DibujarCuadro(mensaje);
             Console.ReadKey();
             MostrarMenuPrincipal();
         }
+
+
+
         public static bool jugarPenaltis()
         {
             Console.CursorVisible = false;
