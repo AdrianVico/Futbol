@@ -73,7 +73,7 @@ namespace Futbol
                     {
                         "PENALTIS",
                         "",
-                        "Cuanto quieres apostar ( Max: "+dinero+" )",
+                        "Cuanto quieres apostar ( Max: "+dinero.ToString("N0")+" )",
                         "---------------------------",
                        "|                          $|",
                         "---------------------------"
@@ -105,7 +105,7 @@ namespace Futbol
                 @"^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
                 "",
             };
-            mensaje.AddRange(new List<string> { gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(", gol ? "HAS GANADO:" : "HAS PERDIDO:", gol ? (cantidadApostada * 1.5).ToString() + "$" : cantidadApostada.ToString() + "$" });
+            mensaje.AddRange(new List<string> { gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(", gol ? "HAS GANADO:" : "HAS PERDIDO:", gol ? (cantidadApostada * 1.5).ToString("N0") + "$" : cantidadApostada.ToString("N0") + "$" });
             Menu.DibujarCuadro(mensaje);
             Console.ReadKey();
             MostrarMenuPrincipal();
@@ -440,8 +440,11 @@ namespace Futbol
                     case ConsoleKey.DownArrow:
                         opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
                         break;
+                    case ConsoleKey.Escape:
+                        opcionSeleccionada = opciones.Count - 1;
+                        break;
                 }
-            } while (tecla != ConsoleKey.Enter);
+            } while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
             return opcionSeleccionada;
         }
@@ -518,8 +521,12 @@ namespace Futbol
                     case ConsoleKey.DownArrow:
                         opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
                         break;
-                }
-            } while (tecla != ConsoleKey.Enter);
+                    //agregado
+                    case ConsoleKey.Escape:
+                        opcionSeleccionada = opciones.Count - 1;
+                        break;
+                }                                   //agregado
+            } while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
             return opcionSeleccionada;
         }
@@ -543,7 +550,7 @@ namespace Futbol
             lineasMenu.AddRange(textoAdicional);
 
             int padTopTexto = DibujarCuadro(lineasMenu);
-            MostrarInfoUsuario(usuario);
+            MostrarInfoUsuario(usuario, "si");
 
             int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count;
             int espacioEntre = 1;
@@ -592,16 +599,20 @@ namespace Futbol
                     case ConsoleKey.RightArrow:
                         opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
                         break;
-                }
-            } while (tecla != ConsoleKey.Enter);
+                        //agregado
+                    case ConsoleKey.Escape:
+                        opcionSeleccionada = opciones.Count - 1;
+                        break;
+                }                                       //agregado
+            } while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
             return opcionSeleccionada;
         }
-        public static void MostrarInfoUsuario(Usuario usuario)
+        public static void MostrarInfoUsuario(Usuario usuario, string opcion = "no")
         {
             Console.SetCursorPosition(72, 2);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Dinero: " +usuario.Dinero + "$");
+            Console.WriteLine("Dinero: " +usuario.Dinero.ToString("N0") + "$");
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(136 - usuario.Nombre.Length - 3, 2);
             Console.WriteLine("O");
@@ -610,6 +621,14 @@ namespace Futbol
             Console.SetCursorPosition(136- usuario.Nombre.Length, 2);
             Console.WriteLine(usuario.Nombre.ToUpper());
             Console.ResetColor();
+
+            if (opcion != "no") {
+                Console.SetCursorPosition(129, 10);
+                Console.WriteLine(usuario.Equipo.Alineacion[0] + "-" +
+                                  usuario.Equipo.Alineacion[1] + "-" +
+                                  usuario.Equipo.Alineacion[2] + "-" +
+                                  usuario.Equipo.Alineacion[3]);
+            }
         }
 
 
@@ -692,7 +711,7 @@ namespace Futbol
             do
             {
                 key = Console.ReadKey(true).Key;
-            } while (key != ConsoleKey.Enter);
+            } while (key != ConsoleKey.Enter && key != ConsoleKey.Escape);
 
             partido.GuardarPartidos();
 
@@ -717,7 +736,7 @@ namespace Futbol
                 do
                 {
                     key = Console.ReadKey(true).Key;
-                } while (key != ConsoleKey.Enter);
+                } while (key != ConsoleKey.Enter && key != ConsoleKey.Escape);
 
                 DibujarCuadro(new List<string> {
                     $"¡Has ganado {dineroGanado:N0}$ por tus {puntosUsuario} puntos!",
@@ -734,7 +753,7 @@ namespace Futbol
             do
             {
                 key = Console.ReadKey(true).Key;
-            } while (key != ConsoleKey.Enter);
+            } while (key != ConsoleKey.Enter && key != ConsoleKey.Escape);
 
             MostrarMenuPrincipal();
         }
@@ -754,7 +773,7 @@ namespace Futbol
             do
             {
                 tecla = Console.ReadKey(true).Key;
-            } while (tecla != ConsoleKey.Enter);
+            } while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
             MostrarMenuPrincipal();
         }

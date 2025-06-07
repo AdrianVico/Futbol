@@ -3,5 +3,6 @@
   "marta": "marta",
   "Izan": "Izan",
   "pruebaIzan": "pruebaIzan",
-  "NuevoUsuario": "NuevoUsuario"
+  "NuevoUsuario": "NuevoUsuario",
+  "": ""
 }

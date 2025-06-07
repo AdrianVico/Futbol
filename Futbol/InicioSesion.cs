@@ -48,7 +48,7 @@ namespace Futbol
 
                     Console.SetCursorPosition(posicionX, posicionY);
                     nombre = Console.ReadLine();
-
+                 
                     encontrado = EncontrarNombre(credenciales, nombre);
 
                     if (!encontrado)
@@ -56,6 +56,7 @@ namespace Futbol
                         Menu.DibujarCuadro(new List<string> { "ERROR :(", "No existe el usuario." });
                         Console.ReadKey();
                     }
+                   
                 } while (!encontrado);
 
                 string passwordUsuario = credenciales[nombre];
@@ -148,14 +149,24 @@ namespace Futbol
                     Console.SetCursorPosition(posicionX, posicionY);
 
                     nombre = Console.ReadLine();
-                    encontrado = EncontrarNombre(credenciales, nombre);
-
-                    if (encontrado)
+                    
+                    if (nombre.Length > 1)
                     {
-                        Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ya hay un usuario con ese nombre." });
+                        encontrado = EncontrarNombre(credenciales, nombre);
+
+                        if (encontrado)
+                        {
+                            Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ya hay un usuario con ese nombre." });
+                            Console.ReadKey();
+                        }
+                    }
+                    else
+                    {
+                        Menu.DibujarCuadro(new List<string> { "ERROR :(", "Tienes que introducir un nombre válido." });
                         Console.ReadKey();
                     }
-                } while (encontrado);
+
+                } while (!encontrado || nombre.Length < 0);
             }
 
             List<string> mensajePassword = new List<string>
@@ -219,13 +230,6 @@ namespace Futbol
         public static bool EncontrarNombre(Dictionary<string, string> credenciales, string nombre)
         {
             return credenciales.ContainsKey(nombre);
-        }
-
-        public static bool TipoDeInicio()
-        {
-            string titulo = "¿Tienes una cuenta creada?";
-            List<string> opciones = new List<string> { "Si", "No" };
-            return MenuSelector.SeleccionarOpcion(opciones, titulo) == 0 ? true : false;
         }
         public static string ElegirEquipoInicial()
         {

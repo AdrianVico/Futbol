@@ -34,7 +34,7 @@ namespace Futbol
         {
             string capitan = esCapitan ? "Es Capitan" : "No es Capitan";
 
-            return $"{nombre} - {precio}$";
+            return $"{nombre}"+" - "+precio.ToString("N0")+"$";
         }
     }
 }
