@@ -161,12 +161,12 @@ namespace Futbol
 
             int[][] posiciones = new int[6][]
             {
-                new int[] { 5, 3 },    // Arriba Izquierda
-                new int[] { 27, 3 },   // Arriba Centro
-                new int[] { 50, 3 },   // Arriba Derecha
-                new int[] { 5, 11 },   // Abajo Izquierda
-                new int[] { 27, 11 },  // Abajo Centro
-                new int[] { 50, 11 }   // Abajo Derecha
+                new int[] { 5, 3 },   
+                new int[] { 27, 3 },  
+                new int[] { 50, 3 },  
+                new int[] { 5, 11 },  
+                new int[] { 27, 11 }, 
+                new int[] { 50, 11 }  
             };
 
             bool[] paradas = new bool[6];
@@ -206,7 +206,6 @@ namespace Futbol
 
                 tecla = Console.ReadKey(true).Key;
 
-                // Movimiento: 0 1 2 (arriba), 3 4 5 (abajo)
                 switch (tecla)
                 {
                     case ConsoleKey.LeftArrow:
@@ -229,7 +228,6 @@ namespace Futbol
 
             if (parada == 1)
             {
-                // Parar una columna aleatoria (0=izq, 1=centro, 2=dcha)
                 int colParada = random.Next(0, 3);
                 List<int> posicionesParadas = new List<int> { colParada, 3 + colParada };
 
@@ -254,7 +252,6 @@ namespace Futbol
             }
             else if (parada == 2)
             {
-                // Parar dos columnas aleatorias
                 int col1 = random.Next(0, 3);
                 int col2;
                 do
@@ -284,7 +281,6 @@ namespace Futbol
             }
             else if (parada == 3)
             {
-                // Parar una fila aleatoria (0=arriba, 1=abajo)
                 int filaParada = random.Next(0, 2);
                 List<int> posicionesParadas = new List<int> { filaParada * 3 , filaParada * 3 + 1, filaParada * 3 + 2 };
 
@@ -321,7 +317,7 @@ namespace Futbol
             int anchoCuadro = 70;
             int altoCuadro = 51;
 
-            int padLeft = (ANCHO_CONSOLA - anchoCuadro) / 2; // 69
+            int padLeft = (ANCHO_CONSOLA - anchoCuadro) / 2; 
             int padTop = 0;
 
             for (int y = 0; y < altoCuadro; y++)
@@ -332,7 +328,6 @@ namespace Futbol
                     Console.Write("█");
                 }
             }
-            // Dibuja cuadro completo
             for (int y = 0; y < altoCuadro; y++)
             {
                 for (int x = 0; x < anchoCuadro; x++)
@@ -528,92 +523,6 @@ namespace Futbol
 
             return opcionSeleccionada;
         }
-
-        //public static int CrearMenuPrincipal(List<string> opciones, Usuario usuario, List<string> textoAdicional)
-        //{
-        //    const int ANCHO_CONSOLA = 209;
-        //    const int ALTO_CONSOLA = 51;
-
-        //    // Asegurarse de que todas las opciones tengan el mismo largo para alinearlas mejor
-        //    int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
-        //    opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
-        //    List<string> preguntasTexto = new List<string>{""};
-        //    List<string> lineasMenu = new List<string>();
-
-        //    lineasMenu.AddRange(preguntasTexto);
-        //    lineasMenu.Add("");
-        //    lineasMenu.Add("");
-        //    lineasMenu.Add("");
-        //    lineasMenu.Add("");
-        //    lineasMenu.AddRange(textoAdicional);
-
-        //    int padTopTexto = DibujarCuadro(lineasMenu);
-
-        //    MostrarInfoUsuario(usuario);
-
-        //    int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
-
-        //    int espacioEntre = 2;
-        //    int totalAnchoOpciones = opciones.Count * (longitudMaxima + espacioEntre) - espacioEntre;
-        //    int inicioX = (ANCHO_CONSOLA - totalAnchoOpciones) / 2;
-
-        //    int[] posicionesX = new int[opciones.Count];
-        //    for (int i = 0; i < opciones.Count; i++)
-        //    {
-        //        posicionesX[i] = inicioX + i * (longitudMaxima + espacioEntre);
-        //    }
-
-        //    for (int i = 0; i < opciones.Count; i++)
-        //    {
-        //        Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES);
-        //        Console.Write(" " + opciones[i]);
-        //    }
-
-        //    int opcionSeleccionada = 0;
-        //    int opcionAnterior = -1;
-        //    ConsoleKey tecla;
-
-        //    Console.SetCursorPosition(posicionesX[0], POSICION_Y_OPCIONES);
-        //    Console.ForegroundColor = ConsoleColor.Green;
-        //    Console.Write(">" + opciones[0]);
-        //    Console.ResetColor();
-
-        //    do
-        //    {
-        //        if (opcionAnterior != opcionSeleccionada)
-        //        {
-        //            if (opcionAnterior >= 0)
-        //            {
-        //                Console.SetCursorPosition(posicionesX[opcionAnterior], POSICION_Y_OPCIONES);
-        //                Console.ForegroundColor = ConsoleColor.Gray;
-        //                Console.Write(" " + opciones[opcionAnterior]);
-        //                Console.ResetColor();
-        //            }
-
-        //            Console.SetCursorPosition(posicionesX[opcionSeleccionada], POSICION_Y_OPCIONES);
-        //            Console.ForegroundColor = ConsoleColor.Green;
-        //            Console.Write(">" + opciones[opcionSeleccionada]);
-        //            Console.ResetColor();
-
-        //            opcionAnterior = opcionSeleccionada;
-        //        }
-
-        //        tecla = Console.ReadKey(true).Key;
-
-        //        switch (tecla)
-        //        {
-        //            case ConsoleKey.LeftArrow:
-        //                opcionSeleccionada = (opcionSeleccionada > 0) ? opcionSeleccionada - 1 : opciones.Count - 1;
-        //                break;
-        //            case ConsoleKey.RightArrow:
-        //                opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
-        //                break;
-        //        }
-
-        //    } while (tecla != ConsoleKey.Enter);
-
-        //    return opcionSeleccionada;
-        //}
         public static int CrearMenuPrincipal(List<string> opciones, Usuario usuario, List<string> textoAdicional, List<string> preguntasTexto)
         {
             const int ANCHO_CONSOLA = 209;

@@ -79,7 +79,7 @@ namespace Futbol
 
                     int padTopTexto = Menu.DibujarCuadro(mensajePassword);
 
-                    int posicionX = (209 - 29) / 2; // Centrado aprox para campo de texto
+                    int posicionX = (209 - 29) / 2;
                     int posicionY = padTopTexto + mensajePassword.Count - 3;
 
                     Console.SetCursorPosition(posicionX, posicionY);
@@ -200,16 +200,16 @@ namespace Futbol
 
             do
             {
-                tecla = Console.ReadKey(true); // true = no muestra la tecla
+                tecla = Console.ReadKey(true);
 
                 if (tecla.Key == ConsoleKey.Backspace && password.Length > 0)
                 {
                     password = password.Substring(0, password.Length - 1);
-                    Console.Write("\b \b"); // borra el último asterisco, \b = retrocede el cursor
+                    Console.Write("\b \b");
                 }
-                else if (!char.IsControl(tecla.KeyChar))// .IsControl es para comprobar que el caracter sea imprimible(no enter,backspace,etc.)
+                else if (!char.IsControl(tecla.KeyChar))
                 {
-                    password += tecla.KeyChar;// añade el caracter a la password
+                    password += tecla.KeyChar;
                     Console.Write("*");
                 }
             } while (tecla.Key != ConsoleKey.Enter);

@@ -95,16 +95,14 @@ namespace Futbol
 
         public string[] MostrarCamisetas()
         {
-            string[] resultado = new string[(6 + 1 + 1) * (3 + 1)];//(6 + 1 +1 ) * (3 + 1) 6 de alto de la camiseta + 1 del nombre, 3 filas de jugadores + 1 del portero
+            string[] resultado = new string[(6 + 1 + 1) * (3 + 1)];
             int linea = 0;
-            // Verificar que la alineación es válida
             if (alineacion.Length != 4)
             {
                 Console.WriteLine("La alineación no es válida(solo 4 lineas)");
             }
             else
             {
-                // Plantilla de la camiseta
                 string si = GetSiglas();
                 string plantillaCamiseta =
                                 "  __    __  \r\n" +
@@ -113,9 +111,9 @@ namespace Futbol
                                 "  |      |  \r\n" +
                                 "  |      |  \r\n" +
                                 "  |______|  ";
-                string[] lineasCamiseta = plantillaCamiseta.Split("\r\n");//6
-                int anchoCamiseta = 12; // Ancho de caracteres cada camiseta
-                int altoCamiseta = lineasCamiseta.Length; // Alto de la camiseta
+                string[] lineasCamiseta = plantillaCamiseta.Split("\r\n");
+                int anchoCamiseta = 12;
+                int altoCamiseta = lineasCamiseta.Length;
                 linea = 0;
                 string[] nombresJugadores = jugadores.Select(j => j.Nombre).ToArray();
                 for (int i = 0; i < nombresJugadores.Length; i++)

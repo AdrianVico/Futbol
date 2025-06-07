@@ -107,7 +107,6 @@ namespace Futbol
             {
                 usuario.Dinero -= jugador.Precio;
                 usuario.ActualizarFicheroDatos();
-                //Console.WriteLine($"Has comprado a {jugador.Nombre} por {jugador.Precio}$");
                 usuario.Equipo.AddJugador(jugador);
                 AgregarJugadoresAlFicheroDelUsuario(jugador);
                 jugadoresMercado.Remove(jugador);
@@ -127,7 +126,6 @@ namespace Futbol
                 {
                     usuario.Dinero += jugador.Precio;
                     usuario.ActualizarFicheroDatos();
-                    //Console.WriteLine($"Has vendido a {jugador.Nombre} por {jugador.Precio}$");
                     usuario.Equipo.RemoveJugador(jugador);
                     AgregarJugadorAlFichero(jugador);
                     BorrarJugadoresDelFicheroDelUsuario(jugador);
