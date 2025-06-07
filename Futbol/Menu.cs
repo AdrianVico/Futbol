@@ -34,7 +34,7 @@ namespace Futbol
         public void MostrarMenuPrincipal()
         {
             string[] opcionesMenu = { "Mercado", "Equipo", "Jornada", "Liga", "Penaltis", "Salir" };
-            switch (Menu.CrearMenuPrincipal(new List<string> { "Selecciona una opción:" }, new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList()))
+            switch (Menu.CrearMenuPrincipal(new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList(),new List<string> { "" }))
             {
                 case 0:
                     MostrarMenuMercado();
@@ -529,79 +529,152 @@ namespace Futbol
             return opcionSeleccionada;
         }
 
-        public static int CrearMenuPrincipal(List<string> preguntasTexto, List<string> opciones, Usuario usuario, List<string> textoAdicional)
+        //public static int CrearMenuPrincipal(List<string> opciones, Usuario usuario, List<string> textoAdicional)
+        //{
+        //    const int ANCHO_CONSOLA = 209;
+        //    const int ALTO_CONSOLA = 51;
+
+        //    // Asegurarse de que todas las opciones tengan el mismo largo para alinearlas mejor
+        //    int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
+        //    opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
+        //    List<string> preguntasTexto = new List<string>{""};
+        //    List<string> lineasMenu = new List<string>();
+
+        //    lineasMenu.AddRange(preguntasTexto);
+        //    lineasMenu.Add("");
+        //    lineasMenu.Add("");
+        //    lineasMenu.Add("");
+        //    lineasMenu.Add("");
+        //    lineasMenu.AddRange(textoAdicional);
+
+        //    int padTopTexto = DibujarCuadro(lineasMenu);
+
+        //    MostrarInfoUsuario(usuario);
+
+        //    int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
+
+        //    int espacioEntre = 2;
+        //    int totalAnchoOpciones = opciones.Count * (longitudMaxima + espacioEntre) - espacioEntre;
+        //    int inicioX = (ANCHO_CONSOLA - totalAnchoOpciones) / 2;
+
+        //    int[] posicionesX = new int[opciones.Count];
+        //    for (int i = 0; i < opciones.Count; i++)
+        //    {
+        //        posicionesX[i] = inicioX + i * (longitudMaxima + espacioEntre);
+        //    }
+
+        //    for (int i = 0; i < opciones.Count; i++)
+        //    {
+        //        Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES);
+        //        Console.Write(" " + opciones[i]);
+        //    }
+
+        //    int opcionSeleccionada = 0;
+        //    int opcionAnterior = -1;
+        //    ConsoleKey tecla;
+
+        //    Console.SetCursorPosition(posicionesX[0], POSICION_Y_OPCIONES);
+        //    Console.ForegroundColor = ConsoleColor.Green;
+        //    Console.Write(">" + opciones[0]);
+        //    Console.ResetColor();
+
+        //    do
+        //    {
+        //        if (opcionAnterior != opcionSeleccionada)
+        //        {
+        //            if (opcionAnterior >= 0)
+        //            {
+        //                Console.SetCursorPosition(posicionesX[opcionAnterior], POSICION_Y_OPCIONES);
+        //                Console.ForegroundColor = ConsoleColor.Gray;
+        //                Console.Write(" " + opciones[opcionAnterior]);
+        //                Console.ResetColor();
+        //            }
+
+        //            Console.SetCursorPosition(posicionesX[opcionSeleccionada], POSICION_Y_OPCIONES);
+        //            Console.ForegroundColor = ConsoleColor.Green;
+        //            Console.Write(">" + opciones[opcionSeleccionada]);
+        //            Console.ResetColor();
+
+        //            opcionAnterior = opcionSeleccionada;
+        //        }
+
+        //        tecla = Console.ReadKey(true).Key;
+
+        //        switch (tecla)
+        //        {
+        //            case ConsoleKey.LeftArrow:
+        //                opcionSeleccionada = (opcionSeleccionada > 0) ? opcionSeleccionada - 1 : opciones.Count - 1;
+        //                break;
+        //            case ConsoleKey.RightArrow:
+        //                opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
+        //                break;
+        //        }
+
+        //    } while (tecla != ConsoleKey.Enter);
+
+        //    return opcionSeleccionada;
+        //}
+        public static int CrearMenuPrincipal(List<string> opciones, Usuario usuario, List<string> textoAdicional, List<string> preguntasTexto)
         {
             const int ANCHO_CONSOLA = 209;
             const int ALTO_CONSOLA = 51;
+            Console.CursorVisible = false;
 
-            // Asegurarse de que todas las opciones tengan el mismo largo para alinearlas mejor
-            int longitudMaxima = opciones.Max(o => o.Length) + (opciones.Max(o => o.Length) % 2 == 0 ? 1 : 0);
-            opciones = opciones.Select(o => o + new string(' ', longitudMaxima - o.Length)).ToList();
+            int longitudMaxima = opciones.Max(o => o.Length);
+            opciones = opciones.Select(o => new string(' ', (longitudMaxima - o.Length) / 2) + o + new string(' ', longitudMaxima - o.Length - (longitudMaxima - o.Length) / 2)).ToList();
 
             List<string> lineasMenu = new List<string>();
-
-            lineasMenu.AddRange(preguntasTexto);
-
             lineasMenu.Add("");
-
+            lineasMenu.Add("");
+            lineasMenu.Add("");
+            lineasMenu.AddRange(preguntasTexto);
             lineasMenu.Add("");
             lineasMenu.Add("");
             lineasMenu.Add("");
             lineasMenu.AddRange(textoAdicional);
 
             int padTopTexto = DibujarCuadro(lineasMenu);
-
             MostrarInfoUsuario(usuario);
 
-            int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count + 1;
-
-            int espacioEntre = 2;
-            int totalAnchoOpciones = opciones.Count * (longitudMaxima + espacioEntre) - espacioEntre;
+            int POSICION_Y_OPCIONES = padTopTexto + preguntasTexto.Count;
+            int espacioEntre = 1;
+            int anchoOpcion = longitudMaxima+2;
+            int totalAnchoOpciones = opciones.Count * anchoOpcion + (opciones.Count - 1) * espacioEntre;
             int inicioX = (ANCHO_CONSOLA - totalAnchoOpciones) / 2;
 
             int[] posicionesX = new int[opciones.Count];
             for (int i = 0; i < opciones.Count; i++)
             {
-                posicionesX[i] = inicioX + i * (longitudMaxima + espacioEntre);
-            }
-
-            for (int i = 0; i < opciones.Count; i++)
-            {
-                Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES);
-                Console.Write(" " + opciones[i]);
+                posicionesX[i] = inicioX + i * (anchoOpcion + espacioEntre);
             }
 
             int opcionSeleccionada = 0;
             int opcionAnterior = -1;
             ConsoleKey tecla;
 
-            Console.SetCursorPosition(posicionesX[0], POSICION_Y_OPCIONES);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(">" + opciones[0]);
-            Console.ResetColor();
-
             do
             {
                 if (opcionAnterior != opcionSeleccionada)
                 {
-                    if (opcionAnterior >= 0)
+                    for (int i = 0; i < opciones.Count; i++)
                     {
-                        Console.SetCursorPosition(posicionesX[opcionAnterior], POSICION_Y_OPCIONES);
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.Write(" " + opciones[opcionAnterior]);
-                        Console.ResetColor();
+                        ConsoleColor color = (i == opcionSeleccionada) ? ConsoleColor.Green : ConsoleColor.Gray;
+                        Console.ForegroundColor = color;
+
+                        Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES);
+                        Console.Write("┌" + new string('─', anchoOpcion - 2) + "┐");
+
+                        Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES + 1);
+                        Console.Write("│" + opciones[i] + "│");
+
+                        Console.SetCursorPosition(posicionesX[i], POSICION_Y_OPCIONES + 2);
+                        Console.Write("└" + new string('─', anchoOpcion - 2) + "┘");
                     }
-
-                    Console.SetCursorPosition(posicionesX[opcionSeleccionada], POSICION_Y_OPCIONES);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(">" + opciones[opcionSeleccionada]);
                     Console.ResetColor();
-
                     opcionAnterior = opcionSeleccionada;
                 }
 
                 tecla = Console.ReadKey(true).Key;
-
                 switch (tecla)
                 {
                     case ConsoleKey.LeftArrow:
@@ -611,16 +684,23 @@ namespace Futbol
                         opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
                         break;
                 }
-
             } while (tecla != ConsoleKey.Enter);
 
             return opcionSeleccionada;
         }
-
         public static void MostrarInfoUsuario(Usuario usuario)
         {
-            Console.SetCursorPosition(70, 1);
-            Console.WriteLine($"{usuario.Nombre} {usuario.Dinero}");
+            Console.SetCursorPosition(72, 2);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Dinero: " +usuario.Dinero + "$");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(136 - usuario.Nombre.Length - 3, 2);
+            Console.WriteLine("O");
+            Console.SetCursorPosition(136 - usuario.Nombre.Length - 4, 3);
+            Console.WriteLine("/-\\");
+            Console.SetCursorPosition(136- usuario.Nombre.Length, 2);
+            Console.WriteLine(usuario.Nombre.ToUpper());
+            Console.ResetColor();
         }
 
 

@@ -121,8 +121,6 @@ namespace Futbol
                 GuardarNumeroJornada();
                 string titulo = "Partidos de la J" + numeroJornada;
                 int posX = (Console.WindowWidth - titulo.Length) / 2;
-                Console.SetCursorPosition(posX, Console.CursorTop);
-                Console.WriteLine(titulo);
             }
             
         }
