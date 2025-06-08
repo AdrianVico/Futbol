@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace Futbol
 {
-    internal class Usuario
+    internal class Usuario: ISerializableUsuario
     {
         string nombre;
         string password;
@@ -48,7 +48,7 @@ namespace Futbol
             }
         }
 
-        public static void Serializar(Dictionary<string, string> credenciales)
+        public void Serializar(Dictionary<string, string> credenciales)
         {
             string ruta = $"../../../Usuarios/Usuarios.txt";
             JsonSerializerOptions options = new JsonSerializerOptions {WriteIndented = true};  
@@ -56,7 +56,7 @@ namespace Futbol
             File.WriteAllText(ruta, jsonString);
         }
 
-        public static Dictionary<string, string> Deserializar()
+        public Dictionary<string, string> Deserializar()
         {
             Dictionary<string, string> credenciales = new Dictionary<string, string>();
             string ruta = $"../../../Usuarios/Usuarios.txt";

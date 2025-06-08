@@ -25,7 +25,7 @@ namespace Futbol
 
             if (File.Exists(nombreFichero))
             {
-                credenciales = Usuario.Deserializar();
+                credenciales = usuario.Deserializar();
 
                 do
                 {
@@ -123,11 +123,12 @@ namespace Futbol
             string nombreDirectorio = NOMBRE_DIRECTORIO;
             bool encontrado;
             string nombre = null;
+            Usuario usuario = null;
             Dictionary<string, string> credenciales = new Dictionary<string, string>();
 
             if (File.Exists(nombreFichero))
             {
-                credenciales = Usuario.Deserializar();
+                credenciales = usuario.Deserializar();
 
                 do
                 {
@@ -190,7 +191,7 @@ namespace Futbol
             if (Directory.Exists(nombreDirectorio))
             {
                 credenciales.Add(nombre, password);
-                Usuario.Serializar(credenciales);
+                usuario.Serializar(credenciales);
 
                 Directory.CreateDirectory(NOMBRE_DIRECTORIO + "\\" + nombre);
                 string rutaDatos = Path.Combine(NOMBRE_DIRECTORIO, nombre, nombre + "_datos.txt");
