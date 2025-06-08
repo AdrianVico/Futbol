@@ -161,7 +161,7 @@ namespace Futbol
                     nombre = Console.ReadLine();
                     nombre.Trim();
 
-                    if (nombre.Length > 1)
+                    if (nombre.Length >= 1)
                     {
                         encontrado = EncontrarNombre(credenciales, nombre);
 
