@@ -47,7 +47,6 @@ namespace Futbol
 
         public void SeleccionarJugadorMercado()
         {
-            LeerFicheroJugadores(rutaLeyendas);
             Menu.MostrarInfoUsuario(usuario);
             AgregarJugadorMercado();
             List<string> lista = new List<string>();
@@ -186,7 +185,6 @@ namespace Futbol
         }
         public void IniciarMercado()
         {
-            LeerFicheroJugadores(rutaLeyendas);
             AgregarJugadorMercado();
             SeleccionarJugadorMercado();
         }

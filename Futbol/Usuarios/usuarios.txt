@@ -1,4 +1,6 @@
 {
   "paco": "paco",
-  "admin": "admin"
+  "admin": "admin",
+  "mario": "mario",
+  "juan": "juan"
 }

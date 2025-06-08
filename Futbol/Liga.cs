@@ -22,40 +22,38 @@ namespace Futbol
             ResultadosPorEquipo.Clear();
             PuntosPorEquipo.Clear();
 
-            if (!File.Exists(rutaArchivo))
+            if (File.Exists(rutaArchivo))
             {
-                Console.WriteLine("No hay archivo");
-                return;
-            }
+                string[] lineas = File.ReadAllLines(rutaArchivo);
+                List<string> jornadaActual = new List<string>();
+                bool ultimaFueSeparador = false;
 
-            string[] lineas = File.ReadAllLines(rutaArchivo);
-            List<string> jornadaActual = new List<string>();
-            bool ultimaFueSeparador = false;
-
-            for (int i = 0; i < lineas.Length; i++)
-            {
-                string lineaLimpia = lineas[i].Trim();
-
-                if (lineaLimpia.StartsWith("-----"))
+                for (int i = 0; i < lineas.Length; i++)
                 {
-                    if (jornadaActual.Count > 0)
+                    string lineaLimpia = lineas[i].Trim();
+
+                    if (lineaLimpia.StartsWith("-----"))
                     {
-                        ProcesarJornada(jornadaActual);
-                        jornadaActual = new List<string>();
+                        if (jornadaActual.Count > 0)
+                        {
+                            ProcesarJornada(jornadaActual);
+                            jornadaActual = new List<string>();
+                        }
+                        ultimaFueSeparador = true;
                     }
-                    ultimaFueSeparador = true;
+                    else if (lineaLimpia.Length > 0)
+                    {
+                        jornadaActual.Add(lineaLimpia);
+                        ultimaFueSeparador = false;
+                    }
                 }
-                else if (lineaLimpia.Length > 0)
+
+                if (jornadaActual.Count > 0 && !ultimaFueSeparador)
                 {
-                    jornadaActual.Add(lineaLimpia);
-                    ultimaFueSeparador = false;
+                    ProcesarJornada(jornadaActual);
                 }
             }
 
-            if (jornadaActual.Count > 0 && !ultimaFueSeparador)
-            {
-                ProcesarJornada(jornadaActual);
-            }
         }
 
 

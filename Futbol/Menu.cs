@@ -108,14 +108,14 @@ namespace Futbol
             do
             {
                 List<string> mensajeDinero = new List<string>
-        {
-            "PENALTIS",
-            "",
-            "Cuanto quieres apostar ( Max: " + dinero.ToString("N0") + " )",
-             "---------------------------",
-            "|                          $|",
-             "---------------------------"
-        };
+                {
+                    "PENALTIS",
+                    "",
+                    "Cuanto quieres apostar ( Max: " + dinero.ToString("N0") + " )",
+                        "---------------------------",
+                        "|                          $|",
+                        "---------------------------"
+                };
 
                 int padTopTexto = Menu.DibujarCuadro(mensajeDinero);
 
@@ -186,12 +186,12 @@ namespace Futbol
                 @"/ > o        <\     |   |XX\",
                 @"^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
                 "",
-            };
+                };
                 mensaje.AddRange(new List<string> {
                 gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(",
                 gol ? "HAS GANADO:" : "HAS PERDIDO:",
                 gol ? (cantidadApostada * 1.5).ToString("N0") + "$" : cantidadApostada.ToString("N0") + "$"
-            });
+                });
 
                 Menu.DibujarCuadro(mensaje);
                 ConsoleKey key;
