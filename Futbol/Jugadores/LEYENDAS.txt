@@ -25,7 +25,6 @@ Thierry Henry;Delantero;Arsenal;33000000
 Dennis Bergkamp;Delantero;Arsenal;26000000
 Gianluigi Buffon;Portero;Parma;44000000
 Iker Casillas;Portero;Porto;42000000
-Roberto Carlos;Defensa;Anzhi Makhachkala;58000000
 Cafu Silva;Defensa;Milan;38000000
 Clarence Seedorf;Mediocampista;Botafogo;50000000
 Didier Drogba;Delantero;Phoenix Rising;45000000
@@ -70,4 +69,4 @@ Manuel Neuer;Portero;Bayern Múnich;31000000
 Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
 Vinícius Júnior;Delantero;Real Madrid;28000000
 Jude Bellingham;Mediocampista;Real Madrid;12000000
-
+Roberto Carlos;Defensa;Anzhi Makhachkala;58000000
