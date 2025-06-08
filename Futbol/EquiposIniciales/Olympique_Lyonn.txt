@@ -7,5 +7,5 @@ Nemanja Matić;Centrocampista;Olympique Lyonnais;3000000
 Maxence Caqueret;Centrocampista;Olympique Lyonnais;2000000
 Corentin Tolisso;Centrocampista;Olympique Lyonnais;3500000
 Rayan Cherki;Delantero;Olympique Lyonnais;2000000
-Alexandre Lacazette;Delantero;Olympique Lyonnais;4500000
+Alexandre Lacazette;Delantero;Olympique Lyonnais;3500000
 Mama Baldé;Delantero;Olympique Lyonnais;1800000

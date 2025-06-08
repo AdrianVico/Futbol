@@ -1,14 +1,1 @@
-Jornada 1
-PSG;1-0
-Bayern;0-1
-Barcelona;2-0
-Elche;0-2
-Arsenal;0-1
-Leipzig;1-0
-Liverpool;2-0
-Napoles;0-2
-Milan;1-1
-Madrid;1-1
-Monaco;0-2
-;2-0
---------------
+

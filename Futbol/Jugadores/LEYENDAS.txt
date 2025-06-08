@@ -4,20 +4,25 @@ Zinedine Zidane;Mediocampista;Real Madrid;56000000
 Franz Beckenbauer;Defensa;Bayern Múnich;49000000
 Johan Cruyff;Mediocampista;Feyenoord;70000000
 Ronaldo Nazário;Delantero;Barcelona;77000000
+Ronaldinho Gaúcho;Mediocampista;Barcelona;63000000
+Michel Platini;Mediocampista;Juventus;45000000
 Lev Yashin;Portero;Dynamo Moscú;28000000
-Kylian Mbappé;Delantero;PSG;40000000
-Andrés Iniesta;Mediocampista;Barcelona;64000000
+Paolo Maldini;Defensa;Milan;38000000
 George Best;Delantero;Bournemouth;47000000
+Roberto Baggio;Delantero;Brescia;23000000
 Alfredo Di Stéfano;Delantero;Español;43000000
 Garrincha Santos;Delantero;Olaria;23000000
+Ferenc Puskás;Delantero;Real Madrid;70000000
 Karl Heinz Rummenigge;Delantero;Bayern Múnich;17000000
 Lothar Matthäus;Mediocampista;NY MetroStars;47000000
 Romário Souza;Delantero;América;65000000
-Thibaut Courtois;Portero;Real Madrid;35000000
 Hugo Sánchez;Delantero;Atlante;53000000
 Ruud Gullit;Mediocampista;Chelsea;62000000
 Marco Van Basten;Delantero;Milan;67000000
+Andrés Iniesta;Mediocampista;Barcelona;64000000
+Xavi Hernández;Mediocampista;Al Sadd;61000000
 Thierry Henry;Delantero;Arsenal;33000000
+Dennis Bergkamp;Delantero;Arsenal;26000000
 Gianluigi Buffon;Portero;Parma;44000000
 Iker Casillas;Portero;Porto;42000000
 Roberto Carlos;Defensa;Anzhi Makhachkala;58000000
@@ -29,49 +34,40 @@ Ryan Giggs;Mediocampista;Manchester United;45000000
 Eric Cantona;Delantero;Manchester United;52000000
 Patrick Vieira;Mediocampista;Manchester City;49000000
 Fabio Cannavaro;Defensa;Al-Ahli;43000000
+Fernando Hierro;Defensa;Bolton Wanderers;11000000
 Carlos Valderrama;Mediocampista;Colorado Rapids;39000000
 Emilio Butragueño;Delantero;Celaya;36000000
-Lionel Messi;Delantero;Barcelona;120000000
 Raúl González;Delantero;New York Cosmos;13000000
+Zlatan Ibrahimović;Delantero;AC Milan;80000000
 Luis Figo;Mediocampista;Inter de Milán;58000000
+Pavel Nedvěd;Mediocampista;Juventus;48000000
 Miroslav Klose;Delantero;Lazio;42000000
 Roberto Donato;Defensa;Real Betis;39000000
 Philipp Lahm;Defensa;Bayern Múnich;52000000
+Arjen Robben;Delantero;Groningen;56000000
+Frank Lampard;Mediocampista;New York City;60000000
 Steven Gerrard;Mediocampista;LA Galaxy;35000000
 Michael Ballack;Mediocampista;Bayer Leverkusen;27000000
 Samuel Eto;Delantero;Antalyaspor;44000000
+Rivaldo Vítor;Mediocampista;Kabuscorp;55000000
+Lionel Messi;Delantero;Barcelona;120000000
+Cristiano Ronaldo;Delantero;Al Nassr;100000000
+Kylian Mbappé;Delantero;PSG;40000000
 Erling Haaland;Delantero;Manchester City;30000000
+Neymar Jr;Delantero;Al Hilal;90000000
 Kevin De Bruyne;Mediocampista;Manchester City;34000000
+Luka Modrić;Mediocampista;Real Madrid;26000000
+Toni Kroos;Mediocampista;Real Madrid;23000000
 Karim Benzema;Delantero;Al Ittihad;50000000
 Robert Lewandowski;Delantero;Barcelona;47000000
 Mohamed Salah;Delantero;Liverpool;22000000
 Sadio Mané;Delantero;Al Nassr;13000000
 Harry Kane;Delantero;Bayern Múnich;29000000
 Virgil van Dijk;Defensa;Liverpool;20000000
+Trent Alexander Arnold;Defensa;Liverpool;7000000
+Thibaut Courtois;Portero;Real Madrid;35000000
 Manuel Neuer;Portero;Bayern Múnich;31000000
 Joshua Kimmich;Mediocampista;Bayern Múnich;18000000
-Toni Kroos;Mediocampista;Real Madrid;23000000
-Paolo Maldini;Defensa;Milan;38000000
-Ferenc Puskás;Delantero;Real Madrid;70000000
-Michel Platini;Mediocampista;Juventus;45000000
-Xavi Hernández;Mediocampista;Al Sadd;61000000
-Zlatan Ibrahimović;Delantero;AC Milan;80000000
-Luka Modrić;Mediocampista;Real Madrid;26000000
-Adrián San Miguel;Portero;Real Betis;120000
-Aitor Ruibal;Defensa;Real Betis;1000000
-Marc Bartra;Defensa;Real Betis;2000000
-Natan;Defensa;Real Betis;1500000
-Romain Perraud;Defensa;Real Betis;1800000
-Johnny Cardoso;Centrocampista;Real Betis;1500000
-Marc Roca;Centrocampista;Real Betis;2200000
-Antony dos Santos;Delantero;Real Betis;2000000
-Cucho Hernández;Delantero;Real Betis;2000000
-Jesús Rodríguez;Delantero;Real Betis;1000000
-Neymar Jr;Delantero;Al Hilal;90000000
-Isco Alarcón;Centrocampista;Real Betis;2500000
-Rui Patrício;Portero;AS Roma;2500000
-Rick Karsdorp;Defensa;AS Roma;2000000
-Frank Lampard;Mediocampista;New York City;60000000
-Trent Alexander Arnold;Defensa;Liverpool;7000000
-Rivaldo Vítor;Mediocampista;Kabuscorp;55000000
-Jesús Rodríguez;Delantero;Real Betis;10000000
+Vinícius Júnior;Delantero;Real Madrid;28000000
+Jude Bellingham;Mediocampista;Real Madrid;12000000
+
