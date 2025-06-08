@@ -142,7 +142,12 @@ namespace Futbol
             });
 
             Menu.DibujarCuadro(mensaje);
-            Console.ReadKey();
+            ConsoleKey key;
+            do
+            {
+                key = Console.ReadKey(true).Key;
+            } while (key != ConsoleKey.Enter);
+
             MostrarMenuPrincipal();
         }
 
