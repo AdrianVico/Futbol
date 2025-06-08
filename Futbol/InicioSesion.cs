@@ -20,8 +20,10 @@ namespace Futbol
             string password = "";
             List<string> lineas = null;
             int posicion = 0;
-            Usuario usuario = null;
+            Usuario usuario = new Usuario("","");
             Dictionary<string, string> credenciales = new Dictionary<string, string>();
+
+            Usuario usu2 = null;
 
             if (File.Exists(nombreFichero))
             {
@@ -104,18 +106,25 @@ namespace Futbol
                 {
                     Menu.DibujarCuadro(new List<string> { "ERROR :(", "Te has quedado sin intentos" });
                     Console.ReadKey();
-
                 }
                 else
                 {
-                    usuario = new Usuario(nombre, password);
+
+                    if (nombre.ToLower() == "admin")
+                    {
+                        usu2 = new Admin(nombre, password);
+                    }
+                    else
+                    {
+                        usu2 = new Usuario(nombre, password);
+                    }  
                 }
             }
             else
             {
                 Console.WriteLine("ERROR :(  : El archivo de usuarios no existe");
             }
-            return usuario;
+            return usu2;
         }
         public static Usuario RegistroUsuario()
         {
@@ -123,7 +132,7 @@ namespace Futbol
             string nombreDirectorio = NOMBRE_DIRECTORIO;
             bool encontrado;
             string nombre = null;
-            Usuario usuario = null;
+            Usuario usuario = new Usuario("","");
             Dictionary<string, string> credenciales = new Dictionary<string, string>();
 
             if (File.Exists(nombreFichero))
@@ -150,7 +159,8 @@ namespace Futbol
                     Console.SetCursorPosition(posicionX, posicionY);
 
                     nombre = Console.ReadLine();
-                    
+                    nombre.Trim();
+
                     if (nombre.Length > 1)
                     {
                         encontrado = EncontrarNombre(credenciales, nombre);
@@ -167,7 +177,7 @@ namespace Futbol
                         Console.ReadKey();
                     }
 
-                } while (!encontrado || nombre.Length < 0);
+                } while (encontrado || nombre.Length <= 0);
             }
 
             List<string> mensajePassword = new List<string>
@@ -276,12 +286,12 @@ namespace Futbol
         }
         public static Usuario Inicio(bool tipo)
         {
-            Usuario usu = null;
+            Usuario usu = new Usuario("","");
             if (tipo)
             {
                 Console.Clear();
                 usu = IniciarSesion();
-                if (usu != null)
+                if (usu.Nombre.Length > 0)
                 {
                     usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
                     RellenarUsuario(usu);
@@ -295,7 +305,7 @@ namespace Futbol
                 string nombreUsuario = usu.Nombre;
                 string equipoInicial = ElegirEquipoInicial();
                 CopiarEquipoInicial(equipoInicial, nombreUsuario);
-                if (usu != null)
+                if (usu.Nombre.Length > 0)
                 {
                     usu.Equipo = new Equipo(usu.Nombre, Equipo.RellenarEquipo(usu.Nombre));
                 }

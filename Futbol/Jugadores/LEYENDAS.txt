@@ -4,7 +4,6 @@ Zinedine Zidane;Mediocampista;Real Madrid;56000000
 Franz Beckenbauer;Defensa;Bayern Múnich;49000000
 Johan Cruyff;Mediocampista;Feyenoord;70000000
 Ronaldo Nazário;Delantero;Barcelona;77000000
-Ronaldinho Gaúcho;Mediocampista;Barcelona;63000000
 Lev Yashin;Portero;Dynamo Moscú;28000000
 Kylian Mbappé;Delantero;PSG;40000000
 Andrés Iniesta;Mediocampista;Barcelona;64000000
@@ -35,11 +34,9 @@ Emilio Butragueño;Delantero;Celaya;36000000
 Lionel Messi;Delantero;Barcelona;120000000
 Raúl González;Delantero;New York Cosmos;13000000
 Luis Figo;Mediocampista;Inter de Milán;58000000
-Pavel Nedvěd;Mediocampista;Juventus;48000000
 Miroslav Klose;Delantero;Lazio;42000000
 Roberto Donato;Defensa;Real Betis;39000000
 Philipp Lahm;Defensa;Bayern Múnich;52000000
-Arjen Robben;Delantero;Groningen;56000000
 Steven Gerrard;Mediocampista;LA Galaxy;35000000
 Michael Ballack;Mediocampista;Bayer Leverkusen;27000000
 Samuel Eto;Delantero;Antalyaspor;44000000

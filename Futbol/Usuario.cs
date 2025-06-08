@@ -37,7 +37,7 @@ namespace Futbol
         public int Puntos { get => puntos; set => puntos = value; }
 
 
-        public void ActualizarFicheroDatos()
+        public virtual void ActualizarFicheroDatos()
         {
             string ruta = $"../../../Usuarios/{nombre}/{nombre}_datos.txt";
             string alineacion = string.Join(",", Equipo.Alineacion);

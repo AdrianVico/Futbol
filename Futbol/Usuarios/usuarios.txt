@@ -4,5 +4,7 @@
   "Izan": "Izan",
   "pruebaIzan": "pruebaIzan",
   "NuevoUsuario": "NuevoUsuario",
-  "": ""
+  "": "",
+  "admin": "admin",
+  "Juan": "Juan"
 }
