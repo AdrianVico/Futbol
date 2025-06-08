@@ -66,19 +66,22 @@ namespace Futbol
         {
             long dinero = usuario.Dinero;
             bool correcto = false;
-            long cantidadApostada;
+            long cantidadApostada = 0;
             bool salir = false;
+            bool cancelado = false;
+            bool abortar = false; 
+
             do
             {
                 List<string> mensajeDinero = new List<string>
-                {
-                    "PENALTIS",
-                    "",
-                    "Cuanto quieres apostar ( Max: " + dinero.ToString("N0") + " )",
-                     "---------------------------",
-                    "|                          $|",
-                     "---------------------------"
-                };
+        {
+            "PENALTIS",
+            "",
+            "Cuanto quieres apostar ( Max: " + dinero.ToString("N0") + " )",
+             "---------------------------",
+            "|                          $|",
+             "---------------------------"
+        };
 
                 int padTopTexto = Menu.DibujarCuadro(mensajeDinero);
 
@@ -89,17 +92,20 @@ namespace Futbol
 
                 string cantidadApostadaString = "";
                 ConsoleKeyInfo tecla;
+                salir = false;
+
                 do
                 {
                     tecla = Console.ReadKey(true);
 
-                    if (tecla.Key == ConsoleKey.Escape) 
+                    if (tecla.Key == ConsoleKey.Escape)
                     {
-                        MostrarMenuPrincipal();
+                        cancelado = true;
+                        salir = true;
                     }
-                    else if (tecla.Key == ConsoleKey.Enter) 
+                    else if (tecla.Key == ConsoleKey.Enter)
                     {
-                        salir = true; 
+                        salir = true;
                     }
                     else if (tecla.Key == ConsoleKey.Backspace && cantidadApostadaString.Length > 0)
                     {
@@ -113,21 +119,33 @@ namespace Futbol
                     }
                 } while (!salir);
 
-                correcto = long.TryParse(cantidadApostadaString, out cantidadApostada) && cantidadApostada > 0 && cantidadApostada <= dinero;
-                if (!correcto)
+                if (cancelado)
                 {
-                    Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ingreso no valido" });
-                    Console.ReadKey();
-                    salir = false;
+                    MostrarMenuPrincipal();
+                    abortar = true; 
                 }
-            } while (!correcto);
 
-            bool gol = jugarPenaltis();
-            usuario.Dinero -= cantidadApostada;
-            usuario.Dinero += gol ? (long)(cantidadApostada * 1.5) : 0;
-            usuario.ActualizarFicheroDatos();
+                if (!abortar)
+                {
+                    correcto = long.TryParse(cantidadApostadaString, out cantidadApostada) && cantidadApostada > 0 && cantidadApostada <= dinero;
+                    if (!correcto)
+                    {
+                        Menu.DibujarCuadro(new List<string> { "ERROR :(", "Ingreso no valido" });
+                        Console.ReadKey();
+                        salir = false;
+                    }
+                }
+             
+            } while (!correcto && !abortar);
 
-            List<string> mensaje = new List<string> {
+            if(!abortar)
+            {
+                bool gol = jugarPenaltis();
+                usuario.Dinero -= cantidadApostada;
+                usuario.Dinero += gol ? (long)(cantidadApostada * 1.5) : 0;
+                usuario.ActualizarFicheroDatos();
+
+                List<string> mensaje = new List<string> {
                 @"                     ___    ",
                 @" o__        o__     |   |\  ",
                 @"/|          /\      |   |X\ ",
@@ -135,20 +153,20 @@ namespace Futbol
                 @"^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
                 "",
             };
-            mensaje.AddRange(new List<string> {
+                mensaje.AddRange(new List<string> {
                 gol ? "GOOOOOOOOOOOOOLLL!!!" : "MALA PUNTERIA :(",
                 gol ? "HAS GANADO:" : "HAS PERDIDO:",
                 gol ? (cantidadApostada * 1.5).ToString("N0") + "$" : cantidadApostada.ToString("N0") + "$"
             });
 
-            Menu.DibujarCuadro(mensaje);
-            ConsoleKey key;
-            do
-            {
-                key = Console.ReadKey(true).Key;
-            } while (key != ConsoleKey.Enter);
-
-            MostrarMenuPrincipal();
+                Menu.DibujarCuadro(mensaje);
+                ConsoleKey key;
+                do
+                {
+                    key = Console.ReadKey(true).Key;
+                } while (key != ConsoleKey.Enter);
+                MostrarMenuPrincipal();
+            }
         }
 
 
@@ -564,11 +582,10 @@ namespace Futbol
                     case ConsoleKey.DownArrow:
                         opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
                         break;
-                    //agregado
                     case ConsoleKey.Escape:
                         opcionSeleccionada = opciones.Count - 1;
                         break;
-                }                                   //agregado
+                }                                   
             } while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
             return opcionSeleccionada;
@@ -642,11 +659,11 @@ namespace Futbol
                     case ConsoleKey.RightArrow:
                         opcionSeleccionada = (opcionSeleccionada < opciones.Count - 1) ? opcionSeleccionada + 1 : 0;
                         break;
-                        //agregado
+                        
                     case ConsoleKey.Escape:
                         opcionSeleccionada = opciones.Count - 1;
                         break;
-                }                                       //agregado
+                }                                       
             } while (tecla != ConsoleKey.Enter && tecla != ConsoleKey.Escape);
 
             return opcionSeleccionada;
