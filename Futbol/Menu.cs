@@ -14,6 +14,39 @@ namespace Futbol
         Mercado mercado;
         Liga liga;
         Partido partido;
+        List<string> cerditos = new List<string> {   "██████╗██████╗ ███████╗██████╗ ██╗████████╗ ██████╗ ███████╗",
+                                                     "██╔════╝██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔═══██╗██╔════╝"
+                                                    ,"██║     ██████╔╝█████╗  ██║  ██║██║   ██║   ██║   ██║███████╗"
+                                                    ,"██║     ██╔══██╗██╔══╝  ██║  ██║██║   ██║   ██║   ██║╚════██║"
+                                                    ,"╚██████╗██║  ██║███████╗██████╔╝██║   ██║   ╚██████╔╝███████║"
+                                                    ,"╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚══════╝"
+                                                    ,""
+                                                    ,@"  __  __                          __     __             _        "
+                                                    ,@" |  \/  | __ _ _ __ ___ ___  ___  \ \   / /_ _ _ __ ___| | __ _  "
+                                                    ,@" | |\/| |/ _` | '__/ __/ _ \/ __|  \ \ / / _` | '__/ _ \ |/ _` | "
+                                                    ,@" | |  | | (_| | | | (_| (_) \__ \   \ V / (_| | | |  __/ | (_| | "
+                                                    ,@" |_|  |_|\__,_|_|  \___\___/|___/    \_/ \__,_|_|  \___|_|\__,_| "
+                                                    ,@"  ___                      _ _                               "
+                                                    ,@" |_ _|______ _ _ __       | (_)_ __ ___   ___ _ __   ___ ____"
+                                                    ,@"  | ||_  / _` | '_ \   _  | | | '_ ` _ \ / _ \ '_ \ / _ \_  /"
+                                                    ,@"  | | / / (_| | | | | | |_| | | | | | | |  __/ | | |  __// / "
+                                                    ,@" |___/___\__,_|_| |_|  \___/|_|_| |_| |_|\___|_| |_|\___/___|"
+                                                    ,@"     _       _      _              __     ___           "
+                                                    ,@"    / \   __| |_ __(_) __ _ _ __   \ \   / (_) ___ ___  "
+                                                    ,@"   / _ \ / _` | '__| |/ _` | '_ \   \ \ / /| |/ __/ _ \ "
+                                                    ,@"  / ___ \ (_| | |  | | (_| | | | |   \ V / | | (_| (_) |"
+                                                    ,@" /_/   \_\__,_|_|  |_|\__,_|_| |_|    \_/  |_|\___\___/ "
+                                                    ,@"     _    _       _                 _              ____    "
+                                                    ,@"    / \  | | ___ (_) __ _ _ __   __| |_ __ ___    / ___|   "
+                                                    ,@"   / _ \ | |/ _ \| |/ _` | '_ \ / _` | '__/ _ \  | |  _    "
+                                                    ,@"  / ___ \| |  __/| | (_| | | | | (_| | | | (_) | | |_| |   "
+                                                    ,@" /_/   \_\_|\___|/ |\__,_|_| |_|\__,_|_|  \___/   \____|  O"
+                                                    ,@"  ____         |__/    _            _    _               _ "
+                                                    ,@" / ___|  ___ _ __ __ _(_) ___      / \  | |__   __ _  __| |"
+                                                    ,@" \___ \ / _ \ '__/ _` | |/ _ \    / _ \ | '_ \ / _` |/ _` |"
+                                                    ,@"  ___) |  __/ | | (_| | | (_) |  / ___ \| |_) | (_| | (_| |"
+                                                    ,@" |____/ \___|_|  \__, |_|\___/  /_/   \_\_.__/ \__,_|\__,_|"
+                                                    ,@"                 |___/                                     "};
 
         internal Usuario Usuario { get => usuario; set => usuario = value; }
         internal Mercado Mercado { get => mercado; set => mercado = value; }
@@ -34,7 +67,7 @@ namespace Futbol
         public void MostrarMenuPrincipal()
         {
             string[] opcionesMenu = { "Mercado", "Equipo", "Jornada", "Liga", "Penaltis", "Salir" };
-            switch (Menu.CrearMenuPrincipal(new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList(),new List<string> { "" }))
+            switch (Menu.CrearMenuPrincipal(new List<string>(opcionesMenu), usuario, usuario.Equipo.MostrarCamisetas().ToList(), new List<string> { "" }))
             {
                 case 0:
                     MostrarMenuMercado();
@@ -52,7 +85,8 @@ namespace Futbol
                     penaltis();
                     break;
                 case 5:
-                    DibujarCuadro(new List<string> { "Gracias por jugar!", "Pulsa Intro para salir..." });
+                    DibujarCuadro(cerditos);
+
                     ConsoleKey key;
                     do
                     {

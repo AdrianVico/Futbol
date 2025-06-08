@@ -8,18 +8,18 @@ namespace Futbol
     {
         static void Main(string[] args)
         {
-            Menu m = null;
-            Usuario u = null;
+            Menu menu = null;
+            Usuario usuario = null;
             do
             {
-                u = Menu.Iniciar();
-                if (u != null) 
+                usuario = Menu.Iniciar();
+                if (usuario != null) 
                 {
-                    m = new Menu(u);
+                    menu = new Menu(usuario);
                 }   
-            }while (u == null);
-            m.MostrarMenuPrincipal();
-            Menu.DibujarCuadro(m.Usuario.Equipo.MostrarCamisetas().ToList());
+            }while (usuario == null);
+            menu.MostrarMenuPrincipal();
+            Console.Clear();
         }
     }
 }
